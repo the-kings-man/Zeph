@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zeph.Core", "ZephCore\Zeph.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zeph.QuestingSystem", "ZephQuestingSystem\Zeph.QuestingSystem.csproj", "{09D3A28E-0636-4862-880E-9678CD2FC46F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeph.Web", "Zeph.Web\Zeph.Web.csproj", "{B1F862CD-5683-4AF5-A6D5-BA7E0C82542D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{09D3A28E-0636-4862-880E-9678CD2FC46F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09D3A28E-0636-4862-880E-9678CD2FC46F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09D3A28E-0636-4862-880E-9678CD2FC46F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1F862CD-5683-4AF5-A6D5-BA7E0C82542D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1F862CD-5683-4AF5-A6D5-BA7E0C82542D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1F862CD-5683-4AF5-A6D5-BA7E0C82542D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1F862CD-5683-4AF5-A6D5-BA7E0C82542D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

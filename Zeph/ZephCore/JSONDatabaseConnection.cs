@@ -8,7 +8,7 @@ using System.Text;
 namespace Zeph.Core {
     public class JSONDatabaseConnection : IDatabaseConnection {
 
-        private string filePath = "C:\\videogames.json";
+        private string filePath = "";
 
         public JSONDatabaseConnection(string filePath) {
             this.filePath = filePath;
