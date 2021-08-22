@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Zeph.Web.Classes {
     public class MongoDBDatabaseConnection : Zeph.Core.IDatabaseConnection {
-        public static string username = "";
-        public static string password = "";
-        public static string clusterAddress = "";
-        public static string databaseName = "";
+        //The Secrets class has not been checked into the remote repo as this data probably shouldn't be stored on an open source remote repo. Instead, create and implement a Secrets class with whatever is needed here.
+        public static string username = Secrets.mongoDBUsername;
+        public static string password = Secrets.mongoDBPassword;
+        public static string clusterAddress = Secrets.mongoDBClusterAddress;
+        public static string databaseName = Secrets.mongoDBDatabaseName;
 
         private string connectionString {
             get {
