@@ -5,7 +5,7 @@ using System.Text;
 namespace Zeph.QuestingSystem.Classes {
 
     [Serializable]
-    public class QuestObjective : Zeph.Core.Classes.IClass {
+    public class QuestObjective : Zeph.Core.Classes.ClassBase {
         /// <summary>
         /// The GUID of the QuestObjective
         /// </summary>

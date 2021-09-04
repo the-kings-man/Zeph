@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Zeph_3d_URP\ZephCore\Zeph.Core.csproj" />
+    <ProjectReference Include="..\ZephCore\Zeph.Core.csproj" />
   </ItemGroup>
 
 </Project>

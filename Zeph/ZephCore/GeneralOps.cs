@@ -14,5 +14,14 @@ namespace Zeph.Core {
                 throw new Exception("Invalid database connection type.");
             }
         }
+
+        /// <summary>
+        /// This is to handle timezones should the need arise.
+        /// </summary>
+        public static DateTime Now {
+            get {
+                return DateTime.Now;
+            }
+        }
     }
 }
