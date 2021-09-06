@@ -5,6 +5,8 @@ using Zeph.Core.Classes;
 
 namespace Zeph.Core.Classes {
     public class PlayerQuest : Zeph.Core.Classes.ClassBase<PlayerQuest> {
+        const string TABLE = "playerQuest";
+
         public Guid pq_GUID = Guid.Empty;
         public Player pq_Player = null;
         public Quest pq_Quest = null;

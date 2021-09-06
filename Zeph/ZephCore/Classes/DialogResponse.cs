@@ -7,6 +7,8 @@ namespace Zeph.Core.Classes {
     /// The class which handles the players responses to the dialogResponse
     /// </summary>
     public class DialogResponse : Zeph.Core.Classes.ClassBase<DialogResponse> {
+        const string TABLE = "dialogResponse";
+
         /// <summary>
         /// GUID of the dialogResponse
         /// </summary>
@@ -31,6 +33,10 @@ namespace Zeph.Core.Classes {
         /// If the <see cref="dr_ResponseType"/> is <see cref="Enums.DialogResponseType.ReceiveQuest"/> this is the quest to receive. This is a GUID because the QuestingSystem is separate to the core of Zeph. This allows the basics of Zeph to be removed from the potentially extra things.
         /// </summary>
         public Quest dr_Quest = null;
+        /// <summary>
+        /// The order this response is to be shown to the player.
+        /// </summary>
+        public int dr_Order = -1;
 
 
         #region File Access
@@ -69,7 +75,8 @@ namespace Zeph.Core.Classes {
                 obj.dr_ResponseType = (Enums.DialogResponseType)(int)dic["dr_ResponseType"];
                 obj.dr_Dialog = new Dialog() { d_GUID = (Guid)dic["dr_Dialog"] };
                 obj.dr_NextDialog = dic["dr_NextDialog"] == null ? null : new Dialog() { d_GUID = (Guid)dic["dr_NextDialog"] };
-                obj.dr_Quest = dic["dr_Quest"] == null ? null : new Quest() { q_GUID = (Guid)dic["dr_Quest"] }
+                obj.dr_Quest = dic["dr_Quest"] == null ? null : new Quest() { q_GUID = (Guid)dic["dr_Quest"] };
+                obj.dr_Order = (int)dic["dr_Order"];
                 return obj;
             } else {
                 return null;
@@ -85,6 +92,7 @@ namespace Zeph.Core.Classes {
                 dic["dr_Dialog"] = obj.dr_Dialog.d_GUID;
                 dic["dr_NextDialog"] = obj.dr_NextDialog == null ? null : (object)obj.dr_NextDialog.d_GUID;
                 dic["dr_QuestGUID"] = obj.dr_Quest == null ? null : (object)obj.dr_Quest.q_GUID;
+                dic["dr_Order"] = obj.dr_Order;
                 return ReadFromDictionary(db.Save("dialogResponse", obj.dr_GUID, dic));
             }
         }

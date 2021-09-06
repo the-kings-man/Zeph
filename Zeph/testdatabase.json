@@ -1,0 +1,88 @@
+{
+  "npc": [
+    {
+      "npc_GUID": "24ac6626-6c0c-4896-a55e-5d3b6a8f51d7",
+      "npc_Name": "John the NPC"
+    }
+  ],
+  "dialog": [
+    {
+      "d_GUID": "cbeabae4-d1f5-4164-97fc-c47b381b7df7",
+      "d_Name": "",
+      "d_Dialog": "Hello adventurer!",
+      "d_NPC": "24ac6626-6c0c-4896-a55e-5d3b6a8f51d7"
+    },
+    {
+      "d_GUID": "53cd71ce-789f-4dad-8231-f7df45d68b92",
+      "d_Name": "",
+      "d_Dialog": "How can I be of assistance?",
+      "d_NPC": "24ac6626-6c0c-4896-a55e-5d3b6a8f51d7"
+    }
+  ],
+  "dialogResponse": [
+    {
+      "dr_GUID": "668a250b-7d7e-4107-8bb1-44017e37ebbf",
+      "dr_Response": "Hello!",
+      "dr_ResponseType": 1,
+      "dr_Dialog": "cbeabae4-d1f5-4164-97fc-c47b381b7df7",
+      "dr_NextDialog": "53cd71ce-789f-4dad-8231-f7df45d68b92",
+      "dr_Quest": null,
+      "dr_Order": 1
+    },
+    {
+      "dr_GUID": "9f194020-33a2-4ffb-8467-943e1fed5956",
+      "dr_Response": "Hello, can I have a quest?",
+      "dr_ResponseType": 2,
+      "dr_Dialog": "cbeabae4-d1f5-4164-97fc-c47b381b7df7",
+      "dr_NextDialog": null,
+      "dr_Quest": "aa29121c-8937-4400-9532-84c4d7975ad7",
+      "dr_Order": 2
+    },
+    {
+      "dr_GUID": "b76a1bf8-779a-4b6d-a84a-e514172b64c8",
+      "dr_Response": "Goodbye.",
+      "dr_ResponseType": 0,
+      "dr_Dialog": "cbeabae4-d1f5-4164-97fc-c47b381b7df7",
+      "dr_NextDialog": null,
+      "dr_Quest": null,
+      "dr_Order": 3
+    },
+    {
+      "dr_GUID": "a66f8fe3-f4b8-45a5-a262-200742becda0",
+      "dr_Response": "Can I have a quest?",
+      "dr_ResponseType": 2,
+      "dr_Dialog": "53cd71ce-789f-4dad-8231-f7df45d68b92",
+      "dr_NextDialog": null,
+      "dr_Quest": "aa29121c-8937-4400-9532-84c4d7975ad7",
+      "dr_Order": 1
+    },
+    {
+      "dr_GUID": "9f87898e-3572-4a17-82ec-fed408adc19a",
+      "dr_Response": "Goodbye.",
+      "dr_ResponseType": 0,
+      "dr_Dialog": "53cd71ce-789f-4dad-8231-f7df45d68b92",
+      "dr_NextDialog": null,
+      "dr_Quest": null,
+      "dr_Order": 2
+    }
+  ],
+  "quest": [
+    {
+      "q_GUID": "aa29121c-8937-4400-9532-84c4d7975ad7",
+      "q_Name": "Defeat the slimes",
+      "q_Description": "You must defeat 5 slimes, quick!",
+      "q_ObjectivesType": 1,
+      "q_ReceivalType": 1
+    }
+  ],
+  "questObjective": [
+    {
+      "qo_GUID": "5116649d-9725-46ad-93e4-a7d99175b768",
+      "qo_Quest": "aa29121c-8937-4400-9532-84c4d7975ad7",
+      "qo_Description": "Defeat the 5 slimes.",
+      "qo_Type": 1,
+      "qo_Goal": 5,
+      "qo_Order": 0
+    }
+  ]
+}

@@ -4,30 +4,36 @@ using System.Text;
 
 namespace Zeph.Core.Classes {
     public class NPC : Zeph.Core.Classes.ClassBase<NPC> {
+        const string TABLE = "npc";
+
         /// <summary>
         /// GUID of the npc
         /// </summary>
         public Guid npc_GUID = Guid.Empty;
         /// <summary>
-        /// Name of the npc
+        /// The NPC this object is linked to
         /// </summary>
-        public string npc_Name = "";
+        public NPC npc_NPC = null;
+        /// <summary>
+        /// The Dialog this object is linked to
+        /// </summary>
+        public Dialog npc_Dialog = null;
 
         #region File Access
 
-        public static bool Delete(Guid guid) {
+        public static new bool Delete(Guid guid) {
             var db = GeneralOps.GetDatabaseConnection();
             return db.Delete("npc", guid);
         }
 
-        public static NPC Read(Guid guid) {
+        public static new NPC Read(Guid guid) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = db.Read("npc", guid);
                 return ReadFromDictionary(dic);
             }
         }
 
-        public static List<NPC> Read() {
+        public static new List<NPC> Read() {
             var lst = new List<NPC>();
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var _lst = db.Read("npc");
@@ -41,22 +47,24 @@ namespace Zeph.Core.Classes {
             return lst;
         }
 
-        public static NPC ReadFromDictionary(Dictionary<string, object> dic) {
+        public static new NPC ReadFromDictionary(Dictionary<string, object> dic) {
             if (dic != null) {
                 var npc = new NPC();
                 npc.npc_GUID = (Guid)dic["npc_GUID"];
-                npc.npc_Name = (string)dic["npc_Name"];
+                npc.npc_NPC = new NPC() { npc_GUID = (Guid)dic["npc_NPC"] };
+                npc.npc_Dialog = new Dialog() { d_GUID = (Guid)dic["npc_Dialog"] };
                 return npc;
             } else {
                 return null;
             }
         }
 
-        public static NPC Save(NPC npc) {
+        public static new NPC Save(NPC npc) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = new Dictionary<string, object>();
                 dic["npc_GUID"] = npc.npc_GUID;
-                dic["npc_Name"] = npc.npc_Name;
+                dic["npc_NPC"] = npc.npc_NPC;
+                dic["npc_Dialog"] = npc.npc_Dialog;
                 return ReadFromDictionary(db.Save("npc", npc.npc_GUID, dic));
             }
         }

@@ -4,6 +4,8 @@ using System.Text;
 
 namespace Zeph.Core.Classes {
     public class Player : Zeph.Core.Classes.ClassBase<Player> {
+        const string TABLE = "player";
+
         /// <summary>
         /// GUID of the player
         /// </summary>
@@ -17,12 +19,12 @@ namespace Zeph.Core.Classes {
 
         public new static bool Delete(Guid guid) {
             var db = GeneralOps.GetDatabaseConnection();
-            return db.Delete("player", guid);
+            return db.Delete(TABLE, guid);
         }
 
         public new static Player Read(Guid guid) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
-                var dic = db.Read("player", guid);
+                var dic = db.Read(TABLE, guid);
                 return ReadFromDictionary(dic);
             }
         }
@@ -30,7 +32,7 @@ namespace Zeph.Core.Classes {
         public new static List<Player> Read() {
             var lst = new List<Player>();
             using (var db = GeneralOps.GetDatabaseConnection()) {
-                var _lst = db.Read("player");
+                var _lst = db.Read(TABLE);
                 foreach (var dic in _lst) {
                     var _dic = ReadFromDictionary(dic);
                     if (_dic != null) {

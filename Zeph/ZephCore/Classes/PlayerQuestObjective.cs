@@ -5,6 +5,8 @@ using System.Text;
 namespace Zeph.Core.Classes {
     [Serializable]
     public class PlayerQuestObjective : Zeph.Core.Classes.ClassBase<PlayerQuestObjective> {
+        const string TABLE = "playerQuestObjective";
+
         public Guid pqo_GUID = Guid.Empty;
         public Guid pqo_PlayerQuest = Guid.Empty;
         public Guid pqo_QuestObjective = Guid.Empty;

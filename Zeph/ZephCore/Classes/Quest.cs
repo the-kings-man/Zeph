@@ -5,7 +5,9 @@ using System.Text;
 namespace Zeph.Core.Classes {
 
     [Serializable]
-    public class Quest : Zeph.Core.Classes.ClassBase {
+    public class Quest : Zeph.Core.Classes.ClassBase<Quest> {
+        const string TABLE = "quest";
+
         /// <summary>
         /// The GUID of the quest
         /// </summary>

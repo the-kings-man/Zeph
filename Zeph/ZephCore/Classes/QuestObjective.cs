@@ -6,6 +6,8 @@ namespace Zeph.Core.Classes {
 
     [Serializable]
     public class QuestObjective : Zeph.Core.Classes.ClassBase {
+        const string TABLE = "questObjective";
+
         /// <summary>
         /// The GUID of the QuestObjective
         /// </summary>

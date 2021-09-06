@@ -7,6 +7,8 @@ namespace Zeph.Core.Classes {
     /// The class which handles the discussion from the enrivonment to the player
     /// </summary>
     public class Dialog : Zeph.Core.Classes.ClassBase<Dialog> {
+        const string TABLE = "dialog";
+
         /// <summary>
         /// GUID of the dialog
         /// </summary>
@@ -28,12 +30,12 @@ namespace Zeph.Core.Classes {
 
         public new static bool Delete(Guid guid) {
             var db = GeneralOps.GetDatabaseConnection();
-            return db.Delete("dialog", guid);
+            return db.Delete(TABLE, guid);
         }
 
         public new static Dialog Read(Guid guid) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
-                var dic = db.Read("dialog", guid);
+                var dic = db.Read(TABLE, guid);
                 return ReadFromDictionary(dic);
             }
         }
@@ -41,7 +43,7 @@ namespace Zeph.Core.Classes {
         public new static List<Dialog> Read() {
             var lst = new List<Dialog>();
             using (var db = GeneralOps.GetDatabaseConnection()) {
-                var _lst = db.Read("dialog");
+                var _lst = db.Read(TABLE);
                 foreach (var dic in _lst) {
                     var _dic = ReadFromDictionary(dic);
                     if (_dic != null) {
