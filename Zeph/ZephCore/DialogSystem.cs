@@ -4,6 +4,11 @@ using System.Text;
 
 namespace Zeph.Core {
     public class DialogSystem {
+        /// <summary>
+        /// Register a response for a piece of dialog
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
         public static DialogSystemResponse Respond(Classes.DialogResponse response) {
             switch (response.dr_ResponseType) {
                 case Enums.DialogResponseType.Close:
@@ -30,6 +35,24 @@ namespace Zeph.Core {
                 default:
                     return null;
             }
+        }
+
+        /// <summary>
+        /// Get all dialogs the NPC can offer
+        /// </summary>
+        /// <param name="npc"></param>
+        /// <returns></returns>
+        public static List<Classes.Dialog> DialogForNPC(Classes.NPC npc) {
+            var lstD = Classes.Dialog.Read();
+            var lstReturn = new List<Classes.Dialog>();
+
+            foreach (var d in lstD) {
+                if (d.d_NPC.npc_GUID == npc.npc_GUID) {
+                    lstReturn.Add(d);
+                }
+            }
+
+            return lstReturn;
         }
     }
 
