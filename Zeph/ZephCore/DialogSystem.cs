@@ -42,12 +42,30 @@ namespace Zeph.Core {
         /// </summary>
         /// <param name="npc"></param>
         /// <returns></returns>
-        public static List<Classes.Dialog> DialogForNPC(Classes.NPC npc) {
+        public static List<Classes.Dialog> AllDialogForNPC(Classes.NPC npc) {
             var lstD = Classes.Dialog.Read();
             var lstReturn = new List<Classes.Dialog>();
 
             foreach (var d in lstD) {
                 if (d.d_NPC.npc_GUID == npc.npc_GUID) {
+                    lstReturn.Add(d);
+                }
+            }
+
+            return lstReturn;
+        }
+
+        /// <summary>
+        /// Get all dialogs the NPC can offer
+        /// </summary>
+        /// <param name="npc"></param>
+        /// <returns></returns>
+        public static List<Classes.Dialog> CurrentDialogForNPC(Classes.NPC npc, Classes.Player player) {
+            var lstD = Classes.Dialog.Read();
+            var lstReturn = new List<Classes.Dialog>();
+
+            foreach (var d in lstD) {
+                if (d.d_NPC.npc_GUID == npc.npc_GUID && d.d_IsInitial) {
                     lstReturn.Add(d);
                 }
             }

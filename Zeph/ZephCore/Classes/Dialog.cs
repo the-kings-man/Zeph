@@ -25,6 +25,10 @@ namespace Zeph.Core.Classes {
         /// The NPC associated with this dialog
         /// </summary>
         public NPC d_NPC = null;
+        /// <summary>
+        /// Whether or not this dialog is the initial dialog in a dialog sequence
+        /// </summary>
+        public bool d_IsInitial = true;
 
         #region File Access
 
@@ -61,6 +65,7 @@ namespace Zeph.Core.Classes {
                 d.d_Name = (string)dic["d_Name"];
                 d.d_Dialog = (string)dic["d_Dialog"];
                 d.d_NPC = dic["d_NPC"] == null ? null : new NPC() { npc_GUID = (Guid)dic["d_NPC"] };
+                d.d_IsInitial = (bool)dic["d_IsInitial"];
                 return d;
             } else {
                 return null;
@@ -74,6 +79,7 @@ namespace Zeph.Core.Classes {
                 dic["d_Name"] = d.d_Name;
                 dic["d_Dialog"] = d.d_Dialog;
                 dic["d_NPC"] = d.d_NPC == null ? null : (object)d.d_NPC.npc_GUID;
+                dic["d_IsInitial"] = d.d_IsInitial;
                 return ReadFromDictionary(db.Save("dialog", d.d_GUID, dic));
             }
         }

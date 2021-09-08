@@ -10,13 +10,15 @@
       "d_GUID": "cbeabae4-d1f5-4164-97fc-c47b381b7df7",
       "d_Name": "",
       "d_Dialog": "Hello adventurer!",
-      "d_NPC": "24ac6626-6c0c-4896-a55e-5d3b6a8f51d7"
+      "d_NPC": "24ac6626-6c0c-4896-a55e-5d3b6a8f51d7",
+      "d_IsInitial": true
     },
     {
       "d_GUID": "53cd71ce-789f-4dad-8231-f7df45d68b92",
       "d_Name": "",
       "d_Dialog": "How can I be of assistance?",
-      "d_NPC": "24ac6626-6c0c-4896-a55e-5d3b6a8f51d7"
+      "d_NPC": "24ac6626-6c0c-4896-a55e-5d3b6a8f51d7",
+      "d_IsInitial": false
     }
   ],
   "dialogResponse": [
