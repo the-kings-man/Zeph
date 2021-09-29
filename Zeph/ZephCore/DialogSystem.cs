@@ -22,7 +22,7 @@ namespace Zeph.Core {
                     return new DialogSystemResponse() {
                         response = response,
                         type = response.dr_ResponseType,
-                        nextDialog = Classes.Dialog.Read(response.dr_NextDialog.d_GUID),
+                        nextDialog = Classes.Dialog.Read(response.dr_NextDialog.d_ID),
                         quest = null
                     };
                 case Enums.DialogResponseType.ReceiveQuest:
@@ -30,7 +30,7 @@ namespace Zeph.Core {
                         response = response,
                         type = response.dr_ResponseType,
                         nextDialog = null,
-                        quest = Classes.Quest.Read(response.dr_Quest.q_GUID),   
+                        quest = Classes.Quest.Read(response.dr_Quest.q_ID),   
                     };
                 default:
                     return null;
@@ -47,7 +47,7 @@ namespace Zeph.Core {
             var lstReturn = new List<Classes.Dialog>();
 
             foreach (var d in lstD) {
-                if (d.d_NPC.npc_GUID == npc.npc_GUID) {
+                if (d.d_NPC.npc_ID == npc.npc_ID) {
                     lstReturn.Add(d);
                 }
             }
@@ -65,7 +65,7 @@ namespace Zeph.Core {
             var lstReturn = new List<Classes.Dialog>();
 
             foreach (var d in lstD) {
-                if (d.d_NPC.npc_GUID == npc.npc_GUID && d.d_IsInitial) {
+                if (d.d_NPC.npc_ID == npc.npc_ID && d.d_IsInitial) {
                     lstReturn.Add(d);
                 }
             }

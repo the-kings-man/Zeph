@@ -5,17 +5,17 @@ using System.Text;
 namespace Zeph.Core.Classes {
 
     [Serializable]
-    public class QuestObjective : Zeph.Core.Classes.ClassBase {
+    public class QuestObjective : Zeph.Core.Classes.ClassBase<QuestObjective> {
         const string TABLE = "questObjective";
 
         /// <summary>
-        /// The GUID of the QuestObjective
+        /// The ID of the QuestObjective
         /// </summary>
-        public Guid qo_GUID = Guid.Empty;
+        public int qo_ID = -1;
         /// <summary>
-        /// The <see cref="Quest.q_GUID"/> of the <see cref="Quest"/> this QuestObjective is linked to
+        /// The <see cref="Quest.q_ID"/> of the <see cref="Quest"/> this QuestObjective is linked to
         /// </summary>
-        public Guid qo_Quest = Guid.Empty;
+        public int qo_Quest = -1;
         /// <summary>
         /// Objective description i.e. "Gather 5 apples", "Defeat 5 ravenous rabbits"
         /// </summary>

@@ -18,13 +18,13 @@ namespace Zeph.Web.Classes {
             }
         }
 
-        public bool Delete(string tableName, Guid guid) {
+        public bool Delete(string tableName, int id) {
             //var client = new MongoClient(connectionString);
             //var database = client.GetDatabase("test");
 
             //var table = database.GetCollection<>(tableName);
             //table.DeleteOne(new FilterDefinition<>() {
-            //    "guid" = guid
+            //    "int" = int
             //});
 
             throw new NotImplementedException();
@@ -34,11 +34,11 @@ namespace Zeph.Web.Classes {
             throw new NotImplementedException();
         }
 
-        public Dictionary<string, object> Read(string tableName, Guid guid) {
+        public Dictionary<string, object> Read(string tableName, int id) {
             throw new NotImplementedException();
         }
 
-        public Dictionary<string, object> Save(string tableName, Guid guid, Dictionary<string, object> dic) {
+        public Dictionary<string, object> Save(string tableName, int id, Dictionary<string, object> dic) {
             throw new NotImplementedException();
         }
 

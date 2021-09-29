@@ -10,9 +10,9 @@ namespace Zeph.Core.Classes {
         const string TABLE = "dialog";
 
         /// <summary>
-        /// GUID of the dialog
+        /// ID of the dialog
         /// </summary>
-        public Guid d_GUID = Guid.Empty;
+        public int d_ID = -1;
         /// <summary>
         /// Name of the dialog
         /// </summary>
@@ -30,16 +30,29 @@ namespace Zeph.Core.Classes {
         /// </summary>
         public bool d_IsInitial = true;
 
-        #region File Access
-
-        public new static bool Delete(Guid guid) {
-            var db = GeneralOps.GetDatabaseConnection();
-            return db.Delete(TABLE, guid);
+        public List<DialogResponse> dialogResponses {
+            get {
+                var lstDR = DialogResponse.Read();
+                var _dialogResponses = new List<DialogResponse>();
+                foreach (var dr in lstDR) {
+                    if (dr.dr_Dialog.d_ID == d_ID) {
+                        _dialogResponses.Add(dr);
+                    }
+                }
+                return _dialogResponses;
+            }
         }
 
-        public new static Dialog Read(Guid guid) {
+        #region File Access
+
+        public new static bool Delete(int id) {
+            var db = GeneralOps.GetDatabaseConnection();
+            return db.Delete(TABLE, id);
+        }
+
+        public new static Dialog Read(int id) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
-                var dic = db.Read(TABLE, guid);
+                var dic = db.Read(TABLE, id);
                 return ReadFromDictionary(dic);
             }
         }
@@ -61,10 +74,10 @@ namespace Zeph.Core.Classes {
         public new static Dialog ReadFromDictionary(Dictionary<string, object> dic) {
             if (dic != null) {
                 var d = new Dialog();
-                d.d_GUID = (Guid)dic["d_GUID"];
+                d.d_ID = (int)dic["d_ID"];
                 d.d_Name = (string)dic["d_Name"];
                 d.d_Dialog = (string)dic["d_Dialog"];
-                d.d_NPC = dic["d_NPC"] == null ? null : new NPC() { npc_GUID = (Guid)dic["d_NPC"] };
+                d.d_NPC = dic["d_NPC"] == null ? null : new NPC() { npc_ID = (int)dic["d_NPC"] };
                 d.d_IsInitial = (bool)dic["d_IsInitial"];
                 return d;
             } else {
@@ -75,12 +88,12 @@ namespace Zeph.Core.Classes {
         public new static Dialog Save(Dialog d) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = new Dictionary<string, object>();
-                dic["d_GUID"] = d.d_GUID;
+                dic["d_ID"] = d.d_ID;
                 dic["d_Name"] = d.d_Name;
                 dic["d_Dialog"] = d.d_Dialog;
-                dic["d_NPC"] = d.d_NPC == null ? null : (object)d.d_NPC.npc_GUID;
+                dic["d_NPC"] = d.d_NPC == null ? null : (object)d.d_NPC.npc_ID;
                 dic["d_IsInitial"] = d.d_IsInitial;
-                return ReadFromDictionary(db.Save("dialog", d.d_GUID, dic));
+                return ReadFromDictionary(db.Save("dialog", d.d_ID, dic));
             }
         }
 

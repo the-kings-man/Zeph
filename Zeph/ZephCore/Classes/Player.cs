@@ -7,9 +7,9 @@ namespace Zeph.Core.Classes {
         const string TABLE = "player";
 
         /// <summary>
-        /// GUID of the player
+        /// ID of the player
         /// </summary>
-        public Guid p_GUID = Guid.Empty;
+        public int p_ID = -1;
         /// <summary>
         /// Name of the player
         /// </summary>
@@ -17,14 +17,14 @@ namespace Zeph.Core.Classes {
 
         #region File Access
 
-        public new static bool Delete(Guid guid) {
+        public new static bool Delete(int id) {
             var db = GeneralOps.GetDatabaseConnection();
-            return db.Delete(TABLE, guid);
+            return db.Delete(TABLE, id);
         }
 
-        public new static Player Read(Guid guid) {
+        public new static Player Read(int id) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
-                var dic = db.Read(TABLE, guid);
+                var dic = db.Read(TABLE, id);
                 return ReadFromDictionary(dic);
             }
         }
@@ -46,7 +46,7 @@ namespace Zeph.Core.Classes {
         public new static Player ReadFromDictionary(Dictionary<string, object> dic) {
             if (dic != null) {
                 var p = new Player();
-                p.p_GUID = (Guid)dic["p_GUID"];
+                p.p_ID = (int)dic["p_ID"];
                 p.p_Name = (string)dic["p_Name"];
                 return p;
             } else {
@@ -57,9 +57,9 @@ namespace Zeph.Core.Classes {
         public new static Player Save(Player p) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = new Dictionary<string, object>();
-                dic["p_GUID"] = p.p_GUID;
+                dic["p_ID"] = p.p_ID;
                 dic["p_Name"] = p.p_Name;
-                return ReadFromDictionary(db.Save("player", p.p_GUID, dic));
+                return ReadFromDictionary(db.Save("player", p.p_ID, dic));
             }
         }
 

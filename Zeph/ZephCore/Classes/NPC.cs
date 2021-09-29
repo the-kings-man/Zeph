@@ -7,9 +7,9 @@ namespace Zeph.Core.Classes {
         const string TABLE = "npc";
 
         /// <summary>
-        /// GUID of the npc
+        /// ID of the npc
         /// </summary>
-        public Guid npc_GUID = Guid.Empty;
+        public int npc_ID = -1;
         /// <summary>
         /// The NPC this object is linked to
         /// </summary>
@@ -21,14 +21,14 @@ namespace Zeph.Core.Classes {
 
         #region File Access
 
-        public static new bool Delete(Guid guid) {
+        public static new bool Delete(int id) {
             var db = GeneralOps.GetDatabaseConnection();
-            return db.Delete("npc", guid);
+            return db.Delete("npc", id);
         }
 
-        public static new NPC Read(Guid guid) {
+        public static new NPC Read(int id) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
-                var dic = db.Read("npc", guid);
+                var dic = db.Read("npc", id);
                 return ReadFromDictionary(dic);
             }
         }
@@ -50,9 +50,9 @@ namespace Zeph.Core.Classes {
         public static new NPC ReadFromDictionary(Dictionary<string, object> dic) {
             if (dic != null) {
                 var npc = new NPC();
-                npc.npc_GUID = (Guid)dic["npc_GUID"];
-                npc.npc_NPC = new NPC() { npc_GUID = (Guid)dic["npc_NPC"] };
-                npc.npc_Dialog = new Dialog() { d_GUID = (Guid)dic["npc_Dialog"] };
+                npc.npc_ID = (int)dic["npc_ID"];
+                npc.npc_NPC = new NPC() { npc_ID = (int)dic["npc_NPC"] };
+                npc.npc_Dialog = new Dialog() { d_ID = (int)dic["npc_Dialog"] };
                 return npc;
             } else {
                 return null;
@@ -62,10 +62,10 @@ namespace Zeph.Core.Classes {
         public static new NPC Save(NPC npc) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = new Dictionary<string, object>();
-                dic["npc_GUID"] = npc.npc_GUID;
+                dic["npc_ID"] = npc.npc_ID;
                 dic["npc_NPC"] = npc.npc_NPC;
                 dic["npc_Dialog"] = npc.npc_Dialog;
-                return ReadFromDictionary(db.Save("npc", npc.npc_GUID, dic));
+                return ReadFromDictionary(db.Save("npc", npc.npc_ID, dic));
             }
         }
 

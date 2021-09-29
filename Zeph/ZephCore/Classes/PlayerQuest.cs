@@ -7,7 +7,7 @@ namespace Zeph.Core.Classes {
     public class PlayerQuest : Zeph.Core.Classes.ClassBase<PlayerQuest> {
         const string TABLE = "playerQuest";
 
-        public Guid pq_GUID = Guid.Empty;
+        public int pq_ID = -1;
         public Player pq_Player = null;
         public Quest pq_Quest = null;
         public Enums.PlayerQuestStatus pq_Status = Enums.PlayerQuestStatus.InProgress;
@@ -17,7 +17,7 @@ namespace Zeph.Core.Classes {
         public List<PlayerQuestObjective> playerQuestObjectives = null;
 
         public PlayerQuest(Player p, Quest q, List<QuestObjective> questObjectives) {
-            pq_GUID = new Guid();
+            pq_ID = new int();
             pq_Player = p;
             pq_Quest = q;
             pq_Status = Enums.PlayerQuestStatus.InProgress;

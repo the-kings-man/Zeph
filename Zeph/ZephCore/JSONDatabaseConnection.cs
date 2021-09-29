@@ -24,12 +24,12 @@ namespace Zeph.Core {
 
         #region IDatabaseConnection
 
-        public bool Delete(string tableName, Guid guid) {
+        public bool Delete(string tableName, int id) {
             var jsonFromFile = open();
             if (jsonFromFile.ContainsKey(tableName)) {
                 var table = (JObject)jsonFromFile[tableName];
-                if (table.ContainsKey(guid.ToString())) {
-                    table.Remove(guid.ToString());
+                if (table.ContainsKey(id.ToString())) {
+                    table.Remove(id.ToString());
                     save(jsonFromFile);
                 }
             }
@@ -52,12 +52,12 @@ namespace Zeph.Core {
             return lst;
         }
 
-        public Dictionary<string, object> Read(string tableName, Guid guid) {
+        public Dictionary<string, object> Read(string tableName, int id) {
             var jsonFromFile = open();
             if (jsonFromFile.ContainsKey(tableName)) {
                 var table = (JObject)jsonFromFile[tableName];
-                if (table.ContainsKey(guid.ToString())) {
-                    var jObject = (JObject)table[guid.ToString()];
+                if (table.ContainsKey(id.ToString())) {
+                    var jObject = (JObject)table[id.ToString()];
                     var dic = new Dictionary<string, object>();
                     foreach (var pair in jObject) {
                         dic[pair.Key] = pair.Value;
@@ -71,7 +71,7 @@ namespace Zeph.Core {
             }
         }
 
-        public Dictionary<string, object> Save(string tableName, Guid guid, Dictionary<string, object> dic) {
+        public Dictionary<string, object> Save(string tableName, int id, Dictionary<string, object> dic) {
             var jsonFromFile = open();
             if (!jsonFromFile.ContainsKey(tableName)) {
                 jsonFromFile[tableName] = new JObject();
@@ -82,7 +82,7 @@ namespace Zeph.Core {
             foreach (var pair in dic) {
                 jObject[pair.Key] = (JToken)pair.Value;
             }
-            table[guid] = jObject;
+            table[id.ToString()] = jObject;
             save(jsonFromFile);
 
             return dic;

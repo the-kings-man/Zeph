@@ -9,9 +9,9 @@ namespace Zeph.Core.Classes {
         const string TABLE = "quest";
 
         /// <summary>
-        /// The GUID of the quest
+        /// The ID of the quest
         /// </summary>
-        public Guid q_GUID = Guid.Empty;
+        public int q_ID = -1;
         /// <summary>
         /// Name of the quest
         /// </summary>
@@ -30,9 +30,10 @@ namespace Zeph.Core.Classes {
         public Enums.QuestReceivalType q_ReceivalType = Enums.QuestReceivalType.OnceOff;
 
         public static PlayerQuest Start(Zeph.Core.Classes.Player p, Classes.Quest q) {
-            var pq = new Classes.PlayerQuest(p, q, q.questObjectives);
-            PlayerQuest.Save(pq);
-            return pq;
+            throw new NotImplementedException();
+            //var pq = new Classes.PlayerQuest(p, q, q.questObjectives);
+            //PlayerQuest.Save(pq);
+            //return pq;
         }
     }
 }
