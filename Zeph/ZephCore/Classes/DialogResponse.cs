@@ -69,13 +69,13 @@ namespace Zeph.Core.Classes {
         public new static DialogResponse ReadFromDictionary(Dictionary<string, object> dic) {
             if (dic != null) {
                 var obj = new DialogResponse();
-                obj.dr_ID = (int)dic["dr_ID"];
-                obj.dr_Response = (string)dic["dr_Response"];
-                obj.dr_ResponseType = (Enums.DialogResponseType)(int)dic["dr_ResponseType"];
-                obj.dr_Dialog = new Dialog() { d_ID = (int)dic["dr_Dialog"] };
-                obj.dr_NextDialog = dic["dr_NextDialog"] == null ? null : new Dialog() { d_ID = (int)dic["dr_NextDialog"] };
-                obj.dr_Quest = dic["dr_Quest"] == null ? null : new Quest() { q_ID = (int)dic["dr_Quest"] };
-                obj.dr_Order = (int)dic["dr_Order"];
+                obj.dr_ID = Convert.ToInt32(dic["id"]);
+                obj.dr_Response = Convert.ToString(dic["dr_Response"]);
+                obj.dr_ResponseType = (Enums.DialogResponseType)Convert.ToInt32(dic["dr_ResponseType"]);
+                obj.dr_Dialog = new Dialog() { d_ID = Convert.ToInt32(dic["dr_Dialog"]) };
+                obj.dr_NextDialog = dic["dr_NextDialog"] == null ? null : new Dialog() { d_ID = Convert.ToInt32(dic["dr_NextDialog"]) };
+                obj.dr_Quest = dic["dr_Quest"] == null ? null : new Quest() { q_ID = Convert.ToInt32(dic["dr_Quest"]) };
+                obj.dr_Order = Convert.ToInt32(dic["dr_Order"]);
                 return obj;
             } else {
                 return null;
@@ -85,7 +85,7 @@ namespace Zeph.Core.Classes {
         public new static DialogResponse Save(DialogResponse obj) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = new Dictionary<string, object>();
-                dic["dr_ID"] = obj.dr_ID;
+                dic["id"] = obj.dr_ID;
                 dic["dr_Response"] = obj.dr_Response;
                 dic["dr_ResponseType"] = (int)obj.dr_ResponseType;
                 dic["dr_Dialog"] = obj.dr_Dialog.d_ID;

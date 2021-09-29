@@ -46,8 +46,8 @@ namespace Zeph.Core.Classes {
         public new static Player ReadFromDictionary(Dictionary<string, object> dic) {
             if (dic != null) {
                 var p = new Player();
-                p.p_ID = (int)dic["p_ID"];
-                p.p_Name = (string)dic["p_Name"];
+                p.p_ID = Convert.ToInt32(dic["id"]);
+                p.p_Name = Convert.ToString(dic["p_Name"]);
                 return p;
             } else {
                 return null;
@@ -57,7 +57,7 @@ namespace Zeph.Core.Classes {
         public new static Player Save(Player p) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = new Dictionary<string, object>();
-                dic["p_ID"] = p.p_ID;
+                dic["id"] = p.p_ID;
                 dic["p_Name"] = p.p_Name;
                 return ReadFromDictionary(db.Save("player", p.p_ID, dic));
             }

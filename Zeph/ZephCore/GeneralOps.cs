@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Zeph.Core {
     public static class GeneralOps {
-        public static string JSONDatabaseFile = "C:\\zeph.json";
+        public static string JSONDatabaseFile = "E:\\Source\\Zeph_source\\Zeph\\testdatabase.json";
         public static Type CurrentDatabasePlatform = typeof(JSONDatabaseConnection);
 
         public static IDatabaseConnection GetDatabaseConnection() {

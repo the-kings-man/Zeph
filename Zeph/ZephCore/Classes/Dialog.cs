@@ -74,11 +74,11 @@ namespace Zeph.Core.Classes {
         public new static Dialog ReadFromDictionary(Dictionary<string, object> dic) {
             if (dic != null) {
                 var d = new Dialog();
-                d.d_ID = (int)dic["d_ID"];
-                d.d_Name = (string)dic["d_Name"];
-                d.d_Dialog = (string)dic["d_Dialog"];
-                d.d_NPC = dic["d_NPC"] == null ? null : new NPC() { npc_ID = (int)dic["d_NPC"] };
-                d.d_IsInitial = (bool)dic["d_IsInitial"];
+                d.d_ID = Convert.ToInt32(dic["id"]);
+                d.d_Name = Convert.ToString(dic["d_Name"]);
+                d.d_Dialog = Convert.ToString(dic["d_Dialog"]);
+                d.d_NPC = dic["d_NPC"] == null ? null : new NPC() { npc_ID = Convert.ToInt32(dic["d_NPC"]) };
+                d.d_IsInitial = Convert.ToBoolean(dic["d_IsInitial"]);
                 return d;
             } else {
                 return null;
@@ -88,7 +88,7 @@ namespace Zeph.Core.Classes {
         public new static Dialog Save(Dialog d) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = new Dictionary<string, object>();
-                dic["d_ID"] = d.d_ID;
+                dic["id"] = d.d_ID;
                 dic["d_Name"] = d.d_Name;
                 dic["d_Dialog"] = d.d_Dialog;
                 dic["d_NPC"] = d.d_NPC == null ? null : (object)d.d_NPC.npc_ID;

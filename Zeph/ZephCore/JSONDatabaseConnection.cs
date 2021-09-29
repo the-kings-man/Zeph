@@ -41,10 +41,10 @@ namespace Zeph.Core {
             var lst = new List<Dictionary<string, object>>();
             if (jsonFromFile.ContainsKey(tableName)) {
                 var table = (JObject)jsonFromFile[tableName];
-                foreach (var jObject in table.Values<JObject>()) {
+                foreach (var pair in table.Properties()) {
                     var dic = new Dictionary<string, object>();
-                    foreach (var pair in jObject) {
-                        dic[pair.Key] = pair.Value;
+                    foreach (var _pair in ((JObject)pair.Value).Properties()) {
+                        dic[_pair.Name] = _pair.Value;
                     }
                     lst.Add(dic);
                 }
