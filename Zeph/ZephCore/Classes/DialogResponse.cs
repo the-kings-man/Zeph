@@ -68,15 +68,19 @@ namespace Zeph.Core.Classes {
 
         public new static DialogResponse ReadFromDictionary(Dictionary<string, object> dic) {
             if (dic != null) {
-                var obj = new DialogResponse();
-                obj.dr_ID = Convert.ToInt32(dic["id"]);
-                obj.dr_Response = Convert.ToString(dic["dr_Response"]);
-                obj.dr_ResponseType = (Enums.DialogResponseType)Convert.ToInt32(dic["dr_ResponseType"]);
-                obj.dr_Dialog = new Dialog() { d_ID = Convert.ToInt32(dic["dr_Dialog"]) };
-                obj.dr_NextDialog = dic["dr_NextDialog"] == null ? null : new Dialog() { d_ID = Convert.ToInt32(dic["dr_NextDialog"]) };
-                obj.dr_Quest = dic["dr_Quest"] == null ? null : new Quest() { q_ID = Convert.ToInt32(dic["dr_Quest"]) };
-                obj.dr_Order = Convert.ToInt32(dic["dr_Order"]);
-                return obj;
+                try {
+                    var obj = new DialogResponse();
+                    obj.dr_ID = GeneralOps.ConvertDatabaseField<int>(dic, "id");
+                    obj.dr_Response = GeneralOps.ConvertDatabaseField<string>(dic, "dr_Response");
+                    obj.dr_ResponseType = (Enums.DialogResponseType)GeneralOps.ConvertDatabaseField<int>(dic, "dr_ResponseType");
+                    obj.dr_Dialog = new Dialog() { d_ID = GeneralOps.ConvertDatabaseField<int>(dic, "dr_Dialog") };
+                    obj.dr_NextDialog = GeneralOps.IsDatabaseFieldNull(dic, "dr_NextDialog") ? null : new Dialog() { d_ID = GeneralOps.ConvertDatabaseField<int>(dic, "dr_NextDialog") };
+                    obj.dr_Quest = GeneralOps.IsDatabaseFieldNull(dic, "dr_Quest") ? null : new Quest() { q_ID = GeneralOps.ConvertDatabaseField<int>(dic, "dr_Quest") };
+                    obj.dr_Order = GeneralOps.ConvertDatabaseField<int>(dic, "dr_Order");
+                    return obj;
+                } catch (Exception ex) {
+                    throw new ExceptionHandling.GeneralException("DialogResponse", 1, "An error occurred reading dictionary " + GeneralOps.DictionaryToJson(dic) + ". " + ex.Message, ex);
+                }
             } else {
                 return null;
             }
