@@ -91,6 +91,7 @@ namespace Zeph.Core.Classes {
         public new static Quest Save(Quest obj) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = new Dictionary<string, object>();
+                if (obj.q_ID == -1) obj.q_ID = db.GetNextId(TABLE);
                 dic["id"] = obj.q_ID;
                 dic["q_Name"] = obj.q_Name;
                 dic["q_Description"] = obj.q_Description;

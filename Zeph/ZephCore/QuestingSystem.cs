@@ -27,6 +27,5 @@ namespace Zeph.Core {
             Classes.PlayerQuest.Save(pq);
             return pq;
         }
-
     }
 }

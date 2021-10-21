@@ -42,12 +42,12 @@ namespace Zeph.Core.Classes {
 
         public new static bool Delete(int id) {
             var db = GeneralOps.GetDatabaseConnection();
-            return db.Delete("dialogResponse", id);
+            return db.Delete(TABLE, id);
         }
 
         public new static DialogResponse Read(int id) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
-                var dic = db.Read("dialogResponse", id);
+                var dic = db.Read(TABLE, id);
                 return ReadFromDictionary(dic);
             }
         }
@@ -55,7 +55,7 @@ namespace Zeph.Core.Classes {
         public new static List<DialogResponse> Read() {
             var lst = new List<DialogResponse>();
             using (var db = GeneralOps.GetDatabaseConnection()) {
-                var _lst = db.Read("dialogResponse");
+                var _lst = db.Read(TABLE);
                 foreach (var dic in _lst) {
                     var _dic = ReadFromDictionary(dic);
                     if (_dic != null) {
@@ -89,6 +89,7 @@ namespace Zeph.Core.Classes {
         public new static DialogResponse Save(DialogResponse obj) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = new Dictionary<string, object>();
+                if (obj.dr_ID == -1) obj.dr_ID = db.GetNextId(TABLE);
                 dic["id"] = obj.dr_ID;
                 dic["dr_Response"] = obj.dr_Response;
                 dic["dr_ResponseType"] = (int)obj.dr_ResponseType;
@@ -96,7 +97,7 @@ namespace Zeph.Core.Classes {
                 dic["dr_NextDialog"] = obj.dr_NextDialog == null ? null : (object)obj.dr_NextDialog.d_ID;
                 dic["dr_QuestGUID"] = obj.dr_Quest == null ? null : (object)obj.dr_Quest.q_ID;
                 dic["dr_Order"] = obj.dr_Order;
-                return ReadFromDictionary(db.Save("dialogResponse", obj.dr_ID, dic));
+                return ReadFromDictionary(db.Save(TABLE, obj.dr_ID, dic));
             }
         }
 

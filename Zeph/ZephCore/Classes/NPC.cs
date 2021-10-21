@@ -57,6 +57,7 @@ namespace Zeph.Core.Classes {
         public static new NPC Save(NPC npc) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = new Dictionary<string, object>();
+                if (npc.npc_ID == -1) npc.npc_ID = db.GetNextId(TABLE);
                 dic["id"] = npc.npc_ID;
                 dic["npc_Name"] = npc.npc_Name;
                 return ReadFromDictionary(db.Save(TABLE, npc.npc_ID, dic));

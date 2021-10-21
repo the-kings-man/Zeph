@@ -16,8 +16,10 @@ namespace Zeph.Core.Classes {
 
         public List<PlayerQuestObjective> playerQuestObjectives = null;
 
+        private PlayerQuest() {
+        }
+
         public PlayerQuest(Player p, Quest q, List<QuestObjective> questObjectives) {
-            pq_ID = new int();
             pq_Player = p;
             pq_Quest = q;
             pq_Status = Enums.PlayerQuestStatus.InProgress;
@@ -33,5 +35,68 @@ namespace Zeph.Core.Classes {
             //TODO: Loop through PlayerQuestObjectives, if all their status is Complete, then we're finished.
             throw new NotImplementedException();
         }
+
+        #region File Access
+
+        public new static bool Delete(int id) {
+            var db = GeneralOps.GetDatabaseConnection();
+            return db.Delete(TABLE, id);
+        }
+
+        public new static PlayerQuest Read(int id) {
+            using (var db = GeneralOps.GetDatabaseConnection()) {
+                var dic = db.Read(TABLE, id);
+                return ReadFromDictionary(dic);
+            }
+        }
+
+        public new static List<PlayerQuest> Read() {
+            var lst = new List<PlayerQuest>();
+            using (var db = GeneralOps.GetDatabaseConnection()) {
+                var _lst = db.Read(TABLE);
+                foreach (var dic in _lst) {
+                    var _dic = ReadFromDictionary(dic);
+                    if (_dic != null) {
+                        lst.Add(_dic);
+                    }
+                }
+            }
+            return lst;
+        }
+
+        public new static PlayerQuest ReadFromDictionary(Dictionary<string, object> dic) {
+            if (dic != null) {
+                try {
+                    var obj = new PlayerQuest();
+                    obj.pq_ID = GeneralOps.ConvertDatabaseField<int>(dic, "id");
+                    obj.pq_Player = new Player() { p_ID = GeneralOps.ConvertDatabaseField<int>(dic, "pq_Player") };
+                    obj.pq_Quest = new Quest() { q_ID = GeneralOps.ConvertDatabaseField<int>(dic, "pq_Quest") };
+                    obj.pq_Status = (Enums.PlayerQuestStatus)GeneralOps.ConvertDatabaseField<int>(dic, "pq_Status");
+                    obj.pq_Started = GeneralOps.ConvertDatabaseField<DateTime>(dic, "pq_Started");
+                    obj.pq_Finished = GeneralOps.ConvertDatabaseField<DateTime>(dic, "pq_Finished");
+                    return obj;
+                } catch (Exception ex) {
+                    throw new ExceptionHandling.GeneralException("PlayerQuest", 1, "An error occurred reading dictionary " + GeneralOps.DictionaryToJson(dic) + ". " + ex.Message, ex);
+                }
+            } else {
+                return null;
+            }
+        }
+
+        public new static PlayerQuest Save(PlayerQuest obj) {
+            using (var db = GeneralOps.GetDatabaseConnection()) {
+                var dic = new Dictionary<string, object>();
+                if (obj.pq_ID == -1) obj.pq_ID = db.GetNextId(TABLE);
+                dic["id"] = obj.pq_ID;
+                dic["pq_Player"] = obj.pq_Player.p_ID;
+                dic["pq_Quest"] = obj.pq_Quest.q_ID;
+                dic["pq_Status"] = (int)obj.pq_Status;
+                dic["pq_Started"] = obj.pq_Started;
+                dic["pq_Finished"] = obj.pq_Finished;
+                return ReadFromDictionary(db.Save(TABLE, obj.pq_ID, dic));
+            }
+        }
+
+        #endregion
     }
 }

@@ -8,5 +8,6 @@ namespace Zeph.Core {
         List<Dictionary<string, object>> Read(string tableName);
         Dictionary<string, object> Read(string tableName, int id);
         Dictionary<string, object> Save(string tableName, int id, Dictionary<string, object> dic);
+        int GetNextId(string tableName);
     }
 }

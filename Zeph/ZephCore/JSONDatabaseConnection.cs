@@ -78,14 +78,24 @@ namespace Zeph.Core {
             }
 
             var table = (JObject)jsonFromFile[tableName];
-            var jObject = new JObject();
-            foreach (var pair in dic) {
-                jObject[pair.Key] = (JToken)pair.Value;
-            }
+            var jObject = JObject.FromObject(dic);
+            //foreach (var pair in dic) {
+            //    jObject[pair.Key] = pair.Value;
+            //}
             table[id.ToString()] = jObject;
             save(jsonFromFile);
 
             return dic;
+        }
+
+        public int GetNextId(string tableName) {
+            var jsonFromFile = open();
+            var n = 0;
+            if (jsonFromFile.ContainsKey(tableName)) {
+                var table = (JObject)jsonFromFile[tableName];
+                while (table.ContainsKey((++n).ToString())) { };
+            }
+            return n;
         }
 
         #region IDisposable Support

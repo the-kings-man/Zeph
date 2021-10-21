@@ -57,9 +57,10 @@ namespace Zeph.Core.Classes {
         public new static Player Save(Player p) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = new Dictionary<string, object>();
+                if (p.p_ID == -1) p.p_ID = db.GetNextId(TABLE);
                 dic["id"] = p.p_ID;
                 dic["p_Name"] = p.p_Name;
-                return ReadFromDictionary(db.Save("player", p.p_ID, dic));
+                return ReadFromDictionary(db.Save(TABLE, p.p_ID, dic));
             }
         }
 

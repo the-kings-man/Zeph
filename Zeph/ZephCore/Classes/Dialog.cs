@@ -88,12 +88,13 @@ namespace Zeph.Core.Classes {
         public new static Dialog Save(Dialog d) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = new Dictionary<string, object>();
+                if (d.d_ID == -1) d.d_ID = db.GetNextId(TABLE);
                 dic["id"] = d.d_ID;
                 dic["d_Name"] = d.d_Name;
                 dic["d_Dialog"] = d.d_Dialog;
                 dic["d_NPC"] = d.d_NPC == null ? null : (object)d.d_NPC.npc_ID;
                 dic["d_IsInitial"] = d.d_IsInitial;
-                return ReadFromDictionary(db.Save("dialog", d.d_ID, dic));
+                return ReadFromDictionary(db.Save(TABLE, d.d_ID, dic));
             }
         }
 
