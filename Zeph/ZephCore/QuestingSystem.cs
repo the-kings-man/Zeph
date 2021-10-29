@@ -23,7 +23,7 @@ namespace Zeph.Core {
         //}
 
         public static Classes.PlayerQuest Start(Zeph.Core.Classes.Player p, Classes.Quest q) {
-            var pq = new Classes.PlayerQuest(p, q, q.questObjectives);
+            var pq = new Classes.PlayerQuest(p, q, q.QuestObjectives);
             Classes.PlayerQuest.Save(pq);
             return pq;
         }

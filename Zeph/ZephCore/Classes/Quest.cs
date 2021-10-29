@@ -29,18 +29,27 @@ namespace Zeph.Core.Classes {
         /// </summary>
         public Enums.QuestReceivalType q_ReceivalType = Enums.QuestReceivalType.OnceOff;
 
-        public List<QuestObjective> questObjectives {
+        private List<QuestObjective> questObjectives = null;
+
+        #region Properties
+
+        public List<QuestObjective> QuestObjectives {
             get {
-                var lstQO = QuestObjective.Read();
-                var _questObjectives = new List<QuestObjective>();
-                foreach (var qo in lstQO) {
-                    if (qo.qo_Quest == q_ID) {
-                        _questObjectives.Add(qo);
+
+                if (questObjectives == null) {
+                    questObjectives = new List<QuestObjective>();
+                    var lstQuestObjectives = QuestObjective.Read();
+                    foreach (var qo in lstQuestObjectives) {
+                        if (qo.qo_Quest == q_ID) {
+                            questObjectives.Add(qo);
+                        }
                     }
                 }
-                return _questObjectives;
+                return questObjectives;
             }
         }
+
+        #endregion
 
         #region File Access
 

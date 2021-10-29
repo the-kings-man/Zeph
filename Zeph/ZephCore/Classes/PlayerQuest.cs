@@ -14,7 +14,7 @@ namespace Zeph.Core.Classes {
         public DateTime pq_Started = new DateTime(1900, 1, 1);
         public DateTime pq_Finished = new DateTime(1900, 1, 1);
 
-        public List<PlayerQuestObjective> playerQuestObjectives = null;
+        private List<PlayerQuestObjective> playerQuestObjectives = null;
 
         private PlayerQuest() {
         }
@@ -35,6 +35,25 @@ namespace Zeph.Core.Classes {
             //TODO: Loop through PlayerQuestObjectives, if all their status is Complete, then we're finished.
             throw new NotImplementedException();
         }
+
+        #region Properties
+
+        public List<PlayerQuestObjective> PlayerQuestObjectives {
+            get {
+                if (playerQuestObjectives == null) {
+                    playerQuestObjectives = new List<PlayerQuestObjective>();
+                    var lstPlayerQuestObjectives = PlayerQuestObjective.Read();
+                    foreach (var pqo in lstPlayerQuestObjectives) {
+                        if (pqo.pqo_PlayerQuest == pq_ID) {
+                            playerQuestObjectives.Add(pqo);
+                        }
+                    }
+                }
+                return playerQuestObjectives;
+            }
+        }
+
+        #endregion
 
         #region File Access
 
@@ -83,7 +102,7 @@ namespace Zeph.Core.Classes {
             }
         }
 
-        public new static PlayerQuest Save(PlayerQuest obj) {
+        public new static PlayerQuest Save(PlayerQuest obj, bool saveChildren = true) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = new Dictionary<string, object>();
                 if (obj.pq_ID == -1) obj.pq_ID = db.GetNextId(TABLE);
@@ -93,6 +112,14 @@ namespace Zeph.Core.Classes {
                 dic["pq_Status"] = (int)obj.pq_Status;
                 dic["pq_Started"] = obj.pq_Started;
                 dic["pq_Finished"] = obj.pq_Finished;
+
+                if (saveChildren) {
+                    foreach (var pqo in obj.playerQuestObjectives) {
+                        pqo.pqo_PlayerQuest = obj.pq_ID;
+                        PlayerQuestObjective.Save(pqo);
+                    }
+                }
+
                 return ReadFromDictionary(db.Save(TABLE, obj.pq_ID, dic));
             }
         }
