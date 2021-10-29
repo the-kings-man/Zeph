@@ -43,7 +43,7 @@
       "dr_ResponseType": 2,
       "dr_Dialog": 1,
       "dr_NextDialog": null,
-      "dr_Quest": 1,
+      "dr_Quest": 2,
       "dr_Order": 2
     },
     "3": {
@@ -61,7 +61,7 @@
       "dr_ResponseType": 2,
       "dr_Dialog": 2,
       "dr_NextDialog": null,
-      "dr_Quest": 1,
+      "dr_Quest": 2,
       "dr_Order": 1
     },
     "5": {
@@ -79,7 +79,14 @@
       "id": 1,
       "q_Name": "Defeat the slimes",
       "q_Description": "You must defeat 5 slimes, quick!",
-      "q_ObjectivesType": 1,
+      "q_Type": 1,
+      "q_ReceivalType": 1
+    },
+    "2": {
+      "id": 2,
+      "q_Name": "Activate the trigger",
+      "q_Description": "You won't, you're scared",
+      "q_Type": 1,
       "q_ReceivalType": 1
     }
   },
@@ -90,6 +97,14 @@
       "qo_Description": "Defeat the 5 slimes.",
       "qo_Type": 1,
       "qo_Goal": 5,
+      "qo_Order": 0
+    },
+    "2": {
+      "id": 2,
+      "qo_Quest": 2,
+      "qo_Description": "Come get 'em",
+      "qo_Type": 3,
+      "qo_Goal": 1,
       "qo_Order": 0
     }
   },

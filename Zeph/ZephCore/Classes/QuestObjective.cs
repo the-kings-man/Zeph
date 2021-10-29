@@ -29,7 +29,7 @@ namespace Zeph.Core.Classes {
         /// </summary>
         public int qo_Goal = 0;
         /// <summary>
-        /// The order this quest objective sits within the quest. For <see cref="Enums.QuestObjectivesType.Procedural"/> quests, this is the order the objective MUST be completed.
+        /// The order this quest objective sits within the quest. For <see cref="Enums.QuestType.Procedural"/> quests, this is the order the objective MUST be completed.
         /// </summary>
         public int qo_Order = 0;
 

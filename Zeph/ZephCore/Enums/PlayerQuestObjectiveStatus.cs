@@ -13,7 +13,7 @@ namespace Zeph.Core.Enums {
         /// </summary>
         Complete = 2,
         /// <summary>
-        /// Objective has not yet been started, i.e. a previous objective is underway as this objects <see cref="Classes.Quest"/> <see cref="Classes.Quest.q_ObjectivesType"/> could be <see cref="Enums.QuestObjectivesType.Procedural"/>
+        /// Objective has not yet been started, i.e. a previous objective is underway as this objects <see cref="Classes.Quest"/> <see cref="Classes.Quest.q_Type"/> could be <see cref="Enums.QuestType.Procedural"/>
         /// </summary>
         NotStarted = 3
     }

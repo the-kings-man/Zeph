@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Zeph.Core.Enums {
-    public enum QuestObjectivesType {
+    public enum QuestType {
         /// <summary>
         /// The objectives within this quest can be completed in any order
         /// </summary>

@@ -23,7 +23,7 @@ namespace Zeph.Core.Classes {
         /// <summary>
         /// The type of quest, i.e. to be completed in any order, or procedural one objective after another
         /// </summary>
-        public Enums.QuestObjectivesType q_ObjectivesType = Enums.QuestObjectivesType.Generic;
+        public Enums.QuestType q_Type = Enums.QuestType.Generic;
         /// <summary>
         /// How often this quest can be received, either once off or recurring. Will be used mainly for daily/weekly quests where the quest giver will run code to see whether or not to offer the quest
         /// </summary>
@@ -86,7 +86,7 @@ namespace Zeph.Core.Classes {
                     obj.q_ID = GeneralOps.ConvertDatabaseField<int>(dic, "id");
                     obj.q_Name = GeneralOps.ConvertDatabaseField<string>(dic, "q_Name");
                     obj.q_Description = GeneralOps.ConvertDatabaseField<string>(dic, "q_Description");
-                    obj.q_ObjectivesType = (Enums.QuestObjectivesType)GeneralOps.ConvertDatabaseField<int>(dic, "q_ObjectivesType");
+                    obj.q_Type = (Enums.QuestType)GeneralOps.ConvertDatabaseField<int>(dic, "q_Type");
                     obj.q_ReceivalType = (Enums.QuestReceivalType)GeneralOps.ConvertDatabaseField<int>(dic, "q_ReceivalType");
                     return obj;
                 } catch (Exception ex) {
@@ -104,7 +104,7 @@ namespace Zeph.Core.Classes {
                 dic["id"] = obj.q_ID;
                 dic["q_Name"] = obj.q_Name;
                 dic["q_Description"] = obj.q_Description;
-                dic["q_ObjectivesType"] = (int)obj.q_ObjectivesType;
+                dic["q_Type"] = (int)obj.q_Type;
                 dic["q_ReceivalType"] = (int)obj.q_ReceivalType;
                 return ReadFromDictionary(db.Save(TABLE, obj.q_ID, dic));
             }

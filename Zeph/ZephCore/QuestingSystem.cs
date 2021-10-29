@@ -27,5 +27,33 @@ namespace Zeph.Core {
             Classes.PlayerQuest.Save(pq);
             return pq;
         }
+
+        public static QuestProgressResult TriggerProgress(Zeph.Core.Classes.Player p, Classes.Trigger t, int progress) {
+            /**
+             * Trigger
+             * id
+             * t_Description
+             * t_NPC
+             * t_Area
+             */
+
+            /**
+             * Area
+             * id
+             * t_Description
+             * 
+             */
+
+            /**
+             * QuestProgressResult
+             * A class that helps the game handle the result of quest progress...?
+             * i.e. Did this finish the quest?
+             * Did this finish the quest objective?
+             * Is threre a next quest objective? If so, what?
+             */
+            
+            //Get all quests for player who have current objectives of type trigger.
+            // If quest bojective trigger is this trigger, log progress
+        }
     }
 }
