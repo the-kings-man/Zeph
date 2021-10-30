@@ -23,7 +23,7 @@ namespace Zeph.Core.Classes {
         /// <summary>
         /// The purpose of the objective, is it to defeat an enemy? Or gather some materials?
         /// </summary>
-        private Enums.QuestObjectiveType qo_Type = Enums.QuestObjectiveType.Defeat;
+        public Enums.QuestObjectiveType qo_Type = Enums.QuestObjectiveType.Defeat;
         /// <summary>
         /// How many of the objective must be defeated/gathered/triggered before the objective is fulfilled.
         /// </summary>
@@ -32,6 +32,10 @@ namespace Zeph.Core.Classes {
         /// The order this quest objective sits within the quest. For <see cref="Enums.QuestType.Procedural"/> quests, this is the order the objective MUST be completed.
         /// </summary>
         public int qo_Order = 0;
+        /// <summary>
+        /// The id of the trigger for this quest objective. The user triggering this trigger counts as progress towards this objective. Used when <see cref="qo_Type"/> = <see cref="Enums.QuestObjectiveType.Trigger"/>
+        /// </summary>
+        public int qo_Trigger = 0;
 
         #region File Access
 
@@ -71,6 +75,7 @@ namespace Zeph.Core.Classes {
                     obj.qo_Type = (Enums.QuestObjectiveType)GeneralOps.ConvertDatabaseField<int>(dic, "qo_Type");
                     obj.qo_Goal = GeneralOps.ConvertDatabaseField<int>(dic, "qo_Goal");
                     obj.qo_Order = GeneralOps.ConvertDatabaseField<int>(dic, "qo_Order");
+                    obj.qo_Trigger = GeneralOps.ConvertDatabaseField<int>(dic, "qo_Trigger");
                     return obj;
                 } catch (Exception ex) {
                     throw new ExceptionHandling.GeneralException("QuestObjective", 1, "An error occurred reading dictionary " + GeneralOps.DictionaryToJson(dic) + ". " + ex.Message, ex);
@@ -90,6 +95,7 @@ namespace Zeph.Core.Classes {
                 dic["qo_Type"] = (int)obj.qo_Type;
                 dic["qo_Goal"] = obj.qo_Goal;
                 dic["qo_Order"] = obj.qo_Order;
+                dic["qo_Trigger"] = obj.qo_Trigger;
                 return ReadFromDictionary(db.Save(TABLE, obj.qo_ID, dic));
             }
         }
