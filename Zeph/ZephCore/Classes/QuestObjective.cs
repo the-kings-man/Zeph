@@ -35,7 +35,7 @@ namespace Zeph.Core.Classes {
         /// <summary>
         /// The id of the trigger for this quest objective. The user triggering this trigger counts as progress towards this objective. Used when <see cref="qo_Type"/> = <see cref="Enums.QuestObjectiveType.Trigger"/>
         /// </summary>
-        public int qo_Trigger = 0;
+        public int qo_Trigger = -1;
 
         #region File Access
 
