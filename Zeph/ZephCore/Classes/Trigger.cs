@@ -13,7 +13,7 @@ namespace Zeph.Core.Classes {
         /// </summary>
         public int t_ID = -1;
         /// <summary>
-        /// Objective description i.e. "Gather 5 apples", "Defeat 5 ravenous rabbits"
+        /// Helpful description for what this trigger is for... Mainly for us
         /// </summary>
         public string t_Description = "";
         /// <summary>
@@ -60,7 +60,7 @@ namespace Zeph.Core.Classes {
                     obj.t_ID = GeneralOps.ConvertDatabaseField<int>(dic, "id");
                     obj.t_Description = GeneralOps.ConvertDatabaseField<string>(dic, "t_Description");
                     obj.t_NPC = GeneralOps.ConvertDatabaseField<int>(dic, "t_NPC");
-                    obj.t_NPC = GeneralOps.ConvertDatabaseField<int>(dic, "t_Area");
+                    obj.t_Area = GeneralOps.ConvertDatabaseField<int>(dic, "t_Area");
                     return obj;
                 } catch (Exception ex) {
                     throw new ExceptionHandling.GeneralException("Trigger", 1, "An error occurred reading dictionary " + GeneralOps.DictionaryToJson(dic) + ". " + ex.Message, ex);

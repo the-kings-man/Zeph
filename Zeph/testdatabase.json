@@ -57,8 +57,8 @@
     },
     "4": {
       "id": 4,
-      "dr_Response": "Can I have a quest?",
-      "dr_ResponseType": 2,
+      "dr_Response": "Have you activated the trigger?",
+      "dr_ResponseType": 3,
       "dr_Dialog": 2,
       "dr_NextDialog": null,
       "dr_Quest": 2,
@@ -97,7 +97,8 @@
       "qo_Description": "Defeat the 5 slimes.",
       "qo_Type": 1,
       "qo_Goal": 5,
-      "qo_Order": 0
+      "qo_Order": 0,
+      "qo_Trigger": -1
     },
     "2": {
       "id": 2,
@@ -105,41 +106,58 @@
       "qo_Description": "Come get 'em",
       "qo_Type": 3,
       "qo_Goal": 1,
-      "qo_Order": 0
+      "qo_Order": 0,
+      "qo_Trigger": 1
     }
   },
   "playerQuest": {
-    "2": {
-      "id": 2,
+    "3": {
+      "id": 3,
       "pq_Player": 1,
-      "pq_Quest": 1,
+      "pq_Quest": 2,
       "pq_Status": 1,
-      "pq_Started": "2021-10-29T17:44:10.2041585+10:00",
-      "pq_Finished": "1900-01-01T00:00:00"
+      "pq_Started": "2021-10-31T11:40:50.5635+10:00",
+      "pq_Finished": "2021-10-31T11:45:21.6093344+10:00",
+      "pq_HandedIn": true
     },
     "1": {
       "id": 1,
       "pq_Player": 1,
-      "pq_Quest": 1,
+      "pq_Quest": 2,
       "pq_Status": 1,
-      "pq_Started": "2021-10-29T17:50:15.5061404+10:00",
-      "pq_Finished": "1900-01-01T00:00:00"
+      "pq_Started": "2021-10-31T12:33:25.4398314+10:00",
+      "pq_Finished": "2021-10-31T12:33:43.0818687+10:00",
+      "pq_HandedIn": true
     }
   },
   "playerQuestObjective": {
-    "1": {
-      "id": 1,
-      "pqo_PlayerQuest": 2,
-      "pqo_QuestObjective": 1,
-      "pqo_Progress": 0,
+    "3": {
+      "id": 3,
+      "pqo_PlayerQuest": 3,
+      "pqo_QuestObjective": 2,
+      "pqo_Progress": 1,
       "pqo_Status": 1
     },
-    "2": {
-      "id": 2,
+    "1": {
+      "id": 1,
       "pqo_PlayerQuest": 1,
-      "pqo_QuestObjective": 1,
-      "pqo_Progress": 0,
+      "pqo_QuestObjective": 2,
+      "pqo_Progress": 1,
       "pqo_Status": 1
+    }
+  },
+  "area": {
+    "1": {
+      "id": 1,
+      "t_Description": "An area with trees"
+    }
+  },
+  "trigger": {
+    "1": {
+      "id": 1,
+      "t_Description": "This trigger has wood. The fundamental trigger on enter of 'An area with trees'",
+      "t_NPC": -1,
+      "t_Area": 1
     }
   }
 }

@@ -24,8 +24,24 @@ namespace Zeph.Core {
 
         public static Classes.PlayerQuest Start(Zeph.Core.Classes.Player p, Classes.Quest q) {
             var pq = new Classes.PlayerQuest(p, q, q.QuestObjectives);
-            Classes.PlayerQuest.Save(pq);
-            return pq;
+            return Classes.PlayerQuest.Save(pq);
+        }
+
+        public static Classes.PlayerQuest HandIn(Zeph.Core.Classes.Player p, Classes.Quest q) {
+            foreach (var pq in Zeph.Core.Classes.PlayerQuest.Read()) {
+                if (pq.pq_Player.p_ID == p.p_ID && pq.pq_Quest.q_ID == q.q_ID) {
+                    if (pq.pq_Finished.Year != 1900 && !pq.pq_HandedIn) {
+                        //Can hand in
+                        return HandIn(pq);
+                    }
+                }
+            }
+            return null;
+        }
+
+        public static Classes.PlayerQuest HandIn(Classes.PlayerQuest pq) {
+            pq.pq_HandedIn = true;
+            return Zeph.Core.Classes.PlayerQuest.Save(pq, false);
         }
 
         public static QuestProgressResult TriggerProgress(Zeph.Core.Classes.Player p, Classes.Trigger t, int progress) {

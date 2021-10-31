@@ -13,6 +13,7 @@ namespace Zeph.Core.Classes {
         public Enums.PlayerQuestStatus pq_Status = Enums.PlayerQuestStatus.InProgress;
         public DateTime pq_Started = new DateTime(1900, 1, 1);
         public DateTime pq_Finished = new DateTime(1900, 1, 1);
+        public bool pq_HandedIn = false;
 
         private List<PlayerQuestObjective> playerQuestObjectives = null;
 
@@ -93,6 +94,7 @@ namespace Zeph.Core.Classes {
                     obj.pq_Status = (Enums.PlayerQuestStatus)GeneralOps.ConvertDatabaseField<int>(dic, "pq_Status");
                     obj.pq_Started = GeneralOps.ConvertDatabaseField<DateTime>(dic, "pq_Started");
                     obj.pq_Finished = GeneralOps.ConvertDatabaseField<DateTime>(dic, "pq_Finished");
+                    obj.pq_HandedIn = GeneralOps.ConvertDatabaseField<bool>(dic, "pq_HandedIn");
                     return obj;
                 } catch (Exception ex) {
                     throw new ExceptionHandling.GeneralException("PlayerQuest", 1, "An error occurred reading dictionary " + GeneralOps.DictionaryToJson(dic) + ". " + ex.Message, ex);
@@ -112,6 +114,7 @@ namespace Zeph.Core.Classes {
                 dic["pq_Status"] = (int)obj.pq_Status;
                 dic["pq_Started"] = obj.pq_Started;
                 dic["pq_Finished"] = obj.pq_Finished;
+                dic["pq_HandedIn"] = obj.pq_HandedIn;
 
                 if (saveChildren) {
                     foreach (var pqo in obj.playerQuestObjectives) {

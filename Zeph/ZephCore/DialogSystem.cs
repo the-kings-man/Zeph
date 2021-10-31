@@ -32,6 +32,13 @@ namespace Zeph.Core {
                         nextDialog = null,
                         quest = Classes.Quest.Read(response.dr_Quest.q_ID),   
                     };
+                case Enums.DialogResponseType.HandInQuest:
+                    return new DialogSystemResponse() {
+                        response = response,
+                        type = response.dr_ResponseType,
+                        nextDialog = null,
+                        quest = Classes.Quest.Read(response.dr_Quest.q_ID),
+                    };
                 default:
                     return null;
             }
