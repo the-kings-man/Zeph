@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-11-02T12:04:51.293Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36" etag="caKbspDw5Jm-rVIf6QAa" version="15.6.5" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2021-11-02T12:09:11.004Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36" etag="2VsOrYFKSEhCJDb0Pd1x" version="15.6.5" type="github" pages="2">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Quests">
     <mxGraphModel dx="1422" dy="1935" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -244,7 +244,7 @@
         <mxCell id="AX0PKi07CL1VcGSAKyGS-11" value="SubType (enum)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="9Z4G7q8sjChNkSuPHu6N-0" vertex="1">
           <mxGeometry y="130" width="300" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="AX0PKi07CL1VcGSAKyGS-31" value="MaxStack (int), 0 infinite stack" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="9Z4G7q8sjChNkSuPHu6N-0" vertex="1">
+        <mxCell id="AX0PKi07CL1VcGSAKyGS-31" value="MaxQuantity (int), 0 infinite" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=default;" parent="9Z4G7q8sjChNkSuPHu6N-0" vertex="1">
           <mxGeometry y="156" width="300" height="26" as="geometry" />
         </mxCell>
         <mxCell id="AX0PKi07CL1VcGSAKyGS-24" value="MetaData (json string changing on ItemType/ItemSubType)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=default;" parent="9Z4G7q8sjChNkSuPHu6N-0" vertex="1">
@@ -312,7 +312,7 @@
         <mxCell id="AX0PKi07CL1VcGSAKyGS-28" value="ItemID (null or 0 for empty)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="AX0PKi07CL1VcGSAKyGS-25" vertex="1">
           <mxGeometry y="78" width="280" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="AX0PKi07CL1VcGSAKyGS-29" value="Quantity (int)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="AX0PKi07CL1VcGSAKyGS-25" vertex="1">
+        <mxCell id="AX0PKi07CL1VcGSAKyGS-29" value="Quantity (int)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=default;" parent="AX0PKi07CL1VcGSAKyGS-25" vertex="1">
           <mxGeometry y="104" width="280" height="26" as="geometry" />
         </mxCell>
         <mxCell id="CejgjDJWCL_AUBKd5sjW-0" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=default;labelBackgroundColor=default;fontColor=default;" parent="gi2wvL1fOQWvFOL7H56U-1" source="fIsBMEw89bsqnH-VNxIH-5" target="fIsBMEw89bsqnH-VNxIH-1" edge="1">
