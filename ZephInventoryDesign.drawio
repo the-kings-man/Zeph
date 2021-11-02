@@ -1,110 +1,113 @@
-<mxfile host="app.diagrams.net" modified="2021-10-31T04:48:39.898Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36" etag="V0FI2hgxmx2oIxnhVyBW" version="15.6.2" type="github">
+<mxfile host="app.diagrams.net" modified="2021-10-31T13:06:03.135Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36" etag="hmML7tMXnpeRWunoH0fS" version="15.6.3" type="github">
   <diagram id="_EGOjmIh_z6DGfE9HAsn" name="Page-1">
     <mxGraphModel dx="1422" dy="766" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="Xlfm45vk5w82AFTyZFev-1" value="I would like this engine to support the following inventory styles:&lt;br&gt;- Multiple Bags&lt;br&gt;- Changeable Bags&lt;br&gt;- Changing slots&lt;br&gt;&lt;br&gt;This will encompass the vast majority of inventory styles. If in a game they only want a simple 16 slot inventory, they just have 1 bag with 16 slots and this will never change even though the data structure could handle that.&lt;br&gt;&lt;br&gt;A currency system, separate from actual items. Potential for multiple currencies." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="Xlfm45vk5w82AFTyZFev-1" value="I would like this engine to support the following inventory styles:&lt;br&gt;- Multiple Bags&lt;br&gt;- Changeable Bags&lt;br&gt;- Changing slots&lt;br&gt;&lt;br&gt;This will encompass the vast majority of inventory styles. If in a game they only want a simple 16 slot inventory, they just have 1 bag with 16 slots and this will never change even though the data structure could handle that.&lt;br&gt;&lt;br&gt;A currency system, separate from actual items. Potential for multiple currencies." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="130" y="130" width="500" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="Xlfm45vk5w82AFTyZFev-3" value="Bag 1" style="swimlane;startSize=30;" vertex="1" parent="1">
+        <mxCell id="Xlfm45vk5w82AFTyZFev-3" value="Bag 1" style="swimlane;startSize=30;" parent="1" vertex="1">
           <mxGeometry x="200" y="370" width="200" height="190" as="geometry" />
         </mxCell>
-        <mxCell id="Xlfm45vk5w82AFTyZFev-5" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="Xlfm45vk5w82AFTyZFev-3">
+        <mxCell id="Xlfm45vk5w82AFTyZFev-5" value="" style="endArrow=none;html=1;rounded=0;" parent="Xlfm45vk5w82AFTyZFev-3" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint y="110" as="sourcePoint" />
             <mxPoint x="200" y="110" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Xlfm45vk5w82AFTyZFev-6" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="Xlfm45vk5w82AFTyZFev-3">
+        <mxCell id="Xlfm45vk5w82AFTyZFev-6" value="" style="endArrow=none;html=1;rounded=0;" parent="Xlfm45vk5w82AFTyZFev-3" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint y="150" as="sourcePoint" />
             <mxPoint x="200" y="150" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Xlfm45vk5w82AFTyZFev-4" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="Xlfm45vk5w82AFTyZFev-3">
+        <mxCell id="Xlfm45vk5w82AFTyZFev-4" value="" style="endArrow=none;html=1;rounded=0;" parent="Xlfm45vk5w82AFTyZFev-3" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint y="70" as="sourcePoint" />
             <mxPoint x="200" y="70" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Xlfm45vk5w82AFTyZFev-8" value="" style="endArrow=none;html=1;rounded=0;exitX=0.2;exitY=0.158;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="Xlfm45vk5w82AFTyZFev-3">
+        <mxCell id="Xlfm45vk5w82AFTyZFev-8" value="" style="endArrow=none;html=1;rounded=0;exitX=0.2;exitY=0.158;exitDx=0;exitDy=0;exitPerimeter=0;" parent="Xlfm45vk5w82AFTyZFev-3" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="80" y="30.019999999999982" as="sourcePoint" />
             <mxPoint x="80" y="190" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Xlfm45vk5w82AFTyZFev-9" value="" style="endArrow=none;html=1;rounded=0;exitX=0.2;exitY=0.158;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="Xlfm45vk5w82AFTyZFev-3">
+        <mxCell id="Xlfm45vk5w82AFTyZFev-9" value="" style="endArrow=none;html=1;rounded=0;exitX=0.2;exitY=0.158;exitDx=0;exitDy=0;exitPerimeter=0;" parent="Xlfm45vk5w82AFTyZFev-3" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="120" y="30.019999999999982" as="sourcePoint" />
             <mxPoint x="120" y="190" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Xlfm45vk5w82AFTyZFev-10" value="" style="endArrow=none;html=1;rounded=0;exitX=0.2;exitY=0.158;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="Xlfm45vk5w82AFTyZFev-3">
+        <mxCell id="Xlfm45vk5w82AFTyZFev-10" value="" style="endArrow=none;html=1;rounded=0;exitX=0.2;exitY=0.158;exitDx=0;exitDy=0;exitPerimeter=0;" parent="Xlfm45vk5w82AFTyZFev-3" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="160" y="30.019999999999982" as="sourcePoint" />
             <mxPoint x="160" y="190" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Xlfm45vk5w82AFTyZFev-7" value="" style="endArrow=none;html=1;rounded=0;exitX=0.2;exitY=0.158;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="Xlfm45vk5w82AFTyZFev-3">
+        <mxCell id="Xlfm45vk5w82AFTyZFev-7" value="" style="endArrow=none;html=1;rounded=0;exitX=0.2;exitY=0.158;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="Xlfm45vk5w82AFTyZFev-3" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="220" y="530" as="sourcePoint" />
             <mxPoint x="240" y="560" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Xlfm45vk5w82AFTyZFev-11" value="Bag 2" style="swimlane;startSize=30;" vertex="1" parent="1">
+        <mxCell id="Xlfm45vk5w82AFTyZFev-11" value="Bag 2" style="swimlane;startSize=30;" parent="1" vertex="1">
           <mxGeometry x="420" y="370" width="200" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="Xlfm45vk5w82AFTyZFev-14" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="Xlfm45vk5w82AFTyZFev-11">
+        <mxCell id="Xlfm45vk5w82AFTyZFev-14" value="" style="endArrow=none;html=1;rounded=0;" parent="Xlfm45vk5w82AFTyZFev-11" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint y="70" as="sourcePoint" />
             <mxPoint x="200" y="70" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Xlfm45vk5w82AFTyZFev-15" value="" style="endArrow=none;html=1;rounded=0;exitX=0.2;exitY=0.158;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="Xlfm45vk5w82AFTyZFev-11">
+        <mxCell id="Xlfm45vk5w82AFTyZFev-15" value="" style="endArrow=none;html=1;rounded=0;exitX=0.2;exitY=0.158;exitDx=0;exitDy=0;exitPerimeter=0;" parent="Xlfm45vk5w82AFTyZFev-11" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="80" y="30.019999999999982" as="sourcePoint" />
             <mxPoint x="80" y="110" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Xlfm45vk5w82AFTyZFev-16" value="" style="endArrow=none;html=1;rounded=0;exitX=0.2;exitY=0.158;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="Xlfm45vk5w82AFTyZFev-11">
+        <mxCell id="Xlfm45vk5w82AFTyZFev-16" value="" style="endArrow=none;html=1;rounded=0;exitX=0.2;exitY=0.158;exitDx=0;exitDy=0;exitPerimeter=0;" parent="Xlfm45vk5w82AFTyZFev-11" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="120" y="30.019999999999982" as="sourcePoint" />
             <mxPoint x="120" y="110" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Xlfm45vk5w82AFTyZFev-17" value="" style="endArrow=none;html=1;rounded=0;exitX=0.2;exitY=0.158;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="Xlfm45vk5w82AFTyZFev-11">
+        <mxCell id="Xlfm45vk5w82AFTyZFev-17" value="" style="endArrow=none;html=1;rounded=0;exitX=0.2;exitY=0.158;exitDx=0;exitDy=0;exitPerimeter=0;" parent="Xlfm45vk5w82AFTyZFev-11" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="160" y="30.019999999999982" as="sourcePoint" />
             <mxPoint x="160" y="110" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Xlfm45vk5w82AFTyZFev-18" value="" style="endArrow=none;html=1;rounded=0;exitX=0.2;exitY=0.158;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="Xlfm45vk5w82AFTyZFev-11">
+        <mxCell id="Xlfm45vk5w82AFTyZFev-18" value="" style="endArrow=none;html=1;rounded=0;exitX=0.2;exitY=0.158;exitDx=0;exitDy=0;exitPerimeter=0;" parent="Xlfm45vk5w82AFTyZFev-11" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="40" y="30.019999999999982" as="sourcePoint" />
             <mxPoint x="40" y="110" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Xlfm45vk5w82AFTyZFev-19" value="Bag 3" style="swimlane;startSize=30;" vertex="1" parent="1">
+        <mxCell id="Xlfm45vk5w82AFTyZFev-19" value="Bag 3" style="swimlane;startSize=30;" parent="1" vertex="1">
           <mxGeometry x="640" y="370" width="80" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="Xlfm45vk5w82AFTyZFev-20" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="Xlfm45vk5w82AFTyZFev-19">
+        <mxCell id="Xlfm45vk5w82AFTyZFev-20" value="" style="endArrow=none;html=1;rounded=0;" parent="Xlfm45vk5w82AFTyZFev-19" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint y="70" as="sourcePoint" />
             <mxPoint x="80" y="70" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Xlfm45vk5w82AFTyZFev-21" value="" style="endArrow=none;html=1;rounded=0;exitX=0.2;exitY=0.158;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="Xlfm45vk5w82AFTyZFev-19">
+        <mxCell id="Xlfm45vk5w82AFTyZFev-21" value="" style="endArrow=none;html=1;rounded=0;exitX=0.2;exitY=0.158;exitDx=0;exitDy=0;exitPerimeter=0;" parent="Xlfm45vk5w82AFTyZFev-19" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="80" y="30.019999999999982" as="sourcePoint" />
             <mxPoint x="80" y="110" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Xlfm45vk5w82AFTyZFev-24" value="" style="endArrow=none;html=1;rounded=0;exitX=0.2;exitY=0.158;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="Xlfm45vk5w82AFTyZFev-19">
+        <mxCell id="Xlfm45vk5w82AFTyZFev-24" value="" style="endArrow=none;html=1;rounded=0;exitX=0.2;exitY=0.158;exitDx=0;exitDy=0;exitPerimeter=0;" parent="Xlfm45vk5w82AFTyZFev-19" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="40" y="30.019999999999982" as="sourcePoint" />
             <mxPoint x="40" y="110" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="nanOTtfB7DN9uQSmGWXo-1" value="Put simply, I suppose I love the Inventory systems of WoW and Runescape. Hence basing Zeph off that... I enjoy the sandbox feel it has.&lt;br&gt;The items in Zeph,&amp;nbsp;&lt;br&gt;https://gamedevelopment.tutsplus.com/articles/designing-an-rpg-inventory-system-that-fits-preliminary-steps--gamedev-14725&lt;br&gt;&lt;ol style=&quot;box-sizing: border-box ; color: rgb(58 , 58 , 58) ; font-family: , &amp;#34;roboto&amp;#34; , &amp;#34;arial&amp;#34; , sans-serif ; font-size: 20px ; background-color: rgb(254 , 254 , 254)&quot;&gt;&lt;li style=&quot;box-sizing: border-box&quot;&gt;&lt;em style=&quot;box-sizing: border-box&quot;&gt;Which game assets types will be displayed in inventory and which will not?&lt;br&gt;&lt;/em&gt;&amp;nbsp;Out of inventory: Currency, Equipped items, Magical items/auras, Spiritual Prayers&lt;br&gt;&amp;nbsp;In inventory: Harvestable items, Equipment, Food, Potions/Buffs, Common/junk items (actually, can the idea. There&#39;s no point to having them other than basic currency generation), Weapons, Ammo&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box&quot;&gt;&lt;em style=&quot;box-sizing: border-box&quot;&gt;Departmentalize inventory asset types.&lt;br&gt;&lt;/em&gt;Equipment&lt;br&gt;&amp;nbsp;Armour&lt;br&gt;&amp;nbsp; Head&lt;br&gt;&amp;nbsp; Body&lt;br&gt;&amp;nbsp; Feet&lt;br&gt;&amp;nbsp; Hands&lt;br&gt;&amp;nbsp; Neck&lt;br&gt;&amp;nbsp; Ring&lt;br&gt;&amp;nbsp; Belt&lt;br&gt;Weapons/Wielding items (2 hands to equip, and an ammo slot&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box&quot;&gt;&amp;nbsp; 1H&lt;br&gt;&amp;nbsp; &amp;nbsp;Sword&lt;br&gt;&amp;nbsp; &amp;nbsp;Axe&lt;br&gt;&amp;nbsp; 2H&lt;br&gt;&amp;nbsp; &amp;nbsp;Bow&lt;br&gt;&amp;nbsp; &amp;nbsp;Staff&lt;br&gt;&amp;nbsp; &amp;nbsp;2H Sword&lt;br&gt;&amp;nbsp; Off-hand&lt;br&gt;&amp;nbsp; &amp;nbsp;Magical buff&lt;br&gt;&amp;nbsp; &amp;nbsp;Shield&lt;br&gt;&amp;nbsp; Main-hand&lt;br&gt;&amp;nbsp; &amp;nbsp;Wand&lt;br&gt;&amp;nbsp;Ammo&lt;br&gt;&amp;nbsp; Arrows&lt;br&gt;&amp;nbsp;&lt;br&gt;Consumables&lt;br&gt;&amp;nbsp;Stat boosting&lt;br&gt;&amp;nbsp;Aura creating&lt;br&gt;&amp;nbsp;World dropping (i.e. plant a plant?)&lt;br&gt;&amp;nbsp;Learning things - learn a skill&lt;br&gt;&amp;nbsp;Bag&lt;br&gt;Materials&lt;br&gt;&amp;nbsp;Skill-based materials&lt;br&gt;Lore things?&lt;br&gt;&amp;nbsp;Books to open a dialog?&lt;br&gt;Quest items&lt;br&gt;&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box&quot;&gt;&lt;em style=&quot;box-sizing: border-box&quot;&gt;Do it again, and again.&lt;/em&gt;&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box&quot;&gt;&lt;em style=&quot;box-sizing: border-box&quot;&gt;Assign individual inventory items&#39; statistics.&lt;/em&gt;&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box&quot;&gt;&lt;em style=&quot;box-sizing: border-box&quot;&gt;Determine asset availability.&lt;br&gt;&amp;nbsp;Drops/Shops/Quests/Skills&lt;/em&gt;&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box&quot;&gt;&lt;em style=&quot;box-sizing: border-box&quot;&gt;Count the number of total inventory assets in your game.&lt;br&gt;&amp;nbsp;Many&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/em&gt;&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box&quot;&gt;&lt;em style=&quot;box-sizing: border-box&quot;&gt;Usability&lt;/em&gt;: Mainly reliant on the players skill/s, but health/buff potions will be helpful also&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box&quot;&gt;&lt;em style=&quot;box-sizing: border-box&quot;&gt;Quest functionality&lt;/em&gt;: You go into the world to help and restore your people. Travelling from place to place. Fairly open world like Skyrim but not as off-you-go-into-the-wilderness style.&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box&quot;&gt;&lt;em style=&quot;box-sizing: border-box&quot;&gt;Is your party comprised of a single character or a collective group?&lt;/em&gt;&amp;nbsp;Single character&lt;/li&gt;&lt;/ol&gt;&lt;div&gt;&lt;font color=&quot;#3a3a3a&quot;&gt;&lt;span style=&quot;font-size: 20px&quot;&gt;&lt;i&gt;&lt;br&gt;&lt;/i&gt;&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="50" y="670" width="740" height="1510" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
