@@ -82,6 +82,10 @@ namespace Zeph.Core {
             //foreach (var pair in dic) {
             //    jObject[pair.Key] = pair.Value;
             //}
+            if (id == -1) {
+                id = GetNextId(tableName);
+                dic["id"] = id;
+            }
             table[id.ToString()] = jObject;
             save(jsonFromFile);
 

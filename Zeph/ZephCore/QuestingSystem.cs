@@ -123,4 +123,15 @@ namespace Zeph.Core {
             return res;
         }
     }
+
+    public class QuestProgressObjectiveResult {
+        public Classes.PlayerQuestObjective playerQuestObjective = null;
+        public bool finished = false;
+    }
+
+    public class QuestProgressResult {
+        public List<QuestProgressObjectiveResult> objectiveResults = new List<QuestProgressObjectiveResult>();
+        public List<Classes.PlayerQuest> questsFinished = new List<Classes.PlayerQuest>();
+        public bool progressed = false;
+    }
 }
