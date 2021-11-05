@@ -5,17 +5,17 @@ using System.Text;
 namespace Zeph.Core.Classes {
 
     [Serializable]
-    public class Area : Zeph.Core.Classes.ClassBase<Area> {
-        const string TABLE = "area";
+    public class Zone : Zeph.Core.Classes.ClassBase<Zone> {
+        const string TABLE = "zone";
 
         /// <summary>
-        /// The ID of the area
+        /// The ID of the zone
         /// </summary>
-        public int a_ID = -1;
+        public int z_ID = -1;
         /// <summary>
-        /// Description of the area
+        /// Description of the zone
         /// </summary>
-        public string a_Description = "";
+        public string z_Description = "";
 
         #region Properties
 
@@ -29,15 +29,15 @@ namespace Zeph.Core.Classes {
             return db.Delete(TABLE, id);
         }
 
-        public new static Area Read(int id) {
+        public new static Zone Read(int id) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = db.Read(TABLE, id);
                 return ReadFromDictionary(dic);
             }
         }
 
-        public new static List<Area> Read() {
-            var lst = new List<Area>();
+        public new static List<Zone> Read() {
+            var lst = new List<Zone>();
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var _lst = db.Read(TABLE);
                 foreach (var dic in _lst) {
@@ -50,28 +50,28 @@ namespace Zeph.Core.Classes {
             return lst;
         }
 
-        public new static Area ReadFromDictionary(Dictionary<string, object> dic) {
+        public new static Zone ReadFromDictionary(Dictionary<string, object> dic) {
             if (dic != null) {
                 try {
-                    var obj = new Area();
-                    obj.a_ID = GeneralOps.ConvertDatabaseField<int>(dic, "id");
-                    obj.a_Description = GeneralOps.ConvertDatabaseField<string>(dic, "a_Description");
+                    var obj = new Zone();
+                    obj.z_ID = GeneralOps.ConvertDatabaseField<int>(dic, "id");
+                    obj.z_Description = GeneralOps.ConvertDatabaseField<string>(dic, "z_Description");
                     return obj;
                 } catch (Exception ex) {
-                    throw new ExceptionHandling.GeneralException("Area", 1, "An error occurred reading dictionary " + GeneralOps.DictionaryToJson(dic) + ". " + ex.Message, ex);
+                    throw new ExceptionHandling.GeneralException("Zone", 1, "An error occurred reading dictionary " + GeneralOps.DictionaryToJson(dic) + ". " + ex.Message, ex);
                 }
             } else {
                 return null;
             }
         }
 
-        public new static Area Save(Area obj) {
+        public new static Zone Save(Zone obj) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = new Dictionary<string, object>();
-                if (obj.a_ID == -1) obj.a_ID = db.GetNextId(TABLE);
-                dic["id"] = obj.a_ID;
-                dic["a_Description"] = obj.a_Description;
-                return ReadFromDictionary(db.Save(TABLE, obj.a_ID, dic));
+                if (obj.z_ID == -1) obj.z_ID = db.GetNextId(TABLE);
+                dic["id"] = obj.z_ID;
+                dic["z_Description"] = obj.z_Description;
+                return ReadFromDictionary(db.Save(TABLE, obj.z_ID, dic));
             }
         }
 

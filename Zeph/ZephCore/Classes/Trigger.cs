@@ -21,9 +21,9 @@ namespace Zeph.Core.Classes {
         /// </summary>
         public int t_NPC = -1;
         /// <summary>
-        /// The <see cref="Area.a_ID"/> of the <see cref="Area"/> this Trigger is triggered by encountering this Area
+        /// The <see cref="Zone.a_ID"/> of the <see cref="Zone"/> this Trigger is triggered by encountering this Area
         /// </summary>
-        public int t_Area = -1;
+        public int t_Zone = -1;
 
         #region File Access
 
@@ -60,7 +60,7 @@ namespace Zeph.Core.Classes {
                     obj.t_ID = GeneralOps.ConvertDatabaseField<int>(dic, "id");
                     obj.t_Description = GeneralOps.ConvertDatabaseField<string>(dic, "t_Description");
                     obj.t_NPC = GeneralOps.ConvertDatabaseField<int>(dic, "t_NPC");
-                    obj.t_Area = GeneralOps.ConvertDatabaseField<int>(dic, "t_Area");
+                    obj.t_Zone = GeneralOps.ConvertDatabaseField<int>(dic, "t_Zone");
                     return obj;
                 } catch (Exception ex) {
                     throw new ExceptionHandling.GeneralException("Trigger", 1, "An error occurred reading dictionary " + GeneralOps.DictionaryToJson(dic) + ". " + ex.Message, ex);
@@ -77,7 +77,7 @@ namespace Zeph.Core.Classes {
                 dic["id"] = obj.t_ID;
                 dic["t_Description"] = obj.t_Description;
                 dic["t_NPC"] = obj.t_NPC;
-                dic["t_Area"] = obj.t_Area;
+                dic["t_Zone"] = obj.t_Zone;
                 return ReadFromDictionary(db.Save(TABLE, obj.t_ID, dic));
             }
         }

@@ -14,7 +14,7 @@ namespace Zeph.Core.Enums {
         Ring = 5,
         Belt = 6,
         //Weapons/Hand equipment (100)
-        OneHanded = 1,
+        OneHanded = 100,
         //Consumables (200)
         Bag = 200,
         //Material (300)

@@ -36,6 +36,10 @@ namespace Zeph.Core.Classes {
         /// The id of the trigger for this quest objective. The user triggering this trigger counts as progress towards this objective. Used when <see cref="qo_Type"/> = <see cref="Enums.QuestObjectiveType.Trigger"/>
         /// </summary>
         public int qo_Trigger = -1;
+        /// <summary>
+        /// The id of the item to gether for this quest objective. This will be checked if <see cref="qo_Type"/> = <see cref="Enums.QuestObjectiveType.Gather"/>
+        /// </summary>
+        public int qo_Item = -1;
 
         #region File Access
 
@@ -76,6 +80,7 @@ namespace Zeph.Core.Classes {
                     obj.qo_Goal = GeneralOps.ConvertDatabaseField<int>(dic, "qo_Goal");
                     obj.qo_Order = GeneralOps.ConvertDatabaseField<int>(dic, "qo_Order");
                     obj.qo_Trigger = GeneralOps.ConvertDatabaseField<int>(dic, "qo_Trigger");
+                    obj.qo_Item = GeneralOps.ConvertDatabaseField<int>(dic, "qo_Item");
                     return obj;
                 } catch (Exception ex) {
                     throw new ExceptionHandling.GeneralException("QuestObjective", 1, "An error occurred reading dictionary " + GeneralOps.DictionaryToJson(dic) + ". " + ex.Message, ex);
@@ -96,6 +101,7 @@ namespace Zeph.Core.Classes {
                 dic["qo_Goal"] = obj.qo_Goal;
                 dic["qo_Order"] = obj.qo_Order;
                 dic["qo_Trigger"] = obj.qo_Trigger;
+                dic["qo_Item"] = obj.qo_Item;
                 return ReadFromDictionary(db.Save(TABLE, obj.qo_ID, dic));
             }
         }

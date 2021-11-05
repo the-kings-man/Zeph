@@ -5,10 +5,74 @@
       "p_Name": "Player"
     }
   },
+  "playerBag": {
+    "1": {
+      "id": 1,
+      "pb_Player": "1",
+      "pb_Item": "1",
+      "pb_Slots": 4
+    }
+  },
+  "playerBagSlot": {
+    "1": {
+      "id": 1,
+      "pbs_PlayerBag": 1,
+      "pbs_Item": 2,
+      "pbs_Quantity": 1
+    },
+    "2": {
+      "id": 2,
+      "pbs_PlayerBag": 1,
+      "pbs_Item": 2,
+      "pbs_Quantity": 1
+    },
+    "3": {
+      "id": 3,
+      "pbs_PlayerBag": 1,
+      "pbs_Item": 2,
+      "pbs_Quantity": 1
+    },
+    "4": {
+      "id": 4,
+      "pbs_PlayerBag": 1,
+      "pbs_Item": -1,
+      "pbs_Quantity": 0
+    },
+    "5": {
+      "id": 5,
+      "pbs_PlayerBag": -1,
+      "pbs_Item": -1,
+      "pbs_Quantity": 0
+    }
+  },
+  "item": {
+    "1": {
+      "id": 1,
+      "i_Name": "Basic Bag",
+      "i_Description": "A stock standard 4 slot bag.",
+      "i_MetaData": "{ \\\"slots\\\": 4 }",
+      "i_Type": 2,
+      "i_SubType": 200,
+      "i_MaxQuantity": 1
+    },
+    "2": {
+      "id": 2,
+      "i_Name": "Steel Sword",
+      "i_Description": "A shiny one handed steel sword.",
+      "i_MetaData": "{ \\\"damage\\\": 10 }",
+      "i_Type": 1,
+      "i_SubType": 100,
+      "i_MaxQuantity": 1
+    }
+  },
   "npc": {
     "1": {
       "id": 1,
       "npc_Name": "John the NPC"
+    },
+    "2": {
+      "id": 2,
+      "npc_Name": "The guy that wants the sword"
     }
   },
   "dialog": {
@@ -25,6 +89,13 @@
       "d_Dialog": "How can I be of assistance?",
       "d_NPC": 1,
       "d_IsInitial": false
+    },
+    "3": {
+      "id": 3,
+      "d_Name": "",
+      "d_Dialog": "Get me 3 swords",
+      "d_NPC": 2,
+      "d_IsInitial": true
     }
   },
   "dialogResponse": {
@@ -57,7 +128,7 @@
     },
     "4": {
       "id": 4,
-      "dr_Response": "Have you activated the trigger?",
+      "dr_Response": "I have activated the trigger",
       "dr_ResponseType": 3,
       "dr_Dialog": 2,
       "dr_NextDialog": null,
@@ -66,12 +137,39 @@
     },
     "5": {
       "id": 5,
-      "dr_Response": "Goodbye.",
+      "dr_Response": "Goodbye",
       "dr_ResponseType": 0,
       "dr_Dialog": 2,
       "dr_NextDialog": null,
       "dr_Quest": null,
       "dr_Order": 2
+    },
+    "6": {
+      "id": 6,
+      "dr_Response": "No",
+      "dr_ResponseType": 0,
+      "dr_Dialog": 3,
+      "dr_NextDialog": null,
+      "dr_Quest": null,
+      "dr_Order": 2
+    },
+    "7": {
+      "id": 7,
+      "dr_Response": "Okay",
+      "dr_ResponseType": 2,
+      "dr_Dialog": 3,
+      "dr_NextDialog": null,
+      "dr_Quest": 3,
+      "dr_Order": 1
+    },
+    "8": {
+      "id": 8,
+      "dr_Response": "I've got them",
+      "dr_ResponseType": 3,
+      "dr_Dialog": 3,
+      "dr_NextDialog": null,
+      "dr_Quest": 3,
+      "dr_Order": 3
     }
   },
   "quest": {
@@ -88,6 +186,13 @@
       "q_Description": "You won't, you're scared",
       "q_Type": 1,
       "q_ReceivalType": 1
+    },
+    "3": {
+      "id": 3,
+      "q_Name": "Get 3 swords",
+      "q_Description": "Garn, jus do it",
+      "q_Type": 1,
+      "q_ReceivalType": 1
     }
   },
   "questObjective": {
@@ -98,7 +203,8 @@
       "qo_Type": 1,
       "qo_Goal": 5,
       "qo_Order": 0,
-      "qo_Trigger": -1
+      "qo_Trigger": -1,
+      "qo_Item": -1
     },
     "2": {
       "id": 2,
@@ -107,7 +213,18 @@
       "qo_Type": 3,
       "qo_Goal": 1,
       "qo_Order": 0,
-      "qo_Trigger": 1
+      "qo_Trigger": 1,
+      "qo_Item": -1
+    },
+    "3": {
+      "id": 3,
+      "qo_Quest": 3,
+      "qo_Description": "Gather 3 swords",
+      "qo_Type": 2,
+      "qo_Goal": 3,
+      "qo_Order": 0,
+      "qo_Trigger": -1,
+      "qo_Item": 2
     }
   },
   "playerQuest": {
@@ -128,6 +245,24 @@
       "pq_Started": "2021-10-31T12:33:25.4398314+10:00",
       "pq_Finished": "2021-10-31T12:33:43.0818687+10:00",
       "pq_HandedIn": true
+    },
+    "2": {
+      "id": 2,
+      "pq_Player": 1,
+      "pq_Quest": 2,
+      "pq_Status": 1,
+      "pq_Started": "2021-11-04T17:56:41.020544+10:00",
+      "pq_Finished": "2021-11-04T17:56:50.5054308+10:00",
+      "pq_HandedIn": true
+    },
+    "4": {
+      "id": 4,
+      "pq_Player": 1,
+      "pq_Quest": 3,
+      "pq_Status": 1,
+      "pq_Started": "2021-11-04T18:43:06.3373811+10:00",
+      "pq_Finished": "2021-11-04T20:40:39.9674112+10:00",
+      "pq_HandedIn": true
     }
   },
   "playerQuestObjective": {
@@ -144,18 +279,32 @@
       "pqo_QuestObjective": 2,
       "pqo_Progress": 1,
       "pqo_Status": 1
+    },
+    "2": {
+      "id": 2,
+      "pqo_PlayerQuest": 2,
+      "pqo_QuestObjective": 2,
+      "pqo_Progress": 1,
+      "pqo_Status": 1
+    },
+    "4": {
+      "id": 4,
+      "pqo_PlayerQuest": 4,
+      "pqo_QuestObjective": 3,
+      "pqo_Progress": 3,
+      "pqo_Status": 1
     }
   },
-  "area": {
+  "zone": {
     "1": {
       "id": 1,
-      "t_Description": "An area with trees"
+      "z_Description": "An zone with trees"
     }
   },
   "trigger": {
     "1": {
       "id": 1,
-      "t_Description": "This trigger has wood. The fundamental trigger on enter of 'An area with trees'",
+      "t_Description": "This trigger has wood. The fundamental trigger on enter of 'An zone with trees'",
       "t_NPC": -1,
       "t_Area": 1
     }
