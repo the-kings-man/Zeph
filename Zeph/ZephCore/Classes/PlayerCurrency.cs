@@ -69,7 +69,7 @@ namespace Zeph.Core.Classes {
             }
         }
 
-        public new static PlayerCurrency Save(PlayerCurrency obj, bool saveChildren = true) {
+        public static PlayerCurrency Save(PlayerCurrency obj, bool saveChildren = true) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = new Dictionary<string, object>();
                 if (obj.pc_ID == -1) obj.pc_ID = db.GetNextId(TABLE);

@@ -104,7 +104,7 @@ namespace Zeph.Core.Classes {
             }
         }
 
-        public new static PlayerQuest Save(PlayerQuest obj, bool saveChildren = true) {
+        public static PlayerQuest Save(PlayerQuest obj, bool saveChildren = true) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = new Dictionary<string, object>();
                 if (obj.pq_ID == -1) obj.pq_ID = db.GetNextId(TABLE);

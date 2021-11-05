@@ -14,8 +14,10 @@ namespace Zeph.Core.Classes {
         /// Name of the player
         /// </summary>
         public string p_Name = "";
+        private int p_Character = -1;
 
         private List<PlayerBag> playerBags = null;
+        private Character character = null;
 
         #region Properties
 
@@ -31,6 +33,15 @@ namespace Zeph.Core.Classes {
                     }
                 }
                 return playerBags;
+            }
+        }
+
+        public Character @Character {
+            get {
+                if (character == null && p_Character != -1) {
+                    character = Character.Read(p_Character);
+                }
+                return character;
             }
         }
 
@@ -67,25 +78,29 @@ namespace Zeph.Core.Classes {
         public new static Player ReadFromDictionary(Dictionary<string, object> dic) {
             if (dic != null) {
                 var p = new Player();
-                p.p_ID = Convert.ToInt32(dic["id"]);
-                p.p_Name = Convert.ToString(dic["p_Name"]);
+                p.p_ID = GeneralOps.ConvertDatabaseField<int>(dic, "id");
+                p.p_Name = GeneralOps.ConvertDatabaseField<string>(dic, "p_Name");
+                p.p_Character = GeneralOps.ConvertDatabaseField<int>(dic, "p_Character");
                 return p;
             } else {
                 return null;
             }
         }
 
-        public new static Player Save(Player obj, bool saveChildren = true) {
+        public static Player Save(Player obj, bool saveChildren = true) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = new Dictionary<string, object>();
                 dic["id"] = obj.p_ID;
                 dic["p_Name"] = obj.p_Name;
+                dic["p_Character"] = obj.p_Character;
 
                 var _obj = ReadFromDictionary(db.Save(TABLE, obj.p_ID, dic));
 
                 if (obj.p_ID == -1) obj.p_ID = _obj.p_ID;
 
                 if (saveChildren) {
+                    if (obj.p_Character != -1 && obj.character != null) Character.Save(obj.character);
+
                     foreach (var pb in obj.playerBags) {
                         pb.pb_Player = _obj.p_ID;
                         PlayerBag.Save(pb);

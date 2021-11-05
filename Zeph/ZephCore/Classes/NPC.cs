@@ -14,6 +14,22 @@ namespace Zeph.Core.Classes {
         /// The name of this npc
         /// </summary>
         public string npc_Name = null;
+        private int npc_Character = -1;
+
+        private Character character = null;
+
+        #region "Properties"
+
+        public Character @Character {
+            get {
+                if (character == null && npc_Character != -1) {
+                    character = Character.Read(npc_Character);
+                }
+                return character;
+            }
+        }
+
+        #endregion
 
         #region File Access
 
@@ -46,21 +62,29 @@ namespace Zeph.Core.Classes {
         public static new NPC ReadFromDictionary(Dictionary<string, object> dic) {
             if (dic != null) {
                 var npc = new NPC();
-                npc.npc_ID = Convert.ToInt32(dic["id"]);
-                npc.npc_Name = Convert.ToString(dic["npc_Name"]);
+                npc.npc_ID = GeneralOps.ConvertDatabaseField<int>(dic, "id");
+                npc.npc_Name = GeneralOps.ConvertDatabaseField<string>(dic, "npc_Name");
+                npc.npc_Character = GeneralOps.ConvertDatabaseField<int>(dic, "npc_Character");
                 return npc;
             } else {
                 return null;
             }
         }
 
-        public static new NPC Save(NPC npc) {
+        public static NPC Save(NPC obj, bool saveChildren = true) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = new Dictionary<string, object>();
-                if (npc.npc_ID == -1) npc.npc_ID = db.GetNextId(TABLE);
-                dic["id"] = npc.npc_ID;
-                dic["npc_Name"] = npc.npc_Name;
-                return ReadFromDictionary(db.Save(TABLE, npc.npc_ID, dic));
+                dic["id"] = obj.npc_ID;
+                dic["npc_Name"] = obj.npc_Name;
+                dic["npc_Character"] = obj.npc_Character;
+
+                var _obj = ReadFromDictionary(db.Save(TABLE, obj.npc_ID, dic));
+
+                if (saveChildren) {
+                    if (obj.npc_Character != -1 && obj.character != null) Character.Save(obj.character);
+                }
+
+                return _obj;
             }
         }
 

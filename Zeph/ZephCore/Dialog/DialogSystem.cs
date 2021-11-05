@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Zeph.Core {
+namespace Zeph.Core.Dialog {
     public class DialogSystem {
         /// <summary>
         /// Register a response for a piece of dialog

@@ -93,7 +93,7 @@ namespace Zeph.Core.Classes {
             }
         }
 
-        public new static PlayerBag Save(PlayerBag obj, bool saveChildren = true) {
+        public static PlayerBag Save(PlayerBag obj, bool saveChildren = true) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = new Dictionary<string, object>();
                 dic["id"] = obj.pb_ID;

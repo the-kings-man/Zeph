@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Zeph.Core {
+namespace Zeph.Core.Questing {
     public class QuestingSystem {
         //public static bool ObjectiveProgressed(Classes.PlayerQuestObjective pqo, int progress) {
         //    //Progress the playerQuestObjective object
@@ -22,15 +22,15 @@ namespace Zeph.Core {
         //    }
         //}
         public static void Initialise() {
-            InventorySystem.ItemAdded += (s, e) => {
+            Inventory.InventorySystem.ItemAdded += (s, e) => {
                 ItemProgress(e.Player, e.Item);
             };
 
-            InventorySystem.ItemRemoved += (s, e) => {
+            Inventory.InventorySystem.ItemRemoved += (s, e) => {
                 ItemProgress(e.Player, e.Item);
             };
 
-            ZoneSystem.ZoneEntered += (s, e) => {
+            Zones.ZoneSystem.ZoneEntered += (s, e) => {
                 if (e.Trigger != null) {
                     TriggerProgress(e.Player, e.Trigger, 1);
                 }
@@ -76,7 +76,7 @@ namespace Zeph.Core {
             return logProgressOnQuest(player, (qo, pqo) => {
                 if (qo.qo_Type == Enums.QuestObjectiveType.Gather && qo.qo_Item == item.i_ID) {
                     //get the total quantity of this item the player has in inventory in total
-                    var quantityInInventory = SystemLocator.GetService<IInventorySystem>().GetQuantity(player, item);
+                    var quantityInInventory = SystemLocator.GetService<Inventory.IInventorySystem>().GetQuantity(player, item);
 
                     bool wasProgressLogged = false;
                     if (quantityInInventory > qo.qo_Goal) {

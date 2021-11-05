@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Zeph.Core {
+namespace Zeph.Core.Inventory {
     public interface IInventorySystem {
         void Initialise();
         bool EquipBag(Classes.Player player, Classes.Items.Bag bag);

@@ -4,7 +4,6 @@ using System.Text;
 
 namespace Zeph.Core.Classes {
 
-    [Serializable]
     public class Trigger : Zeph.Core.Classes.ClassBase<Trigger> {
         const string TABLE = "trigger";
 

@@ -77,7 +77,7 @@ namespace Zeph.Core.Classes {
             }
         }
 
-        public new static PlayerBagSlot Save(PlayerBagSlot obj, bool saveChildren = true) {
+        public static PlayerBagSlot Save(PlayerBagSlot obj, bool saveChildren = true) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = new Dictionary<string, object>();
                 if (obj.pbs_ID == -1) obj.pbs_ID = db.GetNextId(TABLE);

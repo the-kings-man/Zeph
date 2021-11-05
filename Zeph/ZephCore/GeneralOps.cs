@@ -43,7 +43,7 @@ namespace Zeph.Core {
                 } else {
                     throw new Exception("Field " + field + " was not found in the dictionary.");
                 }
-            } catch (InvalidCastException ice) {
+            } catch (InvalidCastException) {
                 if (dic[field] is JValue) {
                     throw new Exception("The field " + field + " was not of the type " + typeof(T).ToString() + " instead it is of the type JValue (" + ((JValue)dic[field]).Type.ToString() + ", " + dic[field].ToString() + "). Cannot convert."); 
                 } else {

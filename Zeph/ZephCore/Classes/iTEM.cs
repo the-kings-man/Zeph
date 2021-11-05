@@ -77,7 +77,7 @@ namespace Zeph.Core.Classes {
             }
         }
 
-        public new static Item Save(Item obj, bool saveChildren = true) {
+        public static Item Save(Item obj, bool saveChildren = true) {
             using (var db = GeneralOps.GetDatabaseConnection()) {
                 var dic = new Dictionary<string, object>();
                 if (obj.i_ID == -1) obj.i_ID = db.GetNextId(TABLE);

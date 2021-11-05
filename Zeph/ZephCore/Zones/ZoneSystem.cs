@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Zeph.Core {
+namespace Zeph.Core.Zones {
     public class ZoneSystem {
 
         #region Event Handling
