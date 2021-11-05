@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Zeph.Core {
     public interface IInventorySystem {
+        void Initialise();
         bool EquipBag(Classes.Player player, Classes.Items.Bag bag);
         ItemAddedResult AddItem(Classes.Player player, Classes.Item item, int quantity = 1);
         bool RemoveItem(Classes.PlayerBagSlot playerBagSlot, int quantity = -1);
@@ -22,6 +23,9 @@ namespace Zeph.Core {
         public delegate void BagEquippedEventHandler(object sender, BagEquippedEventArgs e);
         public static event BagEquippedEventHandler BagEquipped;
         #endregion
+
+        public void Initialise() {
+        }
 
         /// <summary>
         /// Adds a bag to the players inventory.
