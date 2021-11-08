@@ -17,6 +17,7 @@ namespace Zeph.Core.Classes {
         private int p_Character = -1;
 
         private List<PlayerBag> playerBags = null;
+        private List<PlayerFaction> playerFactions = null;
         private Character character = null;
 
         #region Properties
@@ -33,6 +34,21 @@ namespace Zeph.Core.Classes {
                     }
                 }
                 return playerBags;
+            }
+        }
+
+        public List<PlayerFaction> PlayerFactions {
+            get {
+                if (playerFactions == null) {
+                    playerFactions = new List<PlayerFaction>();
+                    var lstPlayerFactions = PlayerFaction.Read();
+                    foreach (var pf in lstPlayerFactions) {
+                        if (pf.pf_Player == p_ID) {
+                            playerFactions.Add(pf);
+                        }
+                    }
+                }
+                return playerFactions;
             }
         }
 
@@ -101,9 +117,18 @@ namespace Zeph.Core.Classes {
                 if (saveChildren) {
                     if (obj.p_Character != -1 && obj.character != null) Character.Save(obj.character);
 
-                    foreach (var pb in obj.playerBags) {
-                        pb.pb_Player = _obj.p_ID;
-                        PlayerBag.Save(pb);
+                    if (obj.playerBags != null) {
+                        foreach (var pb in obj.playerBags) {
+                            pb.pb_Player = _obj.p_ID;
+                            PlayerBag.Save(pb);
+                        }
+                    }
+
+                    if (obj.playerFactions != null) {
+                        foreach (var pf in obj.playerFactions) {
+                            pf.pf_Player = _obj.p_ID;
+                            PlayerFaction.Save(pf);
+                        }
                     }
                 }
 

@@ -106,9 +106,11 @@ namespace Zeph.Core.Classes {
                 if (obj.pb_ID == -1) obj.pb_ID = _obj.pb_ID;
 
                 if (saveChildren) {
-                    foreach (var pbs in obj.playerBagSlots) {
-                        pbs.pbs_PlayerBag = _obj.pb_ID;
-                        PlayerBagSlot.Save(pbs);
+                    if (obj.playerBagSlots != null) {
+                        foreach (var pbs in obj.playerBagSlots) {
+                            pbs.pbs_PlayerBag = _obj.pb_ID;
+                            PlayerBagSlot.Save(pbs);
+                        }
                     }
                 }
 

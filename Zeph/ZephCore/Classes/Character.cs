@@ -15,8 +15,12 @@ namespace Zeph.Core.Classes {
         /// </summary>
         public string c_Name = "";
         private int c_Stats = -1;
+        private int c_Race = -1;
 
         private Stats stats = null;
+        private Race race = null;
+
+        private List<CharacterFaction> characterFactions = null;
 
         #region Properties
 
@@ -26,6 +30,30 @@ namespace Zeph.Core.Classes {
                     stats = Stats.Read(c_Stats);
                 }
                 return stats;
+            }
+        }
+
+        public Race @Race {
+            get {
+                if (race == null && c_Race != -1) {
+                    race = Race.Read(c_Race);
+                }
+                return race;
+            }
+        }
+
+        public List<CharacterFaction> CharacterFactions {
+            get {
+                if (characterFactions == null) {
+                    characterFactions = new List<CharacterFaction>();
+                    var lstCharacterFactions = CharacterFaction.Read();
+                    foreach (var cf in lstCharacterFactions) {
+                        if (cf.cf_Character == c_ID) {
+                            characterFactions.Add(cf);
+                        }
+                    }
+                }
+                return characterFactions;
             }
         }
 
@@ -65,6 +93,7 @@ namespace Zeph.Core.Classes {
                 p.c_ID = GeneralOps.ConvertDatabaseField<int>(dic, "id");
                 p.c_Name = GeneralOps.ConvertDatabaseField<string>(dic, "c_Name");
                 p.c_Stats = GeneralOps.ConvertDatabaseField<int>(dic, "c_Stats");
+                p.c_Race = GeneralOps.ConvertDatabaseField<int>(dic, "c_Race");
                 return p;
             } else {
                 return null;
@@ -77,6 +106,7 @@ namespace Zeph.Core.Classes {
                 dic["id"] = obj.c_ID;
                 dic["c_Name"] = obj.c_Name;
                 dic["c_Stats"] = obj.c_Stats;
+                dic["c_Race"] = obj.c_Race;
 
                 var _obj = ReadFromDictionary(db.Save(TABLE, obj.c_ID, dic));
 
@@ -84,6 +114,13 @@ namespace Zeph.Core.Classes {
 
                 if (saveChildren) {
                     if (obj.c_Stats != -1 && obj.stats != null) Stats.Save(obj.stats);
+
+                    if (obj.characterFactions != null) {
+                        foreach (var cf in obj.characterFactions) {
+                            cf.cf_Character = _obj.c_ID;
+                            CharacterFaction.Save(cf);
+                        }
+                    }
                 }
 
                 return _obj;
