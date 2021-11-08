@@ -44,6 +44,23 @@ namespace Zeph.Core.Classes {
         /// </summary>
         public int s_Clarity = 0;
 
+        #region Operators
+
+        public static Stats operator +(Stats to, Stats from) {
+            to.s_Constitution += from.s_Constitution;
+            to.s_Strength += from.s_Strength;
+            to.s_Hardness += from.s_Hardness;
+            to.s_Creativity += from.s_Creativity;
+            to.s_Agility += from.s_Agility;
+            to.s_Wisdom += from.s_Wisdom;
+            to.s_Intellect += from.s_Intellect;
+            to.s_Clarity += from.s_Clarity;
+
+            return to;
+        }
+
+        #endregion
+
         #region Properties
 
 

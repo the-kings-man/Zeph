@@ -32,21 +32,13 @@ namespace Zeph.Core.Classes {
         /// </summary>
         public int a_Damage = 0;
         /// <summary>
-        /// Whether or not this attack enables a damage over time effect
+        /// How long in milliseconds it takes for this attack to be prepared/cast
         /// </summary>
-        public bool a_IsDOT = false;
+        public int a_PreparationDuration = 0;
         /// <summary>
-        /// The damage of each tick of the damage over time effect
+        /// If this attack results in stat modification or a damage over time, this can be applied here
         /// </summary>
-        public int a_DOTDamage = 0;
-        /// <summary>
-        /// The time in milliseconds between ticks
-        /// </summary>
-        public int a_DOTTimeBetweenTicks = 0;
-        /// <summary>
-        /// The time in milliseconds that the damage over time effect stays on for
-        /// </summary>
-        public int a_DOTDuration = 0;
+        public int a_StatModifier = -1;
 
         #region Properties
 
@@ -91,10 +83,10 @@ namespace Zeph.Core.Classes {
                     obj.a_AttackType = (Enums.AttackType)GeneralOps.ConvertDatabaseField<int>(dic, "a_AttackType");
                     obj.a_Distance = GeneralOps.ConvertDatabaseField<int>(dic, "a_Distance");
                     obj.a_Damage = GeneralOps.ConvertDatabaseField<int>(dic, "a_Damage");
-                    obj.a_IsDOT = GeneralOps.ConvertDatabaseField<bool>(dic, "a_IsDOT");
-                    obj.a_DOTDamage = GeneralOps.ConvertDatabaseField<int>(dic, "a_DOTDamage");
-                    obj.a_DOTTimeBetweenTicks = GeneralOps.ConvertDatabaseField<int>(dic, "a_DOTTimeBetweenTicks");
-                    obj.a_DOTDuration = GeneralOps.ConvertDatabaseField<int>(dic, "a_DOTDuration");
+                    //obj.a_IsDOT = GeneralOps.ConvertDatabaseField<bool>(dic, "a_IsDOT");
+                    //obj.a_DOTDamage = GeneralOps.ConvertDatabaseField<int>(dic, "a_DOTDamage");
+                    //obj.a_DOTTimeBetweenTicks = GeneralOps.ConvertDatabaseField<int>(dic, "a_DOTTimeBetweenTicks");
+                    //obj.a_DOTDuration = GeneralOps.ConvertDatabaseField<int>(dic, "a_DOTDuration");
                     return obj;
                 } catch (Exception ex) {
                     throw new ExceptionHandling.GeneralException("Attack", 1, "An error occurred reading dictionary " + GeneralOps.DictionaryToJson(dic) + ". " + ex.Message, ex);
@@ -114,10 +106,10 @@ namespace Zeph.Core.Classes {
                 dic["a_AttackType"] = (int)obj.a_AttackType;
                 dic["a_Distance"] = obj.a_Distance;
                 dic["a_Damage"] = obj.a_Damage;
-                dic["a_IsDOT"] = obj.a_IsDOT;
-                dic["a_DOTDamage"] = obj.a_DOTDamage;
-                dic["a_DOTTimeBetweenTicks"] = obj.a_DOTTimeBetweenTicks;
-                dic["a_DOTDuration"] = obj.a_DOTDuration;
+                //dic["a_IsDOT"] = obj.a_IsDOT;
+                //dic["a_DOTDamage"] = obj.a_DOTDamage;
+                //dic["a_DOTTimeBetweenTicks"] = obj.a_DOTTimeBetweenTicks;
+                //dic["a_DOTDuration"] = obj.a_DOTDuration;
                 return ReadFromDictionary(db.Save(TABLE, obj.a_ID, dic));
             }
         }

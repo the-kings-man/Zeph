@@ -2,7 +2,8 @@
   "player": {
     "1": {
       "id": 1,
-      "p_Name": "Player"
+      "p_Name": "Player",
+      "p_Character":  1
     }
   },
   "playerBag": {
@@ -73,6 +74,63 @@
     "2": {
       "id": 2,
       "npc_Name": "The guy that wants the sword"
+    },
+    "3": {
+      "id": 2,
+      "npc_Name": "",
+      "npc_Character": 2
+    }
+  },
+  "character": {
+    "1": {
+      "id": 1,
+      "c_Name": "Player",
+      "c_Stats": 1,
+      "c_Race":  -1
+    },
+    "2": {
+      "id": 2,
+      "c_Name": "Enemy",
+      "c_Stats": 2,
+      "c_Race": -1
+    }
+  },
+  "stats": {
+    "1": {
+      "id": 1,
+      "s_Constitution": "0",
+      "s_Strength": "10",
+      "s_Hardness": "0",
+      "s_Creativity": "0",
+      "s_Agility": "0",
+      "s_Wisdom": "0",
+      "s_Intellect": "0",
+      "s_Clarity": "0"
+    },
+    "2": {
+      "id": 2,
+      "s_Constitution": "0",
+      "s_Strength": "0",
+      "s_Hardness": "5",
+      "s_Creativity": "0",
+      "s_Agility": "0",
+      "s_Wisdom": "0",
+      "s_Intellect": "0",
+      "s_Clarity": "0"
+    }
+  },
+  "attack": {
+    "1": {
+      "id": 1,
+      "a_Name": "Melee Strike",
+      "a_Description": "A basic hit with a melee weapon",
+      "a_AttackType": 1,
+      "a_Distance": 1,
+      "a_Damage": 10,
+      "a_IsDOT": false,
+      "a_DOTDamage": 0,
+      "a_DOTTimeBetweenTicks": 0,
+      "a_DOTDuration": 0
     }
   },
   "dialog": {

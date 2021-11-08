@@ -21,9 +21,18 @@ namespace Zeph.Core {
             }
         }
 
+        private static Combat.ICombatSystem _combatSystem = null;
+        public static Combat.ICombatSystem @CombatSystem {
+            set {
+                _combatSystem = value;
+            }
+        }
+
         public static T GetService<T>() {
-            if (typeof(T) is Inventory.IInventorySystem) {
+            if (typeof(T) == typeof(Inventory.IInventorySystem)) {
                 return (T)_inventorySystem;
+            } else if (typeof(T) == typeof(Combat.ICombatSystem)) {
+                return (T)_combatSystem;
             }
             return default(T);
         }
