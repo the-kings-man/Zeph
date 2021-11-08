@@ -4,7 +4,6 @@ using System.Text;
 
 namespace Zeph.Core.Classes {
 
-    [Serializable]
     public class Zone : Zeph.Core.Classes.ClassBase<Zone> {
         const string TABLE = "zone";
 
