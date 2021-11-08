@@ -15,10 +15,10 @@ namespace Zeph.Core.Inventory {
 
         #region Event Handling
         public delegate void ItemAddedEventHandler(object sender, ItemAddedEventArgs e);
-        public static event ItemAddedEventHandler ItemAdded;
+        public static event ItemAddedEventHandler OnItemAdded;
 
         public delegate void ItemRemovedEventHandler(object sender, ItemRemovedEventArgs e);
-        public static event ItemRemovedEventHandler ItemRemoved;
+        public static event ItemRemovedEventHandler OnItemRemoved;
 
         public delegate void BagEquippedEventHandler(object sender, BagEquippedEventArgs e);
         public static event BagEquippedEventHandler BagEquipped;
@@ -106,7 +106,7 @@ namespace Zeph.Core.Inventory {
             }
 
             if (res.itemAdded) {
-                ItemAdded?.Invoke(null, args);
+                OnItemAdded?.Invoke(null, args);
             }
 
             return res;
@@ -138,7 +138,7 @@ namespace Zeph.Core.Inventory {
             }
             Classes.PlayerBagSlot.Save(playerBagSlot);
 
-            ItemRemoved?.Invoke(null, new ItemRemovedEventArgs() {
+            OnItemRemoved?.Invoke(null, new ItemRemovedEventArgs() {
                 Player = player,
                 Item = item,
                 PlayerBagSlot = playerBagSlot,

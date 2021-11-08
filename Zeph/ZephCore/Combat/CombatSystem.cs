@@ -9,6 +9,8 @@ namespace Zeph.Core.Combat {
         DamageResult CalculateDamage(CombatEntity from, CombatEntity to, Classes.Attack attack);
         long CalculateHealth(Stats stats);
         CombatEntity GenerateCombatEntity(Classes.Character character);
+        void NPCDied(Classes.NPC npc, DeathReason reason);
+        event CharacterDiedEventHandler OnNPCDeath;
     }
 
     /// <summary>
@@ -23,6 +25,8 @@ namespace Zeph.Core.Combat {
     /// 
     /// </remarks>
     public class CombatSystem : ICombatSystem {
+
+        public event CharacterDiedEventHandler OnNPCDeath;
 
         #region "Scripts"
 
@@ -70,6 +74,13 @@ return stats.s_Constitution * 100;
             engine.SetValue("stats", stats);
 
             return Convert.ToInt64(engine.Evaluate(calculateHealthScript).ToObject());
+        }
+
+        public void NPCDied(NPC npc, DeathReason reason) {
+            OnNPCDeath?.Invoke(null, new CharacterDiedEventArgs() {
+                NPC = npc,
+                Reason = reason
+            });
         }
 
         #endregion
@@ -155,7 +166,33 @@ return stats.s_Constitution * 100;
         public DateTime lastTick;
     }
 
+    /// <summary>
+    /// A helper class to assist with damage calculations
+    /// </summary>
     public class DamageResult {
         public long damage;
     }
+
+    public class DeathReason {
+        public DeathSource source;
+        public Classes.Player player;
+        public Classes.NPC npc;
+    }
+
+    public enum DeathSource {
+        Player = 1,
+        NPC = 2,
+        Environment = 3
+    }
+
+    #region "Event Handling"
+
+    public delegate void CharacterDiedEventHandler(object sender, CharacterDiedEventArgs e);
+
+    public class CharacterDiedEventArgs : EventArgs {
+        public Classes.NPC NPC { get; set; }
+        public DeathReason Reason { get; set; }
+    }
+
+    #endregion
 }

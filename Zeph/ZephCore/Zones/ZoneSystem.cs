@@ -8,7 +8,7 @@ namespace Zeph.Core.Zones {
         #region Event Handling
 
         public delegate void ZoneEnteredEventHandler(object sender, ZoneEnteredEventArgs e);
-        public static event ZoneEnteredEventHandler ZoneEntered;
+        public static event ZoneEnteredEventHandler OnZoneEntered;
 
         public delegate void ZoneLeftEventHandler(object sender, ZoneLeftEventArgs e);
         public static event ZoneLeftEventHandler ZoneLeft;
@@ -26,7 +26,7 @@ namespace Zeph.Core.Zones {
                 }
             }
 
-            ZoneEntered?.Invoke(null, new ZoneEnteredEventArgs() {
+            OnZoneEntered?.Invoke(null, new ZoneEnteredEventArgs() {
                 Player = player,
                 Area = zone,
                 Trigger = trigger

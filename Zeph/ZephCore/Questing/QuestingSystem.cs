@@ -22,17 +22,24 @@ namespace Zeph.Core.Questing {
         //    }
         //}
         public static void Initialise() {
-            Inventory.InventorySystem.ItemAdded += (s, e) => {
-                ItemProgress(e.Player, e.Item);
+            Inventory.InventorySystem.OnItemAdded += (s, e) => {
+                GatherProgress(e.Player, e.Item);
             };
 
-            Inventory.InventorySystem.ItemRemoved += (s, e) => {
-                ItemProgress(e.Player, e.Item);
+            Inventory.InventorySystem.OnItemRemoved += (s, e) => {
+                GatherProgress(e.Player, e.Item);
             };
 
-            Zones.ZoneSystem.ZoneEntered += (s, e) => {
+            Zones.ZoneSystem.OnZoneEntered += (s, e) => {
                 if (e.Trigger != null) {
                     TriggerProgress(e.Player, e.Trigger, 1);
+                }
+            };
+
+            var combatSystem = SystemLocator.GetService<Combat.ICombatSystem>();
+            combatSystem.OnNPCDeath += (s, e) => {
+                if (e.Reason.source == Combat.DeathSource.Player) {
+                    DefeatProgress(e.Reason.player, e.NPC, 1);
                 }
             };
         }
@@ -72,7 +79,7 @@ namespace Zeph.Core.Questing {
             });
         }
 
-        public static QuestProgressResult ItemProgress(Zeph.Core.Classes.Player player, Classes.Item item) {
+        public static QuestProgressResult GatherProgress(Zeph.Core.Classes.Player player, Classes.Item item) {
             return logProgressOnQuest(player, (qo, pqo) => {
                 if (qo.qo_Type == Enums.QuestObjectiveType.Gather && qo.qo_Item == item.i_ID) {
                     //get the total quantity of this item the player has in inventory in total
@@ -90,6 +97,19 @@ namespace Zeph.Core.Questing {
                     }
 
                     return wasProgressLogged;
+                } else {
+                    return false;
+                }
+            });
+        }
+
+        public static QuestProgressResult DefeatProgress(Zeph.Core.Classes.Player player, Classes.NPC npc, int progress) {
+            return logProgressOnQuest(player, (qo, pqo) => {
+                if (qo.qo_Type == Enums.QuestObjectiveType.Defeat && qo.qo_NPC == npc.npc_ID) {
+                    //Progress! woo
+                    pqo.pqo_Progress += progress;
+
+                    return true;
                 } else {
                     return false;
                 }
