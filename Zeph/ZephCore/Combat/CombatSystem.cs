@@ -50,9 +50,6 @@ return stats.s_Constitution * 100;
         #region Calculations
 
         public DamageResult CalculateDamage(CombatEntity from, CombatEntity to, Classes.Attack attack) {
-            var statsFrom = from.character.Stats;
-            var statsTo = to.character.Stats;
-
             var res = new DamageResult();
 
             var engine = new Jint.Engine();

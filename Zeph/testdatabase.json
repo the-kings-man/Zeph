@@ -140,11 +140,7 @@
       "a_Description": "A basic hit with a melee weapon",
       "a_AttackType": 1,
       "a_Distance": 1,
-      "a_Damage": 10,
-      "a_IsDOT": false,
-      "a_DOTDamage": 0,
-      "a_DOTTimeBetweenTicks": 0,
-      "a_DOTDuration": 0
+      "a_Damage": 10
     }
   },
   "dialog": {
@@ -347,6 +343,15 @@
       "pq_Started": "2021-11-08T15:45:09.9356779+10:00",
       "pq_Finished": "2021-11-08T15:49:00.833256+10:00",
       "pq_HandedIn": true
+    },
+    "6": {
+      "id": 6,
+      "pq_Player": 1,
+      "pq_Quest": 1,
+      "pq_Status": 1,
+      "pq_Started": "2021-11-08T22:50:44.7609088+10:00",
+      "pq_Finished": "2021-11-08T22:50:58.8418911+10:00",
+      "pq_HandedIn": true
     }
   },
   "playerQuestObjective": {
@@ -381,6 +386,13 @@
     "5": {
       "id": 5,
       "pqo_PlayerQuest": 5,
+      "pqo_QuestObjective": 1,
+      "pqo_Progress": 1,
+      "pqo_Status": 1
+    },
+    "6": {
+      "id": 6,
+      "pqo_PlayerQuest": 6,
       "pqo_QuestObjective": 1,
       "pqo_Progress": 1,
       "pqo_Status": 1
