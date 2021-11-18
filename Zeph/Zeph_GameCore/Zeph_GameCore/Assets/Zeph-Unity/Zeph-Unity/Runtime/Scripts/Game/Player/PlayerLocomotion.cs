@@ -15,12 +15,12 @@ namespace Zeph.Unity {
 
         [Header("Vertical Movements")]
         public float inAirTimer;
-        public float leapingSpeed;
-        public float fallingSpeed;
+        //public float leapingSpeed;
+        //public float fallingSpeed;
         public LayerMask groundLayer;
         public float rayCastHeightOffset = 0.5f;
-        public float jumpHeight = 3;
-        public float gravityIntensity = -15;
+        public float jumpHeight = 1f;
+        public float gravityIntensity = 9.81f;
         public float maxClimbingHeight = 0.1f;
 
         [Header("Horizontal Movements")]
@@ -33,6 +33,10 @@ namespace Zeph.Unity {
         public bool isSprinting;
         public bool isGrounded;
         public bool isJumping;
+
+        //Constants
+        const float GROUNDED_RAYCAST_RADIUS = 0.2f;
+        const float SMOOTH_SNAPPING_TO_GROUND_MULTIPLIER = 0.05f;
 
         void Awake() {
             animatorManager = GetComponent<AnimatorManager>();
@@ -104,11 +108,10 @@ namespace Zeph.Unity {
                 }
 
                 inAirTimer = inAirTimer + Time.deltaTime;
-                //playerRigidbody.AddForce(transform.forward * leapingSpeed);
-                playerRigidbody.AddForce(-Vector3.up * fallingSpeed * inAirTimer);
+                playerRigidbody.AddForce(-Vector3.up * gravityIntensity * inAirTimer);
             }
 
-            if (Physics.SphereCast(rayCastOrigin, 0.2f, -Vector3.up, out hit, groundLayer)) {
+            if (Physics.SphereCast(rayCastOrigin, GROUNDED_RAYCAST_RADIUS, -Vector3.up, out hit, GROUNDED_RAYCAST_RADIUS * 4, groundLayer)) {
                 if (!isGrounded && !playerManager.isInteracting) {
                     animatorManager.PlayTargetAnimation("Land", true);
                 }
@@ -121,16 +124,15 @@ namespace Zeph.Unity {
                 isGrounded = false;
             }
 
-            //adjust characters model based upon if we are grounded or not -> bring in contact with the ground. Had to uncheck "use gravity" in rigidbody
+            ////adjust characters model based upon if we are grounded or not -> bring in contact with the ground. Had to uncheck "use gravity" in rigidbody
             if (isGrounded && !isJumping) {
                 if ((groundedPosition.y - transform.position.y) < maxClimbingHeight) {
                     if (playerManager.isInteracting || inputManager.moveAmount > 0) {
-                        transform.position = Vector3.Lerp(transform.position, groundedPosition, Time.deltaTime / 0.1f);
+                        transform.position = Vector3.Lerp(transform.position, groundedPosition, Time.deltaTime / SMOOTH_SNAPPING_TO_GROUND_MULTIPLIER);
                     } else {
                         transform.position = groundedPosition;
                     }
                 }
-
             }
         }
 
@@ -139,7 +141,7 @@ namespace Zeph.Unity {
                 animatorManager.animator.SetBool("IsJumping", true);
                 animatorManager.PlayTargetAnimation("Jump", false);
 
-                float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight);
+                float jumpingVelocity = Mathf.Sqrt(gravityIntensity * jumpHeight);
                 Vector3 playerVelocity = playerRigidbody.velocity; //moveDirection in tutorial
                 playerVelocity.y = jumpingVelocity;
                 playerRigidbody.velocity = playerVelocity;

@@ -13,7 +13,7 @@ namespace Zeph.Unity {
         bool canExecuteButtons = false;
 
         protected override void ExecuteOnEnter(Collider other) {
-            if (other.GetComponent<PlayerController>() != null) {
+            if (other.GetComponent<PlayerManager>() != null) {
                 canExecuteButtons = true;
 
                 if (Debug.isDebugBuild) {
@@ -23,7 +23,7 @@ namespace Zeph.Unity {
         }
 
         protected override void ExecuteOnExit(Collider other) {
-            if (other.GetComponent<PlayerController>() != null) {
+            if (other.GetComponent<PlayerManager>() != null) {
                 canExecuteButtons = false;
 
                 if (Debug.isDebugBuild) {

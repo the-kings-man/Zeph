@@ -33,7 +33,7 @@ namespace Zeph.Unity {
         protected float m_DesiredForwardSpeed;         // How fast Ellen aims be going along the ground based on input.
         protected float m_ForwardSpeed;                // How fast Ellen is currently going along the ground.
         protected float m_VerticalSpeed;               // How fast Ellen is currently moving up or down.
-        protected PlayerInput m_Input;                 // Reference used to determine how Ellen should move.
+        //protected PlayerInput m_Input;                 // Reference used to determine how Ellen should move.
         protected CharacterController m_CharCtrl;      // Reference used to actually move Ellen.
         //protected Animator m_Animator;                 // Reference used to make decisions based on Ellen's current animation and to set parameters.
         protected Material m_CurrentWalkingSurface;    // Reference used to make decisions about audio.
@@ -181,13 +181,13 @@ namespace Zeph.Unity {
                         });
                     }
                 } else {
-                    var player = ZephGame.GeneralOps.CurrentPlayer;
-                    var db = Zeph.Core.GeneralOps.GetDatabaseConnection();
+                    //var player = ZephGame.GeneralOps.CurrentPlayer;
+                    //var db = Zeph.Core.GeneralOps.GetDatabaseConnection();
 
-                    var lstDialog = Zeph.Core.Dialog.DialogSystem.CurrentDialogForNPC(npc, player);
-                    if (lstDialog != null && lstDialog.Count > 0) {
-                        ZephGame.GeneralOps.StartDialog(lstDialog[0]);
-                    }
+                    //var lstDialog = Zeph.Core.Dialog.DialogSystem.CurrentDialogForNPC(npc, player);
+                    //if (lstDialog != null && lstDialog.Count > 0) {
+                    //    ZephGame.GeneralOps.StartDialog(lstDialog[0]);
+                    //}
                 }
             }
         }
