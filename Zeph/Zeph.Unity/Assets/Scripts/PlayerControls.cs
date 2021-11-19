@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/PlayerControls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Zeph-GameCore/PlayerControls.inputactions'
 
 using System;
 using System.Collections;
