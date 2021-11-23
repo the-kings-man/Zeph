@@ -56,35 +56,36 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Zeph.Unity\Scripts\Animation\SetBool.cs" />
-     <Compile Include="Assets\Zeph.Unity\Scripts\Camera\CameraManager.cs" />
-     <Compile Include="Assets\Zeph.Unity\Scripts\Animation\AnimatorManager.cs" />
-     <Compile Include="Assets\Zeph.Unity\Scripts\Player\PlayerLocomotion.cs" />
-     <Compile Include="Assets\Zeph.Unity\Scripts\Animation\SetBoolOnExit.cs" />
-     <Compile Include="Assets\Zeph.Unity\Scripts\Player\PlayerManager.cs" />
-     <Compile Include="Assets\Zeph.Unity\Scripts\Player\PlayerControls.cs" />
-     <Compile Include="Assets\Zeph.Unity\Scripts\Player\InputManager.cs" />
-     <Compile Include="Assets\Zeph.Unity\Scripts\UI\SetCursorMode.cs" />
      <Compile Include="Assets\Zeph.Unity\Scripts\UI\Dialog\DialogCanvas.cs" />
      <Compile Include="Assets\Zeph.Unity\Scripts\UI\Dialog\DialogResponseText.cs" />
-     <Compile Include="Assets\Zeph.Unity\Scripts\UI\Dialog\DialogText.cs" />
      <Compile Include="Assets\Zeph.Unity\Scripts\UI\HUD\HUDPlayerQuestText.cs" />
+     <Compile Include="Assets\Zeph.Unity\Scripts\Camera\CameraManager.cs" />
+     <Compile Include="Assets\Zeph.Unity\Scripts\Environment\DroppedItem.cs" />
+     <Compile Include="Assets\Zeph.Unity\Scripts\Animation\AnimatorManager.cs" />
+     <Compile Include="Assets\Zeph.Unity\Scripts\Player\PlayerLocomotion.cs" />
+     <Compile Include="Assets\Zeph.Unity\Scripts\GameController.cs" />
+     <Compile Include="Assets\Zeph.Unity\Scripts\Animation\SetBoolOnExit.cs" />
+     <Compile Include="Assets\Zeph.Unity\Scripts\Environment\Area.cs" />
+     <Compile Include="Assets\Zeph.Unity\Scripts\GeneralOps.cs" />
+     <Compile Include="Assets\Zeph.Unity\Scripts\Player\PlayerManager.cs" />
+     <Compile Include="Assets\Zeph.Unity\Scripts\Player\PlayerControls.cs" />
+     <Compile Include="Assets\Zeph.Unity\Scripts\InteractOnButton.cs" />
+     <Compile Include="Assets\Zeph.Unity\Scripts\UI\Dialog\DialogText.cs" />
+     <Compile Include="Assets\Zeph.Unity\Scripts\UI\Quest\QuestCanvas.cs" />
+     <Compile Include="Assets\Zeph.Unity\Scripts\InteractOnTrigger.cs" />
+     <Compile Include="Assets\Zeph.Unity\Scripts\NPC\NPCController.cs" />
+     <Compile Include="Assets\Zeph.Unity\Scripts\UI\SetCursorMode.cs" />
+     <Compile Include="Assets\Zeph.Unity\Scripts\Player\InputManager.cs" />
+     <Compile Include="Assets\Zeph.Unity\Scripts\Environment\Trigger.cs" />
      <Compile Include="Assets\Zeph.Unity\Scripts\UI\HUD\HUDPlayerQuestCanvas.cs" />
      <Compile Include="Assets\Zeph.Unity\Scripts\UI\HUD\HUDCanvas.cs" />
-     <Compile Include="Assets\Zeph.Unity\Scripts\UI\Quest\QuestCanvas.cs" />
-     <Compile Include="Assets\Zeph.Unity\Scripts\NPC\NPCController.cs" />
-     <Compile Include="Assets\Zeph.Unity\Scripts\Environment\DroppedItem.cs" />
-     <Compile Include="Assets\Zeph.Unity\Scripts\Environment\Area.cs" />
-     <Compile Include="Assets\Zeph.Unity\Scripts\Environment\Trigger.cs" />
-     <Compile Include="Assets\Zeph.Unity\Scripts\GeneralOps.cs" />
-     <Compile Include="Assets\Zeph.Unity\Scripts\InteractOnButton.cs" />
-     <Compile Include="Assets\Zeph.Unity\Scripts\InteractOnTrigger.cs" />
-     <Compile Include="Assets\Zeph.Unity\Scripts\GameController.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+     <None Include="Assets\Packages\Esprima.2.0.3\lib\net461\Esprima.xml" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
@@ -94,6 +95,7 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+     <None Include="Assets\Packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.xml" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
@@ -342,6 +344,18 @@
  </Reference>
  <Reference Include="UnityEngine.XRModule">
  <HintPath>E:/Unity/Unity Editor/2020.1.6f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
+ </Reference>
+ <Reference Include="Zeph.Core">
+ <HintPath>E:/Source/Zeph_source/Zeph/Zeph.Unity/Assets/Zeph.Unity/Zeph.Core.dll</HintPath>
+ </Reference>
+ <Reference Include="Newtonsoft.Json">
+ <HintPath>E:/Source/Zeph_source/Zeph/Zeph.Unity/Assets/Packages/Newtonsoft.Json.13.0.1/lib/net45/Newtonsoft.Json.dll</HintPath>
+ </Reference>
+ <Reference Include="Esprima">
+ <HintPath>E:/Source/Zeph_source/Zeph/Zeph.Unity/Assets/Packages/Esprima.2.0.3/lib/net461/Esprima.dll</HintPath>
+ </Reference>
+ <Reference Include="Jint">
+ <HintPath>E:/Source/Zeph_source/Zeph/Zeph.Unity/Assets/Packages/Jint.3.0.0-beta-2036/lib/net461/Jint.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>E:/Unity/Unity Editor/2020.1.6f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
