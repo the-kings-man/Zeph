@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace ZephGame {
+namespace Zeph.Unity {
     [RequireComponent(typeof(Collider))]
     public class InteractOnTrigger : MonoBehaviour {
         public LayerMask layers;

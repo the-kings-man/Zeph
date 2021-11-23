@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace ZephGame
+namespace Zeph.Unity
 {
     public class SetCursorMode : MonoBehaviour
     {

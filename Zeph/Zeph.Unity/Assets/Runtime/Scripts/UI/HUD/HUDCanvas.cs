@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace ZephGame {
+namespace Zeph.Unity {
     public class HUDCanvas : MonoBehaviour {
 
         public static HUDCanvas Instance {

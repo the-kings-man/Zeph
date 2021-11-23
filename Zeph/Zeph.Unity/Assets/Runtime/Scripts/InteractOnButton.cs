@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-namespace ZephGame {
+namespace Zeph.Unity {
     public class InteractOnButton : InteractOnTrigger {
 
         public string buttonName = "Interact";

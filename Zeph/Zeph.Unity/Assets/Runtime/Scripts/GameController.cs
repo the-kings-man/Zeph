@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace ZephGame {
+namespace Zeph.Unity {
     public class GameController : MonoBehaviour {
         void Awake() {
         }

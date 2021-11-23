@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace ZephGame {
+namespace Zeph.Unity {
     public class NPCController : MonoBehaviour {
         /// <summary>
         /// The GUID of the <see cref="ZephGame.Core.Classes.NPC"/> this object relates to
@@ -181,12 +181,12 @@ namespace ZephGame {
                         });
                     }
                 } else {
-                    var player = ZephGame.GeneralOps.CurrentPlayer;
+                    var player = Zeph.Unity.GeneralOps.CurrentPlayer;
                     var db = Zeph.Core.GeneralOps.GetDatabaseConnection();
 
                     var lstDialog = Zeph.Core.Dialog.DialogSystem.CurrentDialogForNPC(npc, player);
                     if (lstDialog != null && lstDialog.Count > 0) {
-                        ZephGame.GeneralOps.StartDialog(lstDialog[0]);
+                        Zeph.Unity.GeneralOps.StartDialog(lstDialog[0]);
                     }
                 }
             }

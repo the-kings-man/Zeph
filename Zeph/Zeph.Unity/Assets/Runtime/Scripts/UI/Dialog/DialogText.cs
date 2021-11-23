@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace ZephGame {
+namespace Zeph.Unity {
     public class DialogText : MonoBehaviour {
 
         protected TMPro.TextMeshProUGUI textGameObject;
