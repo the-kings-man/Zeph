@@ -1,7 +1,7 @@
 {
-  "name": "com.Zeph.Unity",
-  "version": "0.0.1",
-  "displayName": "Zeph for Unity",
+  "name": "com.zeph.unity",
+  "version": "0.0.3",
+  "displayName": "Zeph Unity",
   "description": "Zephs core package for use in unity",
   "dependencies": {
     "com.unity.inputsystem": "1.0.2"
