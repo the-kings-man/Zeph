@@ -1,0 +1,13 @@
+{
+  "name": "com.Zeph.Unity",
+  "version": "0.0.1",
+  "displayName": "Zeph for Unity",
+  "description": "Zephs core package for use in unity",
+  "dependencies": {
+    "com.unity.inputsystem": "1.0.2"
+  },
+  "author": {
+    "name": "The.Kings.Man",
+    "url": "https://github.com/the-kings-man/"
+  }
+}
