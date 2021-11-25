@@ -67,7 +67,6 @@
      <Compile Include="Assets\Runtime\Scripts\Animation\SetBoolOnExit.cs" />
      <Compile Include="Assets\Runtime\Scripts\Environment\Area.cs" />
      <Compile Include="Assets\Runtime\Scripts\GeneralOps.cs" />
-     <Compile Include="Assets\Runtime\Scripts\Player\PlayerManager.cs" />
      <Compile Include="Assets\Runtime\Scripts\Player\PlayerControls.cs" />
      <Compile Include="Assets\Runtime\Scripts\InteractOnButton.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\Dialog\DialogText.cs" />
@@ -79,6 +78,9 @@
      <Compile Include="Assets\Runtime\Scripts\Environment\Trigger.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDPlayerQuestCanvas.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDCanvas.cs" />
+     <Compile Include="Assets\Runtime\Scripts\Entity.cs" />
+     <Compile Include="Assets\Runtime\Scripts\Character.cs" />
+     <Compile Include="Assets\Runtime\Scripts\Player\Player.cs" />
      <None Include="Assets\Runtime\Scripts\Zeph.Unity.Runtime.asmdef" />
  <Reference Include="Unity.InputSystem">
  <HintPath>E:/Source/Zeph_source/Zeph/Zeph.Unity/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
@@ -281,14 +283,8 @@
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>E:/Unity/Unity Editor/2020.1.6f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
- <Reference Include="ICSharpCode.NRefactory">
- <HintPath>E:/Source/Zeph_source/Zeph/Zeph.Unity/Library/PackageCache/com.unity.render-pipelines.core@8.2.0/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
- </Reference>
  <Reference Include="NugetForUnity">
  <HintPath>E:/Source/Zeph_source/Zeph/Zeph.Unity/Assets/NuGet/Editor/NugetForUnity.dll</HintPath>
- </Reference>
- <Reference Include="Newtonsoft.Json">
- <HintPath>E:/Source/Zeph_source/Zeph/Zeph.Unity/Assets/Packages/Newtonsoft.Json.13.0.1/lib/net45/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="Esprima">
  <HintPath>E:/Source/Zeph_source/Zeph/Zeph.Unity/Assets/Packages/Esprima.2.0.3/lib/net461/Esprima.dll</HintPath>
@@ -296,8 +292,14 @@
  <Reference Include="Jint">
  <HintPath>E:/Source/Zeph_source/Zeph/Zeph.Unity/Assets/Packages/Jint.3.0.0-beta-2036/lib/net461/Jint.dll</HintPath>
  </Reference>
+ <Reference Include="Newtonsoft.Json">
+ <HintPath>E:/Source/Zeph_source/Zeph/Zeph.Unity/Assets/Packages/Newtonsoft.Json.13.0.1/lib/net45/Newtonsoft.Json.dll</HintPath>
+ </Reference>
  <Reference Include="Zeph.Core">
  <HintPath>E:/Source/Zeph_source/Zeph/Zeph.Unity/Assets/Runtime/Zeph.Core.dll</HintPath>
+ </Reference>
+ <Reference Include="ICSharpCode.NRefactory">
+ <HintPath>E:/Source/Zeph_source/Zeph/Zeph.Unity/Library/PackageCache/com.unity.render-pipelines.core@8.2.0/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>E:/Unity/Unity Editor/2020.1.6f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

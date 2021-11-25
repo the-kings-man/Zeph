@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Zeph.Unity {
-    public class PlayerManager : MonoBehaviour {
+    public class Player : Character {
+        protected EntityType type = EntityType.Character;
+
         public CameraManager cameraManager;
 
         public bool isInteracting;
