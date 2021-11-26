@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Zeph.Unity {
     public class Character : Entity {
+
+        public override EntityType type { get; protected set; } = EntityType.Character;
+
         // Start is called before the first frame update
         void Start() {
 

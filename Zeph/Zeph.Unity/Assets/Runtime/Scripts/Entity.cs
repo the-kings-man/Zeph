@@ -5,9 +5,10 @@ using UnityEngine;
 namespace Zeph.Unity {
     public class Entity : MonoBehaviour {
 
+        [Header("Entity Fields")]
         public bool isSelectable = true;
         public Entity currentTarget;
-        public EntityType type;
+        public virtual EntityType type { get; protected set; }
 
         // Start is called before the first frame update
         void Start() {

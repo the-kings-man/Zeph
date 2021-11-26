@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Zeph.Unity {
-    public class PlayerLocomotion : MonoBehaviour {
+    public class HumanoidLocomotion : MonoBehaviour {
 
         AnimatorManager animatorManager;
-        InputManager inputManager;
-        Player player;
-        Rigidbody playerRigidbody;
+        //InputManager inputManager;
+        //Player player;
+        Rigidbody rigidbody;
         Vector3 moveDirection;
 
-        public Transform cameraObject;
+        //public Transform cameraObject;
 
         [Header("Vertical Movements")]
         public float inAirTimer;
@@ -38,7 +38,7 @@ namespace Zeph.Unity {
             animatorManager = GetComponent<AnimatorManager>();
             inputManager = GetComponent<InputManager>();
             player = GetComponent<Player>();
-            playerRigidbody = GetComponent<Rigidbody>();
+            rigidbody = GetComponent<Rigidbody>();
         }
 
         public void HandleAllMovement() {
@@ -69,7 +69,7 @@ namespace Zeph.Unity {
                 }
 
                 Vector3 movementVelocity = moveDirection * moveSpeed;
-                playerRigidbody.velocity = movementVelocity;
+                rigidbody.velocity = movementVelocity;
             }
         }
 
@@ -104,8 +104,8 @@ namespace Zeph.Unity {
                 }
 
                 inAirTimer = inAirTimer + Time.deltaTime;
-                //playerRigidbody.AddForce(transform.forward * leapingSpeed);
-                playerRigidbody.AddForce(-Vector3.up * fallingSpeed * inAirTimer);
+                //rigidbody.AddForce(transform.forward * leapingSpeed);
+                rigidbody.AddForce(-Vector3.up * fallingSpeed * inAirTimer);
             }
 
             if (Physics.SphereCast(rayCastOrigin, 0.2f, -Vector3.up, out hit, groundLayer)) {
@@ -140,9 +140,9 @@ namespace Zeph.Unity {
                 animatorManager.PlayTargetAnimation("Jump", false);
 
                 float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight);
-                Vector3 playerVelocity = playerRigidbody.velocity; //moveDirection in tutorial
+                Vector3 playerVelocity = rigidbody.velocity; //moveDirection in tutorial
                 playerVelocity.y = jumpingVelocity;
-                playerRigidbody.velocity = playerVelocity;
+                rigidbody.velocity = playerVelocity;
             }
         }
 

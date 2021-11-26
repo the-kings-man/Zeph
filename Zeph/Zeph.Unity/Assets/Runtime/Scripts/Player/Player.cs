@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Zeph.Unity {
     public class Player : Character {
-        protected EntityType type = EntityType.Character;
 
         public CameraManager cameraManager;
 
