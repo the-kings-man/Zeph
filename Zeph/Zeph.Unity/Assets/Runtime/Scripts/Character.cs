@@ -7,6 +7,8 @@ namespace Zeph.Unity {
 
         public override EntityType type { get; protected set; } = EntityType.Character;
 
+        public bool isInteracting = false;
+
         // Start is called before the first frame update
         void Start() {
 

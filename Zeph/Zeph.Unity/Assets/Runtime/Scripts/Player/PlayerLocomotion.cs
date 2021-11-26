@@ -3,54 +3,56 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Zeph.Unity {
-    public class PlayerLocomotion : MonoBehaviour {
+    public class PlayerLocomotion : CharacterLocomotion {
 
-        AnimatorManager animatorManager;
+        //AnimatorManager animatorManager;
         InputManager inputManager;
         Player player;
-        Rigidbody playerRigidbody;
-        Vector3 moveDirection;
+        //Rigidbody rigidbody;
+        //Vector3 moveDirection;
 
         public Transform cameraObject;
 
-        [Header("Vertical Movements")]
-        public float inAirTimer;
-        public float leapingSpeed;
-        public float fallingSpeed;
-        public LayerMask groundLayer;
-        public float rayCastHeightOffset = 0.5f;
-        public float jumpHeight = 3;
-        public float gravityIntensity = -15;
-        public float maxClimbingHeight = 0.1f;
+        //[Header("Vertical Movements")]
+        //public float inAirTimer;
+        //public float leapingSpeed;
+        //public float fallingSpeed;
+        //public LayerMask groundLayer;
+        //public float rayCastHeightOffset = 0.5f;
+        //public float jumpHeight = 3;
+        //public float gravityIntensity = -15;
+        //public float maxClimbingHeight = 0.1f;
 
-        [Header("Horizontal Movements")]
-        public float walkingSpeed = 1.5f;
-        public float runningSpeed = 5f;
-        public float sprintingSpeed = 7f;
-        public float rotationSpeed = 15f;
+        //[Header("Horizontal Movements")]
+        //public float walkingSpeed = 1.5f;
+        //public float runningSpeed = 5f;
+        //public float sprintingSpeed = 7f;
+        //public float rotationSpeed = 15f;
 
-        [Header("Movement Flags")]
-        public bool isSprinting;
-        public bool isGrounded;
-        public bool isJumping;
+        //[Header("Movement Flags")]
+        //public bool isSprinting;
+        //public bool isGrounded;
+        //public bool isJumping;
 
-        void Awake() {
-            animatorManager = GetComponent<AnimatorManager>();
+         protected new void Awake() {
+            base.Awake();
+            //animatorManager = GetComponent<AnimatorManager>();
             inputManager = GetComponent<InputManager>();
             player = GetComponent<Player>();
-            playerRigidbody = GetComponent<Rigidbody>();
+            //rigidbody = GetComponent<Rigidbody>();
         }
 
-        public void HandleAllMovement() {
-            HandleFallingAndLanding();
+        //public void HandleAllMovement() {
+        //    HandleFallingAndLanding();
 
-            if (!player.isInteracting) {
-                HandleMovement();
-                HandleRotation();
-            }
-        }
+        //    if (!player.isInteracting) {
+        //        HandleMovement();
+        //        HandleRotation();
+        //    }
+        //}
 
-        void HandleMovement() {
+        protected override void HandleMovement() {
+            base.HandleMovement();
             if (!isJumping) {
                 moveDirection = cameraObject.forward * inputManager.verticalInput;
                 moveDirection = moveDirection + cameraObject.right * inputManager.horizontalInput;
@@ -69,11 +71,11 @@ namespace Zeph.Unity {
                 }
 
                 Vector3 movementVelocity = moveDirection * moveSpeed;
-                playerRigidbody.velocity = movementVelocity;
+                rigidbody.velocity = movementVelocity;
             }
         }
 
-        void HandleRotation() {
+        protected override void HandleRotation() {
             if (!isJumping) {
                 Vector3 targetDirection = Vector3.zero;
 
@@ -92,7 +94,7 @@ namespace Zeph.Unity {
             }
         }
 
-        void HandleFallingAndLanding() {
+        protected override void HandleFallingAndLanding() {
             RaycastHit hit;
             Vector3 rayCastOrigin = transform.position;
             Vector3 groundedPosition = transform.position;
@@ -104,8 +106,8 @@ namespace Zeph.Unity {
                 }
 
                 inAirTimer = inAirTimer + Time.deltaTime;
-                //playerRigidbody.AddForce(transform.forward * leapingSpeed);
-                playerRigidbody.AddForce(-Vector3.up * fallingSpeed * inAirTimer);
+                //rigidbody.AddForce(transform.forward * leapingSpeed);
+                rigidbody.AddForce(-Vector3.up * fallingSpeed * inAirTimer);
             }
 
             if (Physics.SphereCast(rayCastOrigin, 0.2f, -Vector3.up, out hit, groundLayer)) {
@@ -133,18 +135,5 @@ namespace Zeph.Unity {
 
             }
         }
-
-        public void DoJump() {
-            if (isGrounded) {
-                animatorManager.animator.SetBool("IsJumping", true);
-                animatorManager.PlayTargetAnimation("Jump", false);
-
-                float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight);
-                Vector3 playerVelocity = playerRigidbody.velocity; //moveDirection in tutorial
-                playerVelocity.y = jumpingVelocity;
-                playerRigidbody.velocity = playerVelocity;
-            }
-        }
-
     }
 }
