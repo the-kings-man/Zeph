@@ -52,6 +52,7 @@ MonoBehaviour:
   isSelectable: 1
   currentTarget: {fileID: 0}
   isInteracting: 0
+  isInteracting: 0
 --- !u!114 &5895084746320672394
 MonoBehaviour:
   m_ObjectHideFlags: 0

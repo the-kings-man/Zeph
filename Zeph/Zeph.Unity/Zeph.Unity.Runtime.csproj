@@ -68,6 +68,7 @@
      <Compile Include="Assets\Runtime\Scripts\Animation\SetBoolOnExit.cs" />
      <Compile Include="Assets\Runtime\Scripts\Environment\Area.cs" />
      <Compile Include="Assets\Runtime\Scripts\Entity.cs" />
+     <Compile Include="Assets\Runtime\Scripts\CharacterLocomotion.cs" />
      <Compile Include="Assets\Runtime\Scripts\GeneralOps.cs" />
      <Compile Include="Assets\Runtime\Scripts\Player\PlayerControls.cs" />
      <Compile Include="Assets\Runtime\Scripts\InteractOnButton.cs" />
@@ -78,11 +79,10 @@
      <Compile Include="Assets\Runtime\Scripts\UI\SetCursorMode.cs" />
      <Compile Include="Assets\Runtime\Scripts\Player\InputManager.cs" />
      <Compile Include="Assets\Runtime\Scripts\Player\Player.cs" />
+     <Compile Include="Assets\Runtime\Scripts\NPC\NPC.cs" />
      <Compile Include="Assets\Runtime\Scripts\Environment\Trigger.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDPlayerQuestCanvas.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDCanvas.cs" />
-     <Compile Include="Assets\Runtime\Scripts\NPC\NPC.cs" />
-     <Compile Include="Assets\Runtime\Scripts\CharacterLocomotion.cs" />
      <None Include="Assets\Runtime\Scripts\Zeph.Unity.Runtime.asmdef" />
  <Reference Include="Unity.InputSystem">
  <HintPath>E:/Source/Zeph_source/Zeph/Zeph.Unity/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>

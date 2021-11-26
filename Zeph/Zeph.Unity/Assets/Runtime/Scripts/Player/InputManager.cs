@@ -38,6 +38,18 @@ namespace Zeph.Unity {
 
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
                 playerControls.PlayerActions.Jump.canceled += i => jumpInput = false;
+
+                playerControls.PlayerActions.Select.canceled += (i) => {
+                    RaycastHit raycastHit;
+                    Ray ray = Camera.main.ScreenPointToRay(new Vector3(UnityEngine.InputSystem.Mouse.current.position.x.ReadValue(), UnityEngine.InputSystem.Mouse.current.position.y.ReadValue()));
+                    if (Physics.Raycast(ray, out raycastHit, 100f)) {
+                        if (raycastHit.transform != null) {
+                            //Our custom method. 
+                            var character = (CharacterLocomotion)(raycastHit.transform.gameObject.GetComponent<CharacterLocomotion>());
+                            character.DoJump();
+                        }
+                    }
+                }; //mouse up?
             }
 
             playerControls.Enable();
