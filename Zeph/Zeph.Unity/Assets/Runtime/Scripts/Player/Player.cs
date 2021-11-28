@@ -6,6 +6,7 @@ namespace Zeph.Unity {
     public class Player : Character {
 
         public CameraManager cameraManager;
+        public SelectionIndicator selectionIndicator;
 
         Animator animator;
         InputManager inputManager;
@@ -32,6 +33,18 @@ namespace Zeph.Unity {
             isInteracting = animator.GetBool("IsInteracting");
             playerLocomotion.isJumping = animator.GetBool("IsJumping");
             animator.SetBool("IsGrounded", playerLocomotion.isGrounded);
+        }
+
+        public override void EntitySelected(Entity entity) {
+            base.EntitySelected(entity);
+
+            if (selectionIndicator) {
+                if (entity != null) {
+                    selectionIndicator.currentTarget = entity.gameObject.transform;
+                } else {
+                    selectionIndicator.currentTarget = null;
+                }
+            }
         }
     }
 }

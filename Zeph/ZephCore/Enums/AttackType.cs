@@ -6,16 +6,12 @@ namespace Zeph.Core.Enums {
     public enum AttackType {
         None = 0,
         /// <summary>
-        /// A strike with a melee weapon
+        /// An instant attack inflicted instantly upon the target
         /// </summary>
-        Strike = 1,
+        Instant = 1,
         /// <summary>
-        /// A projectile strike, like an arrow from a bow and arrow
+        /// A projectile strike, like an arrow from a bow and arrow or a fireball spell
         /// </summary>
-        Projectile = 2,
-        /// <summary>
-        /// An attack cast from a spell
-        /// </summary>
-        Spell = 3
+        Projectile = 2
     }
 }

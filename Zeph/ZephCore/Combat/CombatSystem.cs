@@ -46,7 +46,6 @@ return stats.s_Constitution * 100;
 ";
         #endregion
 
-
         #region Calculations
 
         public DamageResult CalculateDamage(CombatEntity from, CombatEntity to, Classes.Attack attack) {
@@ -120,15 +119,38 @@ return stats.s_Constitution * 100;
         }
     }
 
+    /// <summary>
+    /// The class which handles the low level side of damage application/cooldowns/stat modifiers/damage over time effects/health/death.
+    /// </summary>
     public class CombatEntity {
-        public List<CombatStatModifier> combatStatModifiers;
+        public const int GLOBAL_ATTACK_COOLDOWN = 100; //100 milliseconds
+
         public Classes.Character character;
+
+        public CombatState combatState;
+
+        #region "Stats"
+
+        public List<CombatStatModifier> combatStatModifiers;
 
         public long maxHealth;
         public Stats baseStats;
 
         public long currentHealth;
         public Stats currentStats;
+
+        #endregion
+
+        #region "Cooldowns"
+
+        public Dictionary<int, AttackCooldown> cooldowns;
+
+        public bool inGlobalCooldown = false;
+        public DateTime globalCooldownStarted = new DateTime(1900, 1, 1);
+
+        #endregion
+
+        private CombatEntity() { }
 
         internal CombatEntity(Classes.Character _character) {
             character = _character;
@@ -158,6 +180,90 @@ return stats.s_Constitution * 100;
 
             currentStats = stats;
         }
+
+        #region Attacking
+
+        public AttackResult PerformAttack(CombatEntity entityToAttack, Classes.Attack attackToPerform) {
+            var res = new AttackResult();
+
+            if (cooldowns.ContainsKey(attackToPerform.a_ID)) {
+                res.success = false;
+                res.reason = AttackResultFailReason.InCooldown;
+            } else if (inGlobalCooldown) {
+                res.success = false;
+                res.reason = AttackResultFailReason.InGlobalCooldown;
+            } else {
+                //can attack
+                if (attackToPerform.a_PreparationDuration == 0) {
+                    if (attackToPerform.a_AttackType == Enums.AttackType.Instant) {
+                        //TODO: perform the instant attack, dealing damage, putting that attack on cooldown if needed, igniting the global cooldown
+                        //TODO: The dealing damage function should probably do the death stuff and all that. Death to be just an event which can be handled by anything.
+                        //TODO: have a global combat system death event, and possibly a combatEntity instance-specific event
+                        throw new NotImplementedException();
+                    } else {
+                        //TODO: tell the interface to spawn a projectile, pass back the projectile data to spawn.
+                        /**
+                         * 
+                         * I suppose these projectiles need:
+                         *  - speed
+                         *  - renderer/mesh
+                         * 
+                         */
+                        throw new NotImplementedException();
+                    }
+                } else {
+                    //TODO: start casting, return a timer object
+                    throw new NotImplementedException();
+                }
+            }
+
+            return res;
+        }
+
+        #endregion
+    }
+
+    public enum CombatState {
+        OutOfCombat = 1,
+        Attacking = 2,
+        GlobalCooldown = 3,
+        Idle = 4,
+        Casting = 5
+    }
+
+    public class AttackCooldown {
+        public Classes.Attack attack;
+        public DateTime attackPerformed;
+
+        public DateTime CooldownDueToFinish {
+            get {
+                return attackPerformed.AddMilliseconds(attack.a_Cooldown);
+            }
+        }
+    }
+
+    public class AttackResult {
+        public bool success;
+        public AttackResultFailReason reason;
+        public AttackResultSuccessAction action;
+
+        #region "Start Casting"
+
+
+
+        #endregion
+    }
+
+    public enum AttackResultFailReason {
+        None = 0,
+        InCooldown = 1,
+        InGlobalCooldown = 2
+    }
+
+    public enum AttackResultSuccessAction {
+        AttackFinished = 0,
+        StartCasting = 1,
+        Projectile = 2
     }
 
     public class CombatStatModifier {

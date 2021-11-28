@@ -83,6 +83,8 @@
      <Compile Include="Assets\Runtime\Scripts\Environment\Trigger.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDPlayerQuestCanvas.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDCanvas.cs" />
+     <Compile Include="Assets\Runtime\Scripts\SelectionIndicator.cs" />
+     <Compile Include="Assets\Runtime\Scripts\CharacterCombat.cs" />
      <None Include="Assets\Runtime\Scripts\Zeph.Unity.Runtime.asmdef" />
  <Reference Include="Unity.InputSystem">
  <HintPath>E:/Source/Zeph_source/Zeph/Zeph.Unity/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>

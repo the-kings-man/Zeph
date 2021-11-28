@@ -38,7 +38,11 @@ namespace Zeph.Core.Classes {
         /// <summary>
         /// If this attack results in stat modification or a damage over time, this can be applied here
         /// </summary>
-        public int a_StatModifier = -1;
+        public int a_StatModifier = 0;
+        /// <summary>
+        /// The cooldown this attack requires before uses. Set to 0 for no cooldown. Value is in milliseconds.
+        /// </summary>
+        public int a_Cooldown = 0;
 
         #region Properties
 
