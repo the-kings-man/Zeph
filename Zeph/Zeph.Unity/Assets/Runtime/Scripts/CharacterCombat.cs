@@ -30,34 +30,36 @@ namespace Zeph.Unity {
         public CharacterCombatAttackResult Attack(CharacterCombat characterToAttack, Zeph.Core.Classes.Attack attackBeingPerformed) {
             var res = new CharacterCombatAttackResult();
 
-            if (combatEntity.combatState == CombatState.Idle) {
-                if (combatEntity.cooldowns.ContainsKey(attackBeingPerformed.a_ID)) {
-                    res.success = false;
-                    res.reason = CharacterCombatAttackResultFailReason.InCooldown;
-                } else {
-                    PerformAttack(characterToAttack, attackBeingPerformed);
-                    res.success = true;
-                }
-            } else {
-                switch (combatEntity.combatState) {
-                    case CombatState.Attacking:
-                        res.success = false;
-                        res.reason = CharacterCombatAttackResultFailReason.Attacking;
-                        break;
-                    case CombatState.Casting:
-                        res.success = false;
-                        res.reason = CharacterCombatAttackResultFailReason.Casting;
-                        break;
-                    case CombatState.GlobalCooldown:
-                        res.success = false;
-                        res.reason = CharacterCombatAttackResultFailReason.InGlobalCooldown;
-                        break;
-                    case CombatState.OutOfCombat:
-                        res.success = false;
-                        res.reason = CharacterCombatAttackResultFailReason.OutOfCombat;
-                        break;
-                }
-            }
+            //TODO: keep track of state of using the events from the underlying combatEntity, perform the attack to the underlying combat entity and handle the response with whatever is needed to be handled. Remembering this is the link between the zeph engines combat engine and the uinity game objects.
+
+            //if (combatEntity.combatState == CombatState.Idle) {
+            //    if (combatEntity.cooldowns.ContainsKey(attackBeingPerformed.a_ID)) {
+            //        res.success = false;
+            //        res.reason = CharacterCombatAttackResultFailReason.InCooldown;
+            //    } else {
+            //        PerformAttack(characterToAttack, attackBeingPerformed);
+            //        res.success = true;
+            //    }
+            //} else {
+            //    switch (combatEntity.combatState) {
+            //        case CombatState.Attacking:
+            //            res.success = false;
+            //            res.reason = CharacterCombatAttackResultFailReason.Attacking;
+            //            break;
+            //        case CombatState.Casting:
+            //            res.success = false;
+            //            res.reason = CharacterCombatAttackResultFailReason.Casting;
+            //            break;
+            //        case CombatState.GlobalCooldown:
+            //            res.success = false;
+            //            res.reason = CharacterCombatAttackResultFailReason.InGlobalCooldown;
+            //            break;
+            //        case CombatState.OutOfCombat:
+            //            res.success = false;
+            //            res.reason = CharacterCombatAttackResultFailReason.OutOfCombat;
+            //            break;
+            //    }
+            //}
             return res;
         }
 
