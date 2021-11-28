@@ -4,8 +4,6 @@ using UnityEngine;
 
 namespace Zeph.Unity {
     public class NPC : Character {
-        public bool isInteracting;
-
         Animator animator;
 
         // Start is called before the first frame update

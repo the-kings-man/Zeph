@@ -7,8 +7,6 @@ namespace Zeph.Unity {
 
         public CameraManager cameraManager;
 
-        public bool isInteracting;
-
         Animator animator;
         InputManager inputManager;
         PlayerLocomotion playerLocomotion;

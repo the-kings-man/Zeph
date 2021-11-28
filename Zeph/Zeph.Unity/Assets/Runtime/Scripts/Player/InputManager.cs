@@ -20,10 +20,12 @@ namespace Zeph.Unity {
         PlayerControls playerControls;
         PlayerLocomotion playerLocomotion;
         AnimatorManager animatorManager;
+        Player player;
 
         void Awake() {
             animatorManager = GetComponent<AnimatorManager>();
             playerLocomotion = GetComponent<PlayerLocomotion>();
+            player = GetComponent<Player>();
         }
 
         private void OnEnable() {
@@ -39,14 +41,17 @@ namespace Zeph.Unity {
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
                 playerControls.PlayerActions.Jump.canceled += i => jumpInput = false;
 
-                playerControls.PlayerActions.Select.canceled += (i) => {
+                playerControls.PlayerActions.Select.performed += (i) => {
                     RaycastHit raycastHit;
                     Ray ray = Camera.main.ScreenPointToRay(new Vector3(UnityEngine.InputSystem.Mouse.current.position.x.ReadValue(), UnityEngine.InputSystem.Mouse.current.position.y.ReadValue()));
                     if (Physics.Raycast(ray, out raycastHit, 100f)) {
                         if (raycastHit.transform != null) {
-                            //Our custom method. 
-                            var character = (CharacterLocomotion)(raycastHit.transform.gameObject.GetComponent<CharacterLocomotion>());
-                            character.DoJump();
+                            var entity = (Entity)(raycastHit.transform.gameObject.GetComponent<Entity>());
+                            if (entity != null) {
+                                player.EntitySelected(entity);
+                            } else {
+                                player.EntitySelected(null);
+                            }
                         }
                     }
                 }; //mouse up?

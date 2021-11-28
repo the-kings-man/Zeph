@@ -7,17 +7,11 @@ namespace Zeph.Unity {
 
         [Header("Entity Fields")]
         public bool isSelectable = true;
-        public Entity currentTarget;
+        public Entity currentTarget = null;
         public virtual EntityType type { get; protected set; }
 
-        // Start is called before the first frame update
-        void Start() {
-
-        }
-
-        // Update is called once per frame
-        void Update() {
-
+        virtual public void EntitySelected(Entity entity) {
+            currentTarget = entity;
         }
     }
 
