@@ -37,9 +37,10 @@ namespace Zeph.Core.Questing {
             };
 
             var combatSystem = SystemLocator.GetService<Combat.ICombatSystem>();
-            combatSystem.OnNPCDeath += (s, e) => {
-                if (e.Reason.source == Combat.DeathSource.Player) {
-                    DefeatProgress(e.Reason.player, e.NPC, 1);
+            combatSystem.OnCharacterDeath += (s, e) => {
+                if (e.Reason.source == Combat.DeathSource.Character) {
+                    
+                    //DefeatProgress(e.Reason.player, e.NPC, 1);
                 }
             };
         }

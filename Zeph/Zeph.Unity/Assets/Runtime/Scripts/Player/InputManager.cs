@@ -21,6 +21,7 @@ namespace Zeph.Unity {
         PlayerLocomotion playerLocomotion;
         AnimatorManager animatorManager;
         Player player;
+        public HotbarController hotbarController;
 
         void Awake() {
             animatorManager = GetComponent<AnimatorManager>();
@@ -55,6 +56,10 @@ namespace Zeph.Unity {
                         }
                     }
                 }; //mouse up?
+
+                playerControls.PlayerHotbars.Button1.canceled += (i) => {
+                    if (hotbarController != null) hotbarController.ButtonPressed(1);
+                };
             }
 
             playerControls.Enable();

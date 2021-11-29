@@ -6,11 +6,11 @@ using Zeph.Core.Classes;
 
 namespace Zeph.Core.Combat {
     public interface ICombatSystem {
-        DamageResult CalculateDamage(CombatEntity from, CombatEntity to, Classes.Attack attack);
+        long CalculateDamage(CombatEntity from, CombatEntity to, Classes.Attack attack);
         long CalculateHealth(Stats stats);
         CombatEntity GenerateCombatEntity(Classes.Character character);
-        void NPCDied(Classes.NPC npc, DeathReason reason);
-        event CharacterDiedEventHandler OnNPCDeath;
+        void CharacterDied(Classes.Character character, DeathReason reason);
+        event CharacterDiedEventHandler OnCharacterDeath;
     }
 
     /// <summary>
@@ -26,16 +26,14 @@ namespace Zeph.Core.Combat {
     /// </remarks>
     public class CombatSystem : ICombatSystem {
 
-        public event CharacterDiedEventHandler OnNPCDeath;
+        public event CharacterDiedEventHandler OnCharacterDeath;
 
         #region "Scripts"
 
         string calculateDamageScript = @"
-if (attack.a_AttackType == AttackType.Strike) {
+if (attack.a_AttackType == AttackType.Instant) {
     return from.currentStats.s_Strength * attack.a_Damage - to.currentStats.s_Hardness;
 } else if (attack.a_AttackType == AttackType.Projectile) {
-    return 0;
-} else if (attack.a_AttackType == AttackType.Spell) {
     return 0;
 } else {
     return 0;
@@ -48,11 +46,9 @@ return stats.s_Constitution * 100;
 
         #region Calculations
 
-        public DamageResult CalculateDamage(CombatEntity from, CombatEntity to, Classes.Attack attack) {
+        public long CalculateDamage(CombatEntity from, CombatEntity to, Classes.Attack attack) {
             var statsFrom = from.character.Stats;
             var statsTo = to.character.Stats;
-
-            var res = new DamageResult();
 
             var engine = new Jint.Engine();
 
@@ -61,10 +57,7 @@ return stats.s_Constitution * 100;
                 .SetValue("to", to)
                 .SetValue("attack", attack);
 
-            res.damage = Convert.ToInt64(engine.Evaluate(calculateDamageScript).ToObject());
-            
-
-            return res;
+            return Convert.ToInt64(engine.Evaluate(calculateDamageScript).ToObject());
         }
 
         public long CalculateHealth(Stats stats) {
@@ -75,14 +68,14 @@ return stats.s_Constitution * 100;
             return Convert.ToInt64(engine.Evaluate(calculateHealthScript).ToObject());
         }
 
-        public void NPCDied(NPC npc, DeathReason reason) {
-            OnNPCDeath?.Invoke(null, new CharacterDiedEventArgs() {
-                NPC = npc,
+        #endregion
+
+        public void CharacterDied(Character character, DeathReason reason) {
+            OnCharacterDeath?.Invoke(null, new CharacterDiedEventArgs() {
+                Character = character,
                 Reason = reason
             });
         }
-
-        #endregion
 
         public CombatEntity GenerateCombatEntity(Character character) {
             return new CombatEntity(character);
@@ -143,10 +136,18 @@ return stats.s_Constitution * 100;
 
         #region "Cooldowns"
 
-        public Dictionary<int, AttackCooldown> cooldowns;
+        public System.Collections.Concurrent.ConcurrentDictionary<int, AttackCooldown> cooldowns = new System.Collections.Concurrent.ConcurrentDictionary<int, AttackCooldown>();
 
         public bool inGlobalCooldown = false;
-        public DateTime globalCooldownStarted = new DateTime(1900, 1, 1);
+        public float globalCooldownTimeLeft = 0f;
+
+        #endregion
+
+        #region "Events"
+
+        public event CharacterDiedEventHandler OnDeath;
+
+        public event TakeDamageEventHandler OnTakeDamage;
 
         #endregion
 
@@ -196,10 +197,25 @@ return stats.s_Constitution * 100;
                 //can attack
                 if (attackToPerform.a_PreparationDuration == 0) {
                     if (attackToPerform.a_AttackType == Enums.AttackType.Instant) {
-                        //TODO: perform the instant attack, dealing damage, putting that attack on cooldown if needed, igniting the global cooldown
-                        //TODO: The dealing damage function should probably do the death stuff and all that. Death to be just an event which can be handled by anything.
-                        //TODO: have a global combat system death event, and possibly a combatEntity instance-specific event
-                        throw new NotImplementedException();
+                        //perform the instant attack, dealing damage, putting that attack on cooldown if needed, igniting the global cooldown
+                        var combatSystem = SystemLocator.GetService<ICombatSystem>();
+                        var damage = combatSystem.CalculateDamage(this, entityToAttack, attackToPerform);
+
+                        var takeDamageResult = entityToAttack.TakeDamage(damage, this);
+                        
+                        if (attackToPerform.a_Cooldown > 0) {
+                            cooldowns[attackToPerform.a_ID] = new AttackCooldown() {
+                                attack = attackToPerform,
+                                attackPerformed = GeneralOps.Now
+                            };
+                        }
+
+                        inGlobalCooldown = true;
+                        globalCooldownTimeLeft = GLOBAL_ATTACK_COOLDOWN;
+
+                        res.success = true;
+                        res.action = AttackResultSuccessAction.AttackFinished;
+                        res.takeDamageResult = takeDamageResult;
                     } else {
                         //TODO: tell the interface to spawn a projectile, pass back the projectile data to spawn.
                         /**
@@ -220,7 +236,73 @@ return stats.s_Constitution * 100;
             return res;
         }
 
+        public TakeDamageResult TakeDamage(long damage, CombatEntity entity = null) {
+            var combatSystem = SystemLocator.GetService<ICombatSystem>();
+
+            var res = new TakeDamageResult() {
+                damage = damage,
+                damageSource = entity
+            };
+
+            currentHealth -= damage;
+
+            if (currentHealth <= 0) { //combat entity died
+                res.died = true;
+                combatState = CombatState.Dead;
+
+                var deathReason = new DeathReason();
+                if (entity == null) {
+                    deathReason.source = DeathSource.Environment;
+                } else {
+                    deathReason.source = DeathSource.Character;
+                    deathReason.characterSource = entity.character;
+                }
+
+                //Fire this instances death event
+                OnDeath?.Invoke(this, new CharacterDiedEventArgs() {
+                    Character = character,
+                    Reason = deathReason
+                });
+
+                //Fire the global character died event
+                combatSystem.CharacterDied(character, deathReason);
+            }
+
+            OnTakeDamage?.Invoke(this, new TakeDamageEventArgs() {
+                Result = res
+            });
+
+            return res;
+        }
+
         #endregion
+
+        public void Update(float deltaTime) {
+            if (inGlobalCooldown) {
+                globalCooldownTimeLeft -= deltaTime;
+
+                if (globalCooldownTimeLeft <= 0f) {
+                    inGlobalCooldown = false;
+                    globalCooldownTimeLeft = 0f;
+                }
+            }
+
+            var cooldownsFinished = new Dictionary<int, AttackCooldown>();
+            foreach (var cooldown in cooldowns.Values) {
+                cooldown.timeLeft -= deltaTime;
+
+                if (cooldown.timeLeft <= 0f) {
+                    cooldownsFinished.Add(cooldown.attack.a_ID, cooldown);
+                }
+            }
+            foreach (var a_ID in cooldownsFinished.Keys) {
+                try {
+                    cooldowns.TryRemove(a_ID, out var cd);
+                } catch (Exception) {
+                    //TODO: exception handling
+                }
+            }
+        }
     }
 
     public enum CombatState {
@@ -228,12 +310,17 @@ return stats.s_Constitution * 100;
         Attacking = 2,
         GlobalCooldown = 3,
         Idle = 4,
-        Casting = 5
+        Casting = 5,
+        Dead = 6
     }
+
+
+    #region "Attacking enums/classes"
 
     public class AttackCooldown {
         public Classes.Attack attack;
         public DateTime attackPerformed;
+        public float timeLeft;
 
         public DateTime CooldownDueToFinish {
             get {
@@ -252,6 +339,12 @@ return stats.s_Constitution * 100;
 
 
         #endregion
+
+        #region "Damage"
+
+        public TakeDamageResult takeDamageResult;
+
+        #endregion
     }
 
     public enum AttackResultFailReason {
@@ -266,6 +359,8 @@ return stats.s_Constitution * 100;
         Projectile = 2
     }
 
+    #endregion
+
     public class CombatStatModifier {
         public Classes.StatModifier statModifier;
         public DateTime started;
@@ -279,16 +374,20 @@ return stats.s_Constitution * 100;
         public long damage;
     }
 
+    public class TakeDamageResult {
+        public bool died = false;
+        public long damage = 0;
+        public CombatEntity damageSource = null;
+    }
+
     public class DeathReason {
         public DeathSource source;
-        public Classes.Player player;
-        public Classes.NPC npc;
+        public Classes.Character characterSource;
     }
 
     public enum DeathSource {
-        Player = 1,
-        NPC = 2,
-        Environment = 3
+        Character = 1,
+        Environment = 2
     }
 
     #region "Event Handling"
@@ -296,8 +395,14 @@ return stats.s_Constitution * 100;
     public delegate void CharacterDiedEventHandler(object sender, CharacterDiedEventArgs e);
 
     public class CharacterDiedEventArgs : EventArgs {
-        public Classes.NPC NPC { get; set; }
+        public Classes.Character Character { get; set; }
         public DeathReason Reason { get; set; }
+    }
+
+    public delegate void TakeDamageEventHandler(object sender, TakeDamageEventArgs e);
+
+    public class TakeDamageEventArgs : EventArgs {
+        public TakeDamageResult Result;
     }
 
     #endregion

@@ -13,7 +13,9 @@ namespace Zeph.Unity {
         PlayerLocomotion playerLocomotion;
 
         // Start is called before the first frame update
-        void Awake() {
+        protected override void Awake() {
+            base.Awake();
+
             animator = GetComponent<Animator>();
             inputManager = GetComponent<InputManager>();
             playerLocomotion = GetComponent<PlayerLocomotion>();
@@ -44,6 +46,12 @@ namespace Zeph.Unity {
                 } else {
                     selectionIndicator.currentTarget = null;
                 }
+            }
+        }
+
+        public void PerformAttack(Zeph.Core.Classes.Attack attackToPerform) {
+            if (currentTarget.type == EntityType.Character) {
+                characterCombat.Attack(((Character)currentTarget).characterCombat, attackToPerform);
             }
         }
     }

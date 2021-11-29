@@ -171,14 +171,14 @@ namespace Zeph.Unity {
                     var playerCombatEntity = GeneralOps.PlayerCombatEntity;
 
                     var res = combatSystem.CalculateDamage(playerCombatEntity, m_combatEntity, Zeph.Core.Classes.Attack.Read(1));
-                    m_combatEntity.currentHealth -= res.damage;
+                    //m_combatEntity.currentHealth -= res.damage;
 
                     if (m_combatEntity.currentHealth <= 0) {
                         Destroy(this.gameObject);
-                        combatSystem.NPCDied(npc, new Zeph.Core.Combat.DeathReason() {
-                            source = Zeph.Core.Combat.DeathSource.Player,
-                            player = GeneralOps.CurrentPlayer
-                        });
+                        //combatSystem.NPCDied(npc, new Zeph.Core.Combat.DeathReason() {
+                        //    source = Zeph.Core.Combat.DeathSource.Player,
+                        //    player = GeneralOps.CurrentPlayer
+                        //});
                     }
                 } else {
                     var player = Zeph.Unity.GeneralOps.CurrentPlayer;

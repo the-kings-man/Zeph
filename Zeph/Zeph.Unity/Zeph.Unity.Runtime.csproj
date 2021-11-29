@@ -65,11 +65,13 @@
      <Compile Include="Assets\Runtime\Scripts\Character.cs" />
      <Compile Include="Assets\Runtime\Scripts\Player\PlayerLocomotion.cs" />
      <Compile Include="Assets\Runtime\Scripts\GameController.cs" />
+     <Compile Include="Assets\Runtime\Scripts\SelectionIndicator.cs" />
      <Compile Include="Assets\Runtime\Scripts\Animation\SetBoolOnExit.cs" />
      <Compile Include="Assets\Runtime\Scripts\Environment\Area.cs" />
      <Compile Include="Assets\Runtime\Scripts\Entity.cs" />
      <Compile Include="Assets\Runtime\Scripts\CharacterLocomotion.cs" />
      <Compile Include="Assets\Runtime\Scripts\GeneralOps.cs" />
+     <Compile Include="Assets\Runtime\Scripts\CharacterCombat.cs" />
      <Compile Include="Assets\Runtime\Scripts\Player\PlayerControls.cs" />
      <Compile Include="Assets\Runtime\Scripts\InteractOnButton.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\Dialog\DialogText.cs" />
@@ -83,8 +85,7 @@
      <Compile Include="Assets\Runtime\Scripts\Environment\Trigger.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDPlayerQuestCanvas.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDCanvas.cs" />
-     <Compile Include="Assets\Runtime\Scripts\SelectionIndicator.cs" />
-     <Compile Include="Assets\Runtime\Scripts\CharacterCombat.cs" />
+     <Compile Include="Assets\Runtime\Scripts\UI\HUD\HotbarController.cs" />
      <None Include="Assets\Runtime\Scripts\Zeph.Unity.Runtime.asmdef" />
  <Reference Include="Unity.InputSystem">
  <HintPath>E:/Source/Zeph_source/Zeph/Zeph.Unity/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>

@@ -287,6 +287,109 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Player Hotbars",
+            "id": "1f24e920-a068-4c83-9628-855576d846d9",
+            "actions": [
+                {
+                    "name": "Button1",
+                    "type": "Button",
+                    "id": "18665b18-e787-4f9d-b176-837e14991644",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Button2",
+                    "type": "Button",
+                    "id": "c0bdf222-c054-4789-8d47-8c791f81ab0d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Button3",
+                    "type": "Button",
+                    "id": "21808b9c-7364-48a7-b617-7e2665db84e0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Button4",
+                    "type": "Button",
+                    "id": "e912de99-f020-4cbf-8b13-1eeb9a799671",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Button5",
+                    "type": "Button",
+                    "id": "80ba9a18-ab10-4171-b8de-74804187e614",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f953e919-6525-484d-bd61-15e5cfb194eb",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Button1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "792bd294-1a71-45ae-8287-9014872300a1",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Button2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1e3938f5-b110-4d06-a5f7-791d01314852",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Button3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "36fe1213-966d-4a71-b47a-84dd47436fa1",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Button4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "66f9517a-e9cc-47c1-ba42-79e6f63af518",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Button5",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

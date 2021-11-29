@@ -300,6 +300,109 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Player Hotbars"",
+            ""id"": ""1f24e920-a068-4c83-9628-855576d846d9"",
+            ""actions"": [
+                {
+                    ""name"": ""Button1"",
+                    ""type"": ""Button"",
+                    ""id"": ""18665b18-e787-4f9d-b176-837e14991644"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Button2"",
+                    ""type"": ""Button"",
+                    ""id"": ""c0bdf222-c054-4789-8d47-8c791f81ab0d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Button3"",
+                    ""type"": ""Button"",
+                    ""id"": ""21808b9c-7364-48a7-b617-7e2665db84e0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Button4"",
+                    ""type"": ""Button"",
+                    ""id"": ""e912de99-f020-4cbf-8b13-1eeb9a799671"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Button5"",
+                    ""type"": ""Button"",
+                    ""id"": ""80ba9a18-ab10-4171-b8de-74804187e614"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""f953e919-6525-484d-bd61-15e5cfb194eb"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Button1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""792bd294-1a71-45ae-8287-9014872300a1"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Button2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e3938f5-b110-4d06-a5f7-791d01314852"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Button3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""36fe1213-966d-4a71-b47a-84dd47436fa1"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Button4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""66f9517a-e9cc-47c1-ba42-79e6f63af518"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Button5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -313,6 +416,13 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_PlayerActions_Sprint = m_PlayerActions.FindAction("Sprint", throwIfNotFound: true);
         m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
         m_PlayerActions_Select = m_PlayerActions.FindAction("Select", throwIfNotFound: true);
+        // Player Hotbars
+        m_PlayerHotbars = asset.FindActionMap("Player Hotbars", throwIfNotFound: true);
+        m_PlayerHotbars_Button1 = m_PlayerHotbars.FindAction("Button1", throwIfNotFound: true);
+        m_PlayerHotbars_Button2 = m_PlayerHotbars.FindAction("Button2", throwIfNotFound: true);
+        m_PlayerHotbars_Button3 = m_PlayerHotbars.FindAction("Button3", throwIfNotFound: true);
+        m_PlayerHotbars_Button4 = m_PlayerHotbars.FindAction("Button4", throwIfNotFound: true);
+        m_PlayerHotbars_Button5 = m_PlayerHotbars.FindAction("Button5", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -448,6 +558,71 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         }
     }
     public PlayerActionsActions @PlayerActions => new PlayerActionsActions(this);
+
+    // Player Hotbars
+    private readonly InputActionMap m_PlayerHotbars;
+    private IPlayerHotbarsActions m_PlayerHotbarsActionsCallbackInterface;
+    private readonly InputAction m_PlayerHotbars_Button1;
+    private readonly InputAction m_PlayerHotbars_Button2;
+    private readonly InputAction m_PlayerHotbars_Button3;
+    private readonly InputAction m_PlayerHotbars_Button4;
+    private readonly InputAction m_PlayerHotbars_Button5;
+    public struct PlayerHotbarsActions
+    {
+        private @PlayerControls m_Wrapper;
+        public PlayerHotbarsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Button1 => m_Wrapper.m_PlayerHotbars_Button1;
+        public InputAction @Button2 => m_Wrapper.m_PlayerHotbars_Button2;
+        public InputAction @Button3 => m_Wrapper.m_PlayerHotbars_Button3;
+        public InputAction @Button4 => m_Wrapper.m_PlayerHotbars_Button4;
+        public InputAction @Button5 => m_Wrapper.m_PlayerHotbars_Button5;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerHotbars; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerHotbarsActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerHotbarsActions instance)
+        {
+            if (m_Wrapper.m_PlayerHotbarsActionsCallbackInterface != null)
+            {
+                @Button1.started -= m_Wrapper.m_PlayerHotbarsActionsCallbackInterface.OnButton1;
+                @Button1.performed -= m_Wrapper.m_PlayerHotbarsActionsCallbackInterface.OnButton1;
+                @Button1.canceled -= m_Wrapper.m_PlayerHotbarsActionsCallbackInterface.OnButton1;
+                @Button2.started -= m_Wrapper.m_PlayerHotbarsActionsCallbackInterface.OnButton2;
+                @Button2.performed -= m_Wrapper.m_PlayerHotbarsActionsCallbackInterface.OnButton2;
+                @Button2.canceled -= m_Wrapper.m_PlayerHotbarsActionsCallbackInterface.OnButton2;
+                @Button3.started -= m_Wrapper.m_PlayerHotbarsActionsCallbackInterface.OnButton3;
+                @Button3.performed -= m_Wrapper.m_PlayerHotbarsActionsCallbackInterface.OnButton3;
+                @Button3.canceled -= m_Wrapper.m_PlayerHotbarsActionsCallbackInterface.OnButton3;
+                @Button4.started -= m_Wrapper.m_PlayerHotbarsActionsCallbackInterface.OnButton4;
+                @Button4.performed -= m_Wrapper.m_PlayerHotbarsActionsCallbackInterface.OnButton4;
+                @Button4.canceled -= m_Wrapper.m_PlayerHotbarsActionsCallbackInterface.OnButton4;
+                @Button5.started -= m_Wrapper.m_PlayerHotbarsActionsCallbackInterface.OnButton5;
+                @Button5.performed -= m_Wrapper.m_PlayerHotbarsActionsCallbackInterface.OnButton5;
+                @Button5.canceled -= m_Wrapper.m_PlayerHotbarsActionsCallbackInterface.OnButton5;
+            }
+            m_Wrapper.m_PlayerHotbarsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Button1.started += instance.OnButton1;
+                @Button1.performed += instance.OnButton1;
+                @Button1.canceled += instance.OnButton1;
+                @Button2.started += instance.OnButton2;
+                @Button2.performed += instance.OnButton2;
+                @Button2.canceled += instance.OnButton2;
+                @Button3.started += instance.OnButton3;
+                @Button3.performed += instance.OnButton3;
+                @Button3.canceled += instance.OnButton3;
+                @Button4.started += instance.OnButton4;
+                @Button4.performed += instance.OnButton4;
+                @Button4.canceled += instance.OnButton4;
+                @Button5.started += instance.OnButton5;
+                @Button5.performed += instance.OnButton5;
+                @Button5.canceled += instance.OnButton5;
+            }
+        }
+    }
+    public PlayerHotbarsActions @PlayerHotbars => new PlayerHotbarsActions(this);
     public interface IPlayerMovementActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -458,5 +633,13 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
+    }
+    public interface IPlayerHotbarsActions
+    {
+        void OnButton1(InputAction.CallbackContext context);
+        void OnButton2(InputAction.CallbackContext context);
+        void OnButton3(InputAction.CallbackContext context);
+        void OnButton4(InputAction.CallbackContext context);
+        void OnButton5(InputAction.CallbackContext context);
     }
 }

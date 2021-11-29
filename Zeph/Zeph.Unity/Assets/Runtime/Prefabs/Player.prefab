@@ -52,9 +52,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSelectable: 1
   currentTarget: {fileID: 0}
-  type: 0
-  cameraManager: {fileID: 0}
   isInteracting: 0
+  characterID: -1
+  cameraManager: {fileID: 0}
+  selectionIndicator: {fileID: 0}
 --- !u!114 &1859597692177642969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,7 +68,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5b872955111c9f4d842c397c99ed80a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraObject: {fileID: 0}
   inAirTimer: 0
   leapingSpeed: 3
   fallingSpeed: 33
@@ -85,6 +85,7 @@ MonoBehaviour:
   isSprinting: 0
   isGrounded: 0
   isJumping: 0
+  cameraObject: {fileID: 0}
 --- !u!114 &1859597692177642970
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,10 +25,37 @@ namespace Zeph.Unity {
     /// </remarks>
     public class CharacterCombat : MonoBehaviour
     {
-        public CombatEntity combatEntity;
+        public CombatEntity combatEntity { get; private set; }
+
+        Character character;
+
+        virtual protected void Awake() {
+            character = GetComponent<Character>();
+        }
+
+        virtual protected void Update() {
+            combatEntity?.Update(Time.deltaTime * 1000f); //multiply by 1000 cos zeph framework is in milliseconds
+        }
 
         public CharacterCombatAttackResult Attack(CharacterCombat characterToAttack, Zeph.Core.Classes.Attack attackBeingPerformed) {
+            //TODO: This here should rather start combat when combat is entered, i.e. the player attacks an enemy or the enemy attacks the player. This will help reduce processing power. But seeing as this is not a thing atm, let's just start combat here
+            if (combatEntity == null) this.StartCombat();
+            if (characterToAttack.combatEntity == null) characterToAttack.StartCombat();
+
+            if (combatEntity == null) {
+                throw new Zeph.Core.Classes.ExceptionHandling.GeneralException("Zeph.Unity.CharacterCombat", 1, "Must call StartCombat to generate a CombatEntity before calling Attack.");
+            }
+
             var res = new CharacterCombatAttackResult();
+
+            var attackResult = combatEntity.PerformAttack(characterToAttack.combatEntity, attackBeingPerformed);
+
+            if (attackResult.success) {
+                //TODO: play the animation, create the projectile if needed, move the player etc...
+                res.success = true;
+            } else {
+                throw new System.NotImplementedException();
+            }
 
             //TODO: keep track of state of using the events from the underlying combatEntity, perform the attack to the underlying combat entity and handle the response with whatever is needed to be handled. Remembering this is the link between the zeph engines combat engine and the uinity game objects.
 
@@ -63,18 +90,20 @@ namespace Zeph.Unity {
             return res;
         }
 
-        virtual protected void PerformAttack(CharacterCombat characterToAttack, Zeph.Core.Classes.Attack attackBeingPerformed) {
-            if (attackBeingPerformed.a_AttackType == Core.Enums.AttackType.Strike) {
-                if (attackBeingPerformed.a_PreparationDuration )
-                characterToAttack.GetAttacked(this, attackBeingPerformed);
-                combatEntity.PerformAttack(attackBeingPerformed);
-            } else {
-                throw new System.NotImplementedException();
-            }
+        public void StartCombat() {
+            var combatSystem = Zeph.Core.SystemLocator.GetService<ICombatSystem>();
+
+            combatEntity = combatSystem.GenerateCombatEntity(character.character);
+            combatEntity.OnDeath += (s, e) => {
+                Debug.Log(this.ToString() + " died :(");
+            };
+            combatEntity.OnTakeDamage += (s, e) => {
+                Debug.Log(this.ToString() + " took " + e.Result.damage.ToString() + " damage.");
+            };
         }
 
-        virtual protected void GetAttacked(CharacterCombat characterAttackIsFrom, Zeph.Core.Classes.Attack attackBeingPerformed) {
-
+        public void LeaveCombat() {
+            combatEntity = null;
         }
     }
 
