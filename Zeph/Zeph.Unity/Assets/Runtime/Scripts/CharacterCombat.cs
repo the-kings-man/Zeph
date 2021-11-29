@@ -51,53 +51,33 @@ namespace Zeph.Unity {
 
             var res = new CharacterCombatAttackResult();
 
-            var attackResult = combatEntity.PerformAttack(characterToAttack.combatEntity, attackBeingPerformed);
-
-            if (attackResult.success) {
-                //TODO: play the animation, create the projectile if needed, move the player etc...
-                res.success = true;
-
-                
-                if (justPunched) {
-                    animatorManager.PlayTargetAnimationClip("Attack", "Punching", "Punching", true);
-                } else {
-                    animatorManager.PlayTargetAnimationClip("Attack", "Punching", "Headbutt", true);
-                }
-                justPunched = !justPunched;
+            if (Vector3.Distance(this.gameObject.transform.position, characterToAttack.gameObject.transform.position) > attackBeingPerformed.a_Distance) {
+                res.success = false;
+                res.reason = CharacterCombatAttackResultFailReason.TooFar;
+            } else if (characterToAttack == this) {
+                res.success = false;
+                res.reason = CharacterCombatAttackResultFailReason.SameCharacter;
             } else {
-                throw new System.NotImplementedException();
+                var attackResult = combatEntity.PerformAttack(characterToAttack.combatEntity, attackBeingPerformed);
+
+                if (attackResult.success) {
+                    //TODO: play the animation, create the projectile if needed, move the player etc...
+                    res.success = true;
+
+                    if (justPunched) {
+                        animatorManager.PlayTargetAnimationClip("Attack", "Punching", "Punching", true);
+                    } else {
+                        animatorManager.PlayTargetAnimationClip("Attack", "Punching", "Headbutt", true);
+                    }
+                    justPunched = !justPunched;
+
+                } else {
+                    res.success = false;
+                    res.reason = CharacterCombatAttackResultFailReason.CombatEntityFail;
+                    res.combatEntityResult = attackResult;
+                }
             }
 
-            //TODO: keep track of state of using the events from the underlying combatEntity, perform the attack to the underlying combat entity and handle the response with whatever is needed to be handled. Remembering this is the link between the zeph engines combat engine and the uinity game objects.
-
-            //if (combatEntity.combatState == CombatState.Idle) {
-            //    if (combatEntity.cooldowns.ContainsKey(attackBeingPerformed.a_ID)) {
-            //        res.success = false;
-            //        res.reason = CharacterCombatAttackResultFailReason.InCooldown;
-            //    } else {
-            //        PerformAttack(characterToAttack, attackBeingPerformed);
-            //        res.success = true;
-            //    }
-            //} else {
-            //    switch (combatEntity.combatState) {
-            //        case CombatState.Attacking:
-            //            res.success = false;
-            //            res.reason = CharacterCombatAttackResultFailReason.Attacking;
-            //            break;
-            //        case CombatState.Casting:
-            //            res.success = false;
-            //            res.reason = CharacterCombatAttackResultFailReason.Casting;
-            //            break;
-            //        case CombatState.GlobalCooldown:
-            //            res.success = false;
-            //            res.reason = CharacterCombatAttackResultFailReason.InGlobalCooldown;
-            //            break;
-            //        case CombatState.OutOfCombat:
-            //            res.success = false;
-            //            res.reason = CharacterCombatAttackResultFailReason.OutOfCombat;
-            //            break;
-            //    }
-            //}
             return res;
         }
 
@@ -106,9 +86,12 @@ namespace Zeph.Unity {
 
             combatEntity = combatSystem.GenerateCombatEntity(character.character);
             combatEntity.OnDeath += (s, e) => {
+                //this.gameObject.SetActive(false);
+                animatorManager.PlayTargetAnimation("Dying", true);
                 Debug.Log(this.ToString() + " died :(");
             };
             combatEntity.OnTakeDamage += (s, e) => {
+                GameController.Instance.CreateDamageIndicator(e.Result.damage.ToString(), this.gameObject.transform.position);
                 Debug.Log(this.ToString() + " took " + e.Result.damage.ToString() + " damage.");
             };
         }
@@ -121,14 +104,13 @@ namespace Zeph.Unity {
     public class CharacterCombatAttackResult {
         public bool success = false;
         public CharacterCombatAttackResultFailReason reason = CharacterCombatAttackResultFailReason.None;
+        public Zeph.Core.Combat.AttackResult combatEntityResult = null;
     }
 
     public enum CharacterCombatAttackResultFailReason {
         None = 1,
-        InCooldown = 2,
-        InGlobalCooldown = 3,
-        Casting = 4,
-        OutOfCombat = 5,
-        Attacking = 6
+        TooFar = 2,
+        CombatEntityFail = 3,
+        SameCharacter = 4
     }
 }

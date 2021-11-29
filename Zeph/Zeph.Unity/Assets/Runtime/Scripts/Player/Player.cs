@@ -51,7 +51,11 @@ namespace Zeph.Unity {
 
         public void PerformAttack(Zeph.Core.Classes.Attack attackToPerform) {
             if (currentTarget.type == EntityType.Character) {
-                characterCombat.Attack(((Character)currentTarget).characterCombat, attackToPerform);
+                var attackResult = characterCombat.Attack(((Character)currentTarget).characterCombat, attackToPerform);
+
+                if (!attackResult.success) {
+                    Debug.Log("Attack failed due to: " + attackResult.reason.ToString());
+                }
             }
         }
     }
