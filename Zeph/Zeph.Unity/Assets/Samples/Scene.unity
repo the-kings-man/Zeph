@@ -303,6 +303,18 @@ PrefabInstance:
       propertyPath: hotbarController
       value: 
       objectReference: {fileID: 179359787}
+    - target: {fileID: 1859597692177642971, guid: 4845463d04b821a478600e0ccfe73cd6, type: 3}
+      propertyPath: attackAnimations.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859597692177642971, guid: 4845463d04b821a478600e0ccfe73cd6, type: 3}
+      propertyPath: attackAnimations.Array.data[0]
+      value: 
+      objectReference: {fileID: -203655887218126122, guid: 184f52919683d964894ef8745f6b4b2a, type: 3}
+    - target: {fileID: 1859597692177642971, guid: 4845463d04b821a478600e0ccfe73cd6, type: 3}
+      propertyPath: attackAnimations.Array.data[1]
+      value: 
+      objectReference: {fileID: -203655887218126122, guid: ecca31f87797ac24f9f259c41f249e55, type: 3}
     - target: {fileID: 1859597692177642975, guid: 4845463d04b821a478600e0ccfe73cd6, type: 3}
       propertyPath: m_Name
       value: Player
@@ -864,6 +876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e30fe7e5dc176eb4db4064df6c1d99ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageIndicator: {fileID: 7892545916200517812, guid: cc2f1cc2f85173949a6026100d02729b, type: 3}
 --- !u!4 &698963727
 Transform:
   m_ObjectHideFlags: 0
