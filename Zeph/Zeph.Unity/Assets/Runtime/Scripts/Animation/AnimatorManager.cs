@@ -4,9 +4,13 @@ using UnityEngine;
 
 namespace Zeph.Unity {
     public class AnimatorManager : MonoBehaviour {
-        public Animator animator;
+        public Animator animator { get; private set; }
+        AnimatorOverrideController animatorOverrideController;
         int horizontal;
         int vertical;
+
+        public List<AnimationClip> attackAnimations;
+        public static Dictionary<string, AnimationClip> attackAnimationDictionary;
 
         public bool snapMovementAnimations = true;
 
@@ -14,6 +18,13 @@ namespace Zeph.Unity {
             animator = GetComponent<Animator>();
             horizontal = Animator.StringToHash("Horizontal");
             vertical = Animator.StringToHash("Vertical");
+            animatorOverrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
+            animator.runtimeAnimatorController = animatorOverrideController;
+
+            attackAnimationDictionary = new Dictionary<string, AnimationClip>();
+            foreach (var clip in attackAnimations) {
+                attackAnimationDictionary.Add(clip.name, clip);
+            }
         }
 
         public void UpdateAnimatorValues(float horizontalMovement, float verticalMovement, bool isSprinting) {
@@ -62,6 +73,12 @@ namespace Zeph.Unity {
 
         public void PlayTargetAnimation(string targetAnimation, bool isInteracting) {
             animator.SetBool("IsInteracting", isInteracting);
+            animator.CrossFade(targetAnimation, 0.2f);
+        }
+
+        public void PlayTargetAnimationClip(string targetAnimation, string animationClipName, string targetAnimationClip, bool isInteracting) {
+            animator.SetBool("IsInteracting", isInteracting);
+            animatorOverrideController[animationClipName] = attackAnimationDictionary[targetAnimationClip];
             animator.CrossFade(targetAnimation, 0.2f);
         }
     }

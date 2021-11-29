@@ -28,15 +28,18 @@ namespace Zeph.Unity {
         public CombatEntity combatEntity { get; private set; }
 
         Character character;
+        AnimatorManager animatorManager;
 
         virtual protected void Awake() {
             character = GetComponent<Character>();
+            animatorManager = GetComponent<AnimatorManager>();
         }
 
         virtual protected void Update() {
             combatEntity?.Update(Time.deltaTime * 1000f); //multiply by 1000 cos zeph framework is in milliseconds
         }
 
+        bool justPunched = true;
         public CharacterCombatAttackResult Attack(CharacterCombat characterToAttack, Zeph.Core.Classes.Attack attackBeingPerformed) {
             //TODO: This here should rather start combat when combat is entered, i.e. the player attacks an enemy or the enemy attacks the player. This will help reduce processing power. But seeing as this is not a thing atm, let's just start combat here
             if (combatEntity == null) this.StartCombat();
@@ -53,6 +56,14 @@ namespace Zeph.Unity {
             if (attackResult.success) {
                 //TODO: play the animation, create the projectile if needed, move the player etc...
                 res.success = true;
+
+                
+                if (justPunched) {
+                    animatorManager.PlayTargetAnimationClip("Attack", "Punching", "Punching", true);
+                } else {
+                    animatorManager.PlayTargetAnimationClip("Attack", "Punching", "Headbutt", true);
+                }
+                justPunched = !justPunched;
             } else {
                 throw new System.NotImplementedException();
             }
