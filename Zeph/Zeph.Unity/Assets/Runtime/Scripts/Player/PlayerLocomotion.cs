@@ -71,7 +71,7 @@ namespace Zeph.Unity {
                 }
 
                 Vector3 movementVelocity = moveDirection * moveSpeed;
-                rigidbody.velocity = movementVelocity;
+                characterRigidbody.velocity = movementVelocity;
             }
         }
 
@@ -107,7 +107,7 @@ namespace Zeph.Unity {
 
                 inAirTimer = inAirTimer + Time.deltaTime;
                 //rigidbody.AddForce(transform.forward * leapingSpeed);
-                rigidbody.AddForce(-Vector3.up * fallingSpeed * inAirTimer);
+                characterRigidbody.AddForce(-Vector3.up * fallingSpeed * inAirTimer);
             }
 
             if (Physics.SphereCast(rayCastOrigin, 0.2f, -Vector3.up, out hit, groundLayer)) {

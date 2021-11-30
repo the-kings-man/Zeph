@@ -8,7 +8,6 @@ namespace Zeph.Unity {
         public CameraManager cameraManager;
         public SelectionIndicator selectionIndicator;
 
-        Animator animator;
         InputManager inputManager;
         PlayerLocomotion playerLocomotion;
 
@@ -16,12 +15,11 @@ namespace Zeph.Unity {
         protected override void Awake() {
             base.Awake();
 
-            animator = GetComponent<Animator>();
             inputManager = GetComponent<InputManager>();
             playerLocomotion = GetComponent<PlayerLocomotion>();
         }
 
-        void Update() {
+        protected void Update() {
             inputManager.HandleAllInputs();
         }
 
@@ -32,9 +30,9 @@ namespace Zeph.Unity {
         void LateUpdate() {
             cameraManager.HandleAllCameraMovement();
 
-            isInteracting = animator.GetBool("IsInteracting");
-            playerLocomotion.isJumping = animator.GetBool("IsJumping");
-            animator.SetBool("IsGrounded", playerLocomotion.isGrounded);
+            isInteracting = animatorManager.animator.GetBool("IsInteracting");
+            playerLocomotion.isJumping = animatorManager.animator.GetBool("IsJumping");
+            animatorManager.animator.SetBool("IsGrounded", playerLocomotion.isGrounded);
         }
 
         public override void EntitySelected(Entity entity) {

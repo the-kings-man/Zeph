@@ -14,7 +14,7 @@ namespace Zeph.Unity {
 
         public bool snapMovementAnimations = true;
 
-        private void Awake() {
+        virtual protected void Awake() {
             animator = GetComponent<Animator>();
             horizontal = Animator.StringToHash("Horizontal");
             vertical = Animator.StringToHash("Vertical");

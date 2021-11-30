@@ -8,7 +8,7 @@ namespace Zeph.Unity {
         protected AnimatorManager animatorManager;
         //InputManager inputManager;
         Character character;
-        protected Rigidbody rigidbody;
+        public Rigidbody characterRigidbody;
         protected Vector3 moveDirection;
 
         //public Transform cameraObject;
@@ -38,7 +38,7 @@ namespace Zeph.Unity {
             animatorManager = GetComponent<AnimatorManager>();
             //inputManager = GetComponent<InputManager>();
             character = GetComponent<Character>();
-            rigidbody = GetComponent<Rigidbody>();
+            characterRigidbody = GetComponent<Rigidbody>();
         }
 
         public virtual void HandleAllMovement() {
@@ -140,9 +140,9 @@ namespace Zeph.Unity {
                 animatorManager.PlayTargetAnimation("Jump", false);
 
                 float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight);
-                Vector3 characterVelocity = rigidbody.velocity; //moveDirection in tutorial
+                Vector3 characterVelocity = characterRigidbody.velocity; //moveDirection in tutorial
                 characterVelocity.y = jumpingVelocity;
-                rigidbody.velocity = characterVelocity;
+                characterRigidbody.velocity = characterVelocity;
             }
         }
 

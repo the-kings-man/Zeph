@@ -4,24 +4,40 @@ using UnityEngine;
 
 namespace Zeph.Unity {
     public class NPC : Character {
-        Animator animator;
+        NPCLocomotion npcLocomotion;
+
+        public bool isPerformingAction;
+
+        [Header("AI Settings")]
+        public float detectionRadius = 5;
+        //The higher, and lower, respectively these angles are, the greater detection field of view (basically like eye sight, peripheral vision)
+        public float minimumDetectionAngle = -50f;
+        public float maximumDetectionAngle = 50f;
+        public LayerMask detectionLayer;
+
 
         // Start is called before the first frame update
         protected override void Awake() {
             base.Awake();
 
-            animator = GetComponent<Animator>();
+            npcLocomotion = GetComponent<NPCLocomotion>();
         }
 
-        void Update() {
-        }
-
-        void FixedUpdate() {
+        protected void FixedUpdate() {
+            HandleCurrentAction();
         }
 
         void LateUpdate() {
-            isInteracting = animator.GetBool("IsInteracting");
-            animator.SetBool("IsGrounded", false);
+            isInteracting = animatorManager.animator.GetBool("IsInteracting");
+            animatorManager.animator.SetBool("IsGrounded", false);
+        }
+
+        private void HandleCurrentAction() {
+            if (currentTarget == null) {
+                npcLocomotion.HandleDetection();
+            } else {
+                npcLocomotion.HandleMoveToTarget();
+            }
         }
     }
 }

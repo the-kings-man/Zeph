@@ -13,6 +13,7 @@ namespace Zeph.Unity {
         public int characterID = -1;
 
         public CharacterCombat characterCombat { get; private set; }
+        public AnimatorManager animatorManager { get; private set; }
 
         // Start is called before the first frame update
         virtual protected void Awake() {
@@ -23,11 +24,7 @@ namespace Zeph.Unity {
             }
 
             characterCombat = this.gameObject.AddComponent<CharacterCombat>();
-        }
-
-        // Update is called once per frame
-        void Update() {
-
+            animatorManager = GetComponent<AnimatorManager>();
         }
     }
 }
