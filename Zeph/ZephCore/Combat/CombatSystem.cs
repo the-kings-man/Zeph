@@ -204,10 +204,10 @@ return stats.s_Constitution * 100;
                         var takeDamageResult = entityToAttack.TakeDamage(damage, this);
                         
                         if (attackToPerform.a_Cooldown > 0) {
-                            cooldowns[attackToPerform.a_ID] = new AttackCooldown() {
-                                attack = attackToPerform,
-                                attackPerformed = GeneralOps.Now
-                            };
+                            var ac = AttackCooldown.GetAttackCooldown(attackToPerform);
+                            if (ac != null) {
+                                cooldowns[attackToPerform.a_ID] = ac;
+                            }
                         }
 
                         inGlobalCooldown = true;
@@ -288,11 +288,13 @@ return stats.s_Constitution * 100;
             }
 
             var cooldownsFinished = new Dictionary<int, AttackCooldown>();
-            foreach (var cooldown in cooldowns.Values) {
+            foreach (var a_ID in cooldowns.Keys) {
+                var cooldown = cooldowns[a_ID];
+
                 cooldown.timeLeft -= deltaTime;
 
                 if (cooldown.timeLeft <= 0f) {
-                    cooldownsFinished.Add(cooldown.attack.a_ID, cooldown);
+                    cooldownsFinished.Add(a_ID, cooldown);
                 }
             }
             foreach (var a_ID in cooldownsFinished.Keys) {
@@ -319,14 +321,25 @@ return stats.s_Constitution * 100;
 
     public class AttackCooldown {
         public Classes.Attack attack;
-        public DateTime attackPerformed;
+        public DateTime attackPerformed { get; private set; }
         public float timeLeft;
 
-        public DateTime CooldownDueToFinish {
-            get {
-                return attackPerformed.AddMilliseconds(attack.a_Cooldown);
+        AttackCooldown(Attack attack) {
+            attackPerformed = GeneralOps.Now;
+            timeLeft = attack.a_Cooldown;
+        }
+
+        #region "Factory function"
+
+        public static AttackCooldown GetAttackCooldown(Attack attack) {
+            if (attack.a_Cooldown > 0) {
+                return new AttackCooldown(attack);
+            } else {
+                return null;
             }
         }
+
+        #endregion
     }
 
     public class AttackResult {

@@ -66,6 +66,7 @@ GameObject:
   - component: {fileID: 5895084746320672394}
   - component: {fileID: 6254561740529281009}
   - component: {fileID: 5858167357246223279}
+  - component: {fileID: 4528773193707825242}
   - component: {fileID: 7894383207965991222}
   - component: {fileID: 7894383207965991223}
   - component: {fileID: 7894383207965991220}
@@ -181,6 +182,18 @@ MonoBehaviour:
   isJumping: 0
   distanceFromTarget: 0
   stoppingDistance: 1
+--- !u!114 &4528773193707825242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7894383207965991221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7886060fac358f74c92f587e46ae1e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &7894383207965991222
 Animator:
   serializedVersion: 3

@@ -58,6 +58,7 @@
      <Compile Include="Assets\Runtime\Scripts\Animation\SetBool.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\Dialog\DialogCanvas.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\Dialog\DialogResponseText.cs" />
+     <Compile Include="Assets\Runtime\Scripts\NPC\NPCLocomotion.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDPlayerQuestText.cs" />
      <Compile Include="Assets\Runtime\Scripts\DamageIndicator.cs" />
      <Compile Include="Assets\Runtime\Scripts\Camera\CameraManager.cs" />
@@ -81,14 +82,14 @@
      <Compile Include="Assets\Runtime\Scripts\InteractOnTrigger.cs" />
      <Compile Include="Assets\Runtime\Scripts\NPC\NPCController.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\SetCursorMode.cs" />
+     <Compile Include="Assets\Runtime\Scripts\NPC\NPCAnimatorManager.cs" />
      <Compile Include="Assets\Runtime\Scripts\Player\InputManager.cs" />
      <Compile Include="Assets\Runtime\Scripts\Player\Player.cs" />
      <Compile Include="Assets\Runtime\Scripts\NPC\NPC.cs" />
      <Compile Include="Assets\Runtime\Scripts\Environment\Trigger.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDPlayerQuestCanvas.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDCanvas.cs" />
-     <Compile Include="Assets\Runtime\Scripts\NPC\NPCLocomotion.cs" />
-     <Compile Include="Assets\Runtime\Scripts\NPC\NPCAnimatorManager.cs" />
+     <Compile Include="Assets\Runtime\Scripts\NPC\NPCCombat.cs" />
      <None Include="Assets\Runtime\Scripts\Zeph.Unity.Runtime.asmdef" />
  <Reference Include="Unity.InputSystem">
  <HintPath>E:/Source/Zeph_source/Zeph/Zeph.Unity/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>

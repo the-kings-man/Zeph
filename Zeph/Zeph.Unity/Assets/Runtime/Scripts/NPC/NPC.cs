@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Zeph.Unity {
     public class NPC : Character {
-        NPCLocomotion npcLocomotion;
+        protected NPCLocomotion npcLocomotion;
+        protected NPCCombat npcCombat;
 
         public bool isPerformingAction;
 
@@ -21,6 +22,7 @@ namespace Zeph.Unity {
             base.Awake();
 
             npcLocomotion = GetComponent<NPCLocomotion>();
+            npcCombat = GetComponent<NPCCombat>();
         }
 
         protected void FixedUpdate() {
@@ -37,6 +39,7 @@ namespace Zeph.Unity {
                 npcLocomotion.HandleDetection();
             } else {
                 npcLocomotion.HandleMoveToTarget();
+                npcCombat.HandleAttacking(npcLocomotion.distanceFromTarget);
             }
         }
     }

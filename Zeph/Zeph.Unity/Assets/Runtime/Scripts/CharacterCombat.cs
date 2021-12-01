@@ -27,8 +27,8 @@ namespace Zeph.Unity {
     {
         public CombatEntity combatEntity { get; private set; }
 
-        Character character;
-        AnimatorManager animatorManager;
+        protected Character character;
+        protected AnimatorManager animatorManager;
 
         virtual protected void Awake() {
             character = GetComponent<Character>();

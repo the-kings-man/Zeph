@@ -38,7 +38,7 @@ namespace Zeph.Core.Classes {
         /// <summary>
         /// If this attack results in stat modification or a damage over time, this can be applied here
         /// </summary>
-        public int a_StatModifier = 0;
+        public int a_StatModifier = -1;
         /// <summary>
         /// The cooldown this attack requires before uses. Set to 0 for no cooldown. Value is in milliseconds.
         /// </summary>
@@ -87,10 +87,9 @@ namespace Zeph.Core.Classes {
                     obj.a_AttackType = (Enums.AttackType)GeneralOps.ConvertDatabaseField<int>(dic, "a_AttackType");
                     obj.a_Distance = GeneralOps.ConvertDatabaseField<int>(dic, "a_Distance");
                     obj.a_Damage = GeneralOps.ConvertDatabaseField<int>(dic, "a_Damage");
-                    //obj.a_IsDOT = GeneralOps.ConvertDatabaseField<bool>(dic, "a_IsDOT");
-                    //obj.a_DOTDamage = GeneralOps.ConvertDatabaseField<int>(dic, "a_DOTDamage");
-                    //obj.a_DOTTimeBetweenTicks = GeneralOps.ConvertDatabaseField<int>(dic, "a_DOTTimeBetweenTicks");
-                    //obj.a_DOTDuration = GeneralOps.ConvertDatabaseField<int>(dic, "a_DOTDuration");
+                    obj.a_PreparationDuration = GeneralOps.ConvertDatabaseField<int>(dic, "a_PreparationDuration");
+                    obj.a_StatModifier = GeneralOps.ConvertDatabaseField<int>(dic, "a_StatModifier");
+                    obj.a_Cooldown = GeneralOps.ConvertDatabaseField<int>(dic, "a_Cooldown");
                     return obj;
                 } catch (Exception ex) {
                     throw new ExceptionHandling.GeneralException("Attack", 1, "An error occurred reading dictionary " + GeneralOps.DictionaryToJson(dic) + ". " + ex.Message, ex);
@@ -110,6 +109,9 @@ namespace Zeph.Core.Classes {
                 dic["a_AttackType"] = (int)obj.a_AttackType;
                 dic["a_Distance"] = obj.a_Distance;
                 dic["a_Damage"] = obj.a_Damage;
+                dic["a_PreparationDuration"] = obj.a_PreparationDuration;
+                dic["a_StatModifier"] = obj.a_StatModifier;
+                dic["a_Cooldown"] = obj.a_Cooldown;
                 //dic["a_IsDOT"] = obj.a_IsDOT;
                 //dic["a_DOTDamage"] = obj.a_DOTDamage;
                 //dic["a_DOTTimeBetweenTicks"] = obj.a_DOTTimeBetweenTicks;
