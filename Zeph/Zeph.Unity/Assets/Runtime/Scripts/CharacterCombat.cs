@@ -59,22 +59,33 @@ namespace Zeph.Unity {
                 res.reason = CharacterCombatAttackResultFailReason.SameCharacter;
             } else {
                 var attackResult = combatEntity.PerformAttack(characterToAttack.combatEntity, attackBeingPerformed);
+                res.combatEntityResult = attackResult;
 
                 if (attackResult.success) {
-                    //TODO: play the animation, create the projectile if needed, move the player etc...
-                    res.success = true;
+                    switch (attackResult.action) {
+                        case AttackResultSuccessAction.AttackFinished:
+                            //TODO: play the animation, create the projectile if needed, move the player etc...
+                            res.success = true;
 
-                    if (justPunched) {
-                        animatorManager.PlayTargetAnimationClip("Attack", "Punching", "Punching", true);
-                    } else {
-                        animatorManager.PlayTargetAnimationClip("Attack", "Punching", "Headbutt", true);
+                            if (justPunched) {
+                                animatorManager.PlayTargetAnimationClip("Attack", "Punching", "Punching", true);
+                            } else {
+                                animatorManager.PlayTargetAnimationClip("Attack", "Punching", "Headbutt", true);
+                            }
+                            justPunched = !justPunched;
+                            break;
+                        case AttackResultSuccessAction.Projectile:
+                            break;
+                        case AttackResultSuccessAction.StartCasting:
+                            //TODO: play the animation, create the projectile if needed, move the player etc...
+                            res.success = true;
+
+                            animatorManager.PlayTargetAnimationClip("Casting", "Casting Spell", "Casting Spell", true);
+                            break;
                     }
-                    justPunched = !justPunched;
-
                 } else {
                     res.success = false;
                     res.reason = CharacterCombatAttackResultFailReason.CombatEntityFail;
-                    res.combatEntityResult = attackResult;
                 }
             }
 
