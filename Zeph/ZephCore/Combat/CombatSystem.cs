@@ -143,11 +143,21 @@ return stats.s_Constitution * 100;
 
         #endregion
 
+        #region "Casting"
+
+        public bool isCasting = false;
+        public float castingTimeLeft = 0f;
+        public Attack currentCastingAttack = null;
+
+        #endregion
+
         #region "Events"
 
         public event CharacterDiedEventHandler OnDeath;
 
         public event TakeDamageEventHandler OnTakeDamage;
+
+        public event CastingEventHandler OnCastingFinished;
 
         #endregion
 
@@ -228,8 +238,13 @@ return stats.s_Constitution * 100;
                         throw new NotImplementedException();
                     }
                 } else {
-                    //TODO: start casting, return a timer object
-                    throw new NotImplementedException();
+                    //TODO: start casting, inform the caller that casting has started
+                    isCasting = true;
+                    castingTimeLeft = attackToPerform.a_PreparationDuration;
+                    currentCastingAttack = attackToPerform;
+
+                    res.success = true;
+                    res.action = AttackResultSuccessAction.StartCasting;
                 }
             }
 
@@ -278,6 +293,7 @@ return stats.s_Constitution * 100;
         #endregion
 
         public void Update(float deltaTime) {
+            //Cooldowns
             if (inGlobalCooldown) {
                 globalCooldownTimeLeft -= deltaTime;
 
@@ -302,6 +318,18 @@ return stats.s_Constitution * 100;
                     cooldowns.TryRemove(a_ID, out var cd);
                 } catch (Exception) {
                     //TODO: exception handling
+                }
+            }
+
+            //Casting
+            if (isCasting) {
+                castingTimeLeft -= deltaTime;
+
+                if (castingTimeLeft <= 0f) {
+                    isCasting = false;
+                    OnCastingFinished?.Invoke(this, new CastingEventArgs() {
+                        Attack = currentCastingAttack
+                    });
                 }
             }
         }
@@ -416,6 +444,12 @@ return stats.s_Constitution * 100;
 
     public class TakeDamageEventArgs : EventArgs {
         public TakeDamageResult Result;
+    }
+
+    public delegate void CastingEventHandler(object sender, CastingEventArgs e);
+
+    public class CastingEventArgs : EventArgs {
+        public Attack @Attack;
     }
 
     #endregion
