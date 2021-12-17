@@ -60,6 +60,14 @@ namespace Zeph.Unity {
                 playerControls.PlayerHotbars.Button1.canceled += (i) => {
                     if (hotbarController != null) hotbarController.ButtonPressed(1);
                 };
+
+                playerControls.PlayerHotbars.Button2.canceled += (i) => {
+                    if (hotbarController != null) hotbarController.ButtonPressed(2);
+                };
+
+                playerControls.PlayerHotbars.Button3.canceled += (i) => {
+                    if (hotbarController != null) hotbarController.ButtonPressed(3);
+                };
             }
 
             playerControls.Enable();

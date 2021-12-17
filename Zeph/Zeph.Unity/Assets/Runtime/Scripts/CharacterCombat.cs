@@ -80,7 +80,7 @@ namespace Zeph.Unity {
                             //TODO: play the animation, create the projectile if needed, move the player etc...
                             res.success = true;
 
-                            animatorManager.PlayTargetAnimationClip("Casting", "Casting Spell", "Casting Spell", true);
+                            animatorManager.PlayTargetAnimationClip("Start Casting Spell", "Start Casting Spell", "Start Casting Spell", true);
                             break;
                     }
                 } else {
@@ -104,6 +104,9 @@ namespace Zeph.Unity {
             combatEntity.OnTakeDamage += (s, e) => {
                 GameController.Instance.CreateDamageIndicator(e.Result.damage.ToString(), this.gameObject.transform.position);
                 Debug.Log(this.ToString() + " took " + e.Result.damage.ToString() + " damage.");
+            };
+            combatEntity.OnCastingFinished += (s, e) => {
+                animatorManager.PlayTargetAnimationClip("Finish Casting Spell", "Finish Casting Spell", "Finish Casting Spell", true);
             };
         }
 

@@ -141,9 +141,20 @@
       "a_AttackType": 1,
       "a_Distance": 1,
       "a_Damage": 10,
-	  "a_PreparationDuration": 0,
-	  "a_StatModifier": -1,
-	  "a_Cooldown": 3000
+      "a_PreparationDuration": 0,
+      "a_StatModifier": -1,
+      "a_Cooldown": 3000
+    },
+    "2": {
+      "id": 2,
+      "a_Name": "Charge Strike",
+      "a_Description": "An attack which takes time to charge up, but deals extra damage",
+      "a_AttackType": 1,
+      "a_Distance": 1,
+      "a_Damage": 100,
+      "a_PreparationDuration": 10000,
+      "a_StatModifier": -1,
+      "a_Cooldown": 10000
     }
   },
   "dialog": {

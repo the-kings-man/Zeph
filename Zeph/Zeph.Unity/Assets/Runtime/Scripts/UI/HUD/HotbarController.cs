@@ -12,6 +12,10 @@ namespace Zeph.Unity {
         public void ButtonPressed(int button) {
             if (button == 1) {
                 player.PerformAttack(Zeph.Core.Classes.Attack.Read(1));
+            } else if (button == 2) {
+                player.PerformAttack(Zeph.Core.Classes.Attack.Read(2));
+            } else if (button == 3) {
+                player.PerformAttack(Zeph.Core.Classes.Attack.Read(3));
             }
         }
     }
