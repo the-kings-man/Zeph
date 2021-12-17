@@ -148,6 +148,7 @@ return stats.s_Constitution * 100;
         public bool isCasting = false;
         public float castingTimeLeft = 0f;
         public Attack currentCastingAttack = null;
+        public CombatEntity currentCastingEntityToAttack = null;
 
         #endregion
 
@@ -238,10 +239,11 @@ return stats.s_Constitution * 100;
                         throw new NotImplementedException();
                     }
                 } else {
-                    //TODO: start casting, inform the caller that casting has started
+                    //start casting, inform the caller that casting has started
                     isCasting = true;
                     castingTimeLeft = attackToPerform.a_PreparationDuration;
                     currentCastingAttack = attackToPerform;
+                    currentCastingEntityToAttack = entityToAttack;
 
                     res.success = true;
                     res.action = AttackResultSuccessAction.StartCasting;
@@ -327,9 +329,47 @@ return stats.s_Constitution * 100;
 
                 if (castingTimeLeft <= 0f) {
                     isCasting = false;
-                    OnCastingFinished?.Invoke(this, new CastingEventArgs() {
-                        Attack = currentCastingAttack
-                    });
+
+                    var args = new CastingEventArgs() {
+                        Attack = currentCastingAttack,
+                        EntityToAttack = currentCastingEntityToAttack,
+                    };
+
+                    var attackToPerform = currentCastingAttack;
+                    var entityToAttack = currentCastingEntityToAttack;
+
+                    if (attackToPerform.a_AttackType == Enums.AttackType.Instant) {
+                        //perform the instant attack, dealing damage, putting that attack on cooldown if needed, igniting the global cooldown
+                        var combatSystem = SystemLocator.GetService<ICombatSystem>();
+                        var damage = combatSystem.CalculateDamage(this, entityToAttack, attackToPerform);
+
+                        var takeDamageResult = entityToAttack.TakeDamage(damage, this);
+
+                        if (attackToPerform.a_Cooldown > 0) {
+                            var ac = AttackCooldown.GetAttackCooldown(attackToPerform);
+                            if (ac != null) {
+                                cooldowns[attackToPerform.a_ID] = ac;
+                            }
+                        }
+
+                        inGlobalCooldown = true;
+                        globalCooldownTimeLeft = GLOBAL_ATTACK_COOLDOWN;
+
+                        args.Action = AttackResultSuccessAction.AttackFinished;
+                        args.TakeDamageResult = takeDamageResult;
+                    } else {
+                        //TODO: tell the interface to spawn a projectile, pass back the projectile data to spawn.
+                        /**
+                         * 
+                         * I suppose these projectiles need:
+                         *  - speed
+                         *  - renderer/mesh
+                         * 
+                         */
+                        throw new NotImplementedException();
+                    }
+
+                    OnCastingFinished?.Invoke(this, args);
                 }
             }
         }
@@ -450,6 +490,9 @@ return stats.s_Constitution * 100;
 
     public class CastingEventArgs : EventArgs {
         public Attack @Attack;
+        public CombatEntity EntityToAttack;
+        public AttackResultSuccessAction Action;
+        public TakeDamageResult TakeDamageResult;
     }
 
     #endregion
