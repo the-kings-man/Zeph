@@ -75,6 +75,7 @@ namespace Zeph.Unity {
                             justPunched = !justPunched;
                             break;
                         case AttackResultSuccessAction.Projectile:
+                            //TODO: play the animation, create the projectile if needed, move the player etc...
                             break;
                         case AttackResultSuccessAction.StartCasting:
                             //TODO: play the animation, create the projectile if needed, move the player etc...

@@ -122,7 +122,7 @@ return stats.s_Constitution * 100;
 
         public CombatState combatState;
 
-        #region "Stats"
+        #region "Stat Members"
 
         public List<CombatStatModifier> combatStatModifiers;
 
@@ -134,7 +134,7 @@ return stats.s_Constitution * 100;
 
         #endregion
 
-        #region "Cooldowns"
+        #region "Cooldown Members"
 
         public System.Collections.Concurrent.ConcurrentDictionary<int, AttackCooldown> cooldowns = new System.Collections.Concurrent.ConcurrentDictionary<int, AttackCooldown>();
 
@@ -143,7 +143,7 @@ return stats.s_Constitution * 100;
 
         #endregion
 
-        #region "Casting"
+        #region "Casting Members"
 
         public bool isCasting = false;
         public float castingTimeLeft = 0f;
@@ -159,6 +159,7 @@ return stats.s_Constitution * 100;
         public event TakeDamageEventHandler OnTakeDamage;
 
         public event CastingEventHandler OnCastingFinished;
+        public event CastingInterruptedEventHandler OnCastingInterrupted;
 
         #endregion
 
@@ -294,6 +295,32 @@ return stats.s_Constitution * 100;
 
         #endregion
 
+        #region "Casting Functions"
+
+        public void InterruptCasting(CastingInterruptionReason reason) {
+            if (isCasting) {
+                var args = new CastingInterruptedEventArgs() {
+                    Attack = currentCastingAttack,
+                    EntityToAttack = currentCastingEntityToAttack,
+                    Reason = reason
+                };
+
+                ResetCasting();
+
+                OnCastingInterrupted?.Invoke(this, args);
+            }
+        }
+
+        private void ResetCasting() {
+            //reset casting
+            castingTimeLeft = 0f;
+            currentCastingAttack = null;
+            currentCastingEntityToAttack = null;
+            isCasting = false;
+        }
+
+        #endregion
+
         public void Update(float deltaTime) {
             //Cooldowns
             if (inGlobalCooldown) {
@@ -368,6 +395,8 @@ return stats.s_Constitution * 100;
                          */
                         throw new NotImplementedException();
                     }
+
+                    ResetCasting();
 
                     OnCastingFinished?.Invoke(this, args);
                 }
@@ -471,6 +500,15 @@ return stats.s_Constitution * 100;
         Environment = 2
     }
 
+    public class CastingInterruptionReason {
+        public CastingInterruptionSource source;
+    }
+
+    public enum CastingInterruptionSource {
+        Moved = 1,
+        TooFarAway = 2
+    }
+
     #region "Event Handling"
 
     public delegate void CharacterDiedEventHandler(object sender, CharacterDiedEventArgs e);
@@ -493,6 +531,14 @@ return stats.s_Constitution * 100;
         public CombatEntity EntityToAttack;
         public AttackResultSuccessAction Action;
         public TakeDamageResult TakeDamageResult;
+    }
+
+    public delegate void CastingInterruptedEventHandler(object sender, CastingInterruptedEventArgs e);
+
+    public class CastingInterruptedEventArgs : EventArgs {
+        public Attack @Attack;
+        public CombatEntity EntityToAttack;
+        public CastingInterruptionReason Reason;
     }
 
     #endregion
