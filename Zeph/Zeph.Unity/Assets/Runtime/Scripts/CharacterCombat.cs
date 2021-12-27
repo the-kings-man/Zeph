@@ -64,7 +64,6 @@ namespace Zeph.Unity {
                 if (attackResult.success) {
                     switch (attackResult.action) {
                         case AttackResultSuccessAction.AttackFinished:
-                            //TODO: play the animation, create the projectile if needed, move the player etc...
                             res.success = true;
 
                             if (justPunched) {
