@@ -7,7 +7,8 @@ using UnityEngine;
 
 namespace Zeph.Unity {
     public class GameController : MonoBehaviour {
-        public GameObject damageIndicator;
+        public GameObject damageIndicatorTemplate;
+        public GameObject projectileTemplate;
 
         private static GameController _instance;
         public static GameController Instance {
@@ -31,8 +32,13 @@ namespace Zeph.Unity {
         }
 
         public void CreateDamageIndicator(string text, Vector3 position) {
-            var obj = Instantiate(damageIndicator, position, Quaternion.identity).GetComponent<DamageIndicator>();
+            var obj = Instantiate(damageIndicatorTemplate, position, Quaternion.identity).GetComponent<DamageIndicator>();
             obj.SetText(text);
+        }
+
+        public void CreateProjectile(Vector3 position, Character targetCharacter) {
+            var obj = Instantiate(projectileTemplate, position, Quaternion.identity).GetComponent<Projectile>();
+            obj.targetCharacter = targetCharacter;
         }
     }
 }

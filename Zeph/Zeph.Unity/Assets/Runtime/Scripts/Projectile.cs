@@ -5,7 +5,9 @@ using UnityEngine;
 namespace Zeph.Unity {
     public class Projectile : MonoBehaviour {
 
+        public Character sourceCharacter;
         public Character targetCharacter;
+        public Zeph.Core.Classes.Attack attack;
         public float maxSpeed = 1f;
         public float collisionDistance = 1f;
 
@@ -21,6 +23,7 @@ namespace Zeph.Unity {
 
             if (Vector3.Distance(transform.position, targetCharacter.transform.position) < collisionDistance) {
                 //TODO: collide, raise an event so the combat system can deal damage and so that other systems can do what they need to also
+                targetCharacter.characterCombat.combatEntity.ProjectileCollision(sourceCharacter, targetCharacter, attack);
                 Destroy(this.gameObject);
             }
         }

@@ -30,6 +30,8 @@ namespace Zeph.Unity {
         protected Character character;
         protected AnimatorManager animatorManager;
 
+        private Character castingCharacterTarget;
+
         virtual protected void Awake() {
             character = GetComponent<Character>();
             animatorManager = GetComponent<AnimatorManager>();
@@ -74,11 +76,18 @@ namespace Zeph.Unity {
                             justPunched = !justPunched;
                             break;
                         case AttackResultSuccessAction.Projectile:
-                            //TODO: play the animation, create the projectile if needed, move the player etc...
+                            //play the animation, create the projectile if needed
+                            animatorManager.PlayTargetAnimationClip("Finish Casting Spell", "Finish Casting Spell", "Finish Casting Spell", true);
+
+                            GameController.Instance.CreateProjectile(transform.position, characterToAttack.character);
+
+                            res.success = true;
                             break;
                         case AttackResultSuccessAction.StartCasting:
                             //TODO: play the animation, create the projectile if needed, move the player etc...
                             res.success = true;
+
+                            castingCharacterTarget = characterToAttack.character;
 
                             animatorManager.PlayTargetAnimationClip("Start Casting Spell", "Start Casting Spell", "Start Casting Spell", true);
                             break;
@@ -106,7 +115,17 @@ namespace Zeph.Unity {
                 Debug.Log(this.ToString() + " took " + e.Result.damage.ToString() + " damage.");
             };
             combatEntity.OnCastingFinished += (s, e) => {
-                animatorManager.PlayTargetAnimationClip("Finish Casting Spell", "Finish Casting Spell", "Finish Casting Spell", true);
+
+                if (e.Action == AttackResultSuccessAction.AttackFinished) {
+                    animatorManager.PlayTargetAnimationClip("Finish Casting Spell", "Finish Casting Spell", "Finish Casting Spell", true);
+                } else if (e.Action == AttackResultSuccessAction.Projectile) {
+                    GameController.Instance.CreateProjectile(transform.position, castingCharacterTarget);
+                    animatorManager.PlayTargetAnimationClip("Finish Casting Spell", "Finish Casting Spell", "Finish Casting Spell", true);
+                } else {
+                    Debug.Log("Not implemented");
+                }
+
+                castingCharacterTarget = null;
             };
         }
 

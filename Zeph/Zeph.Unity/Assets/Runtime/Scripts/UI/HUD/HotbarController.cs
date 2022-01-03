@@ -16,6 +16,8 @@ namespace Zeph.Unity {
                 player.PerformAttack(Zeph.Core.Classes.Attack.Read(2));
             } else if (button == 3) {
                 player.PerformAttack(Zeph.Core.Classes.Attack.Read(3));
+            } else if (button == 4) {
+                player.PerformAttack(Zeph.Core.Classes.Attack.Read(4));
             }
         }
     }

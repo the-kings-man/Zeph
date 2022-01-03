@@ -198,6 +198,7 @@ return stats.s_Constitution * 100;
 
         public AttackResult PerformAttack(CombatEntity entityToAttack, Classes.Attack attackToPerform) {
             var res = new AttackResult();
+            res.attack = attackToPerform;
 
             if (cooldowns.ContainsKey(attackToPerform.a_ID)) {
                 res.success = false;
@@ -215,21 +216,11 @@ return stats.s_Constitution * 100;
 
                         var takeDamageResult = entityToAttack.TakeDamage(damage, this);
                         
-                        if (attackToPerform.a_Cooldown > 0) {
-                            var ac = AttackCooldown.GetAttackCooldown(attackToPerform);
-                            if (ac != null) {
-                                cooldowns[attackToPerform.a_ID] = ac;
-                            }
-                        }
-
-                        inGlobalCooldown = true;
-                        globalCooldownTimeLeft = GLOBAL_ATTACK_COOLDOWN;
-
                         res.success = true;
                         res.action = AttackResultSuccessAction.AttackFinished;
                         res.takeDamageResult = takeDamageResult;
-                    } else {
-                        //TODO: tell the interface to spawn a projectile, pass back the projectile data to spawn.
+                    } else if (attackToPerform.a_AttackType == Enums.AttackType.Projectile) {
+                        //tell the interface to spawn a projectile, pass back the projectile data to spawn.
                         /**
                          * 
                          * I suppose these projectiles need:
@@ -237,6 +228,9 @@ return stats.s_Constitution * 100;
                          *  - renderer/mesh
                          * 
                          */
+                        res.success = true;
+                        res.action = AttackResultSuccessAction.Projectile;
+                    } else {
                         throw new NotImplementedException();
                     }
                 } else {
@@ -249,6 +243,18 @@ return stats.s_Constitution * 100;
                     res.success = true;
                     res.action = AttackResultSuccessAction.StartCasting;
                 }
+            }
+
+            if (res.success) {
+                if (attackToPerform.a_Cooldown > 0) {
+                    var ac = AttackCooldown.GetAttackCooldown(attackToPerform);
+                    if (ac != null) {
+                        cooldowns[attackToPerform.a_ID] = ac;
+                    }
+                }
+
+                inGlobalCooldown = true;
+                globalCooldownTimeLeft = GLOBAL_ATTACK_COOLDOWN;
             }
 
             return res;
@@ -384,8 +390,8 @@ return stats.s_Constitution * 100;
 
                         args.Action = AttackResultSuccessAction.AttackFinished;
                         args.TakeDamageResult = takeDamageResult;
-                    } else {
-                        //TODO: tell the interface to spawn a projectile, pass back the projectile data to spawn.
+                    } else if (attackToPerform.a_AttackType == Enums.AttackType.Projectile) {
+                        //tell the interface to spawn a projectile, pass back the projectile data to spawn.
                         /**
                          * 
                          * I suppose these projectiles need:
@@ -393,6 +399,11 @@ return stats.s_Constitution * 100;
                          *  - renderer/mesh
                          * 
                          */
+                        inGlobalCooldown = true;
+                        globalCooldownTimeLeft = GLOBAL_ATTACK_COOLDOWN;
+
+                        args.Action = AttackResultSuccessAction.Projectile;
+                    } else {
                         throw new NotImplementedException();
                     }
 
@@ -443,6 +454,7 @@ return stats.s_Constitution * 100;
         public bool success;
         public AttackResultFailReason reason;
         public AttackResultSuccessAction action;
+        public Attack attack;
 
         #region "Start Casting"
 

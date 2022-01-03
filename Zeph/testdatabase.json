@@ -155,6 +155,28 @@
       "a_PreparationDuration": 10000,
       "a_StatModifier": -1,
       "a_Cooldown": 10000
+    },
+    "3": {
+      "id": 3,
+      "a_Name": "Instant Projectile",
+      "a_Description": "An instant attack which launches a projectile",
+      "a_AttackType": 2,
+      "a_Distance": 20,
+      "a_Damage": 50,
+      "a_PreparationDuration": 0,
+      "a_StatModifier": -1,
+      "a_Cooldown": 3000
+    },
+    "4": {
+      "id": 4,
+      "a_Name": "Charge Projectile",
+      "a_Description": "A charge attack which launches a projectile",
+      "a_AttackType": 2,
+      "a_Distance": 20,
+      "a_Damage": 70,
+      "a_PreparationDuration": 4000,
+      "a_StatModifier": -1,
+      "a_Cooldown": 3000
     }
   },
   "dialog": {
