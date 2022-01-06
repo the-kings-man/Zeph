@@ -203,7 +203,12 @@ MonoBehaviour:
   cameraFollowSpeed: 0.2
   cameraLookSpeed: 2
   cameraPivotSpeed: 2
+  cameraRotateSpeed: 2
   lookAngle: 0
   pivotAngle: 0
   minimumPivotAngle: -35
   maximumPivotAngle: 35
+  distanceFromPlayer: 0
+  cameraMovementInOutSpeed: 0.01
+  minDistanceFromPlayer: 1
+  maxDistanceFromPlayer: 30

@@ -9,6 +9,9 @@ namespace Zeph.Unity {
 
         public float cameraInputHorizontal;
         public float cameraInputVertical;
+        public bool cameraInputFreeLook = false;
+        public float cameraInputRotate = 0f;
+        public float cameraMoveInOut = 0f;
 
         public float moveAmount;
         public float verticalInput;
@@ -33,14 +36,26 @@ namespace Zeph.Unity {
             if (playerControls == null) {
                 playerControls = new PlayerControls();
 
+                //Player moving
                 playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
-                playerControls.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
 
                 playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
                 playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
 
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
                 playerControls.PlayerActions.Jump.canceled += i => jumpInput = false;
+
+                //Camera
+                playerControls.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
+                playerControls.PlayerMovement.CameraFreeLook.performed += i => cameraInputFreeLook = true;
+                playerControls.PlayerMovement.CameraFreeLook.canceled += i => cameraInputFreeLook = false;
+                playerControls.PlayerMovement.CameraRotateLeft.performed += i => cameraInputRotate -= 1;
+                playerControls.PlayerMovement.CameraRotateLeft.canceled += i => cameraInputRotate += 1;
+                playerControls.PlayerMovement.CameraRotateRight.performed += i => cameraInputRotate += 1;
+                playerControls.PlayerMovement.CameraRotateRight.canceled += i => cameraInputRotate -= 1;
+
+                playerControls.PlayerMovement.CameraMoveInOut.performed += i => cameraMoveInOut = i.ReadValue<float>();
+
 
                 playerControls.PlayerActions.Select.performed += (i) => {
                     RaycastHit raycastHit;

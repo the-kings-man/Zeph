@@ -1755,6 +1755,22 @@ PrefabInstance:
       propertyPath: inputManager
       value: 
       objectReference: {fileID: 1707200997}
+    - target: {fileID: 1597821627449122844, guid: 4d0f85ddf2d90cd419f62af55eca0ecf, type: 3}
+      propertyPath: cameraLookSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1597821627449122844, guid: 4d0f85ddf2d90cd419f62af55eca0ecf, type: 3}
+      propertyPath: cameraPivotSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1597821627449122844, guid: 4d0f85ddf2d90cd419f62af55eca0ecf, type: 3}
+      propertyPath: cameraRotateSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1597821627449122844, guid: 4d0f85ddf2d90cd419f62af55eca0ecf, type: 3}
+      propertyPath: cameraMovementInOutSpeed
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d0f85ddf2d90cd419f62af55eca0ecf, type: 3}
 --- !u!1001 &6599274560338649940

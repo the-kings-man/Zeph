@@ -33,6 +33,38 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""CameraFreeLook"",
+                    ""type"": ""Button"",
+                    ""id"": ""aeeeb8f5-559a-465b-ba96-be1dbea3299d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""CameraRotateLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""c3767b62-5df3-48c9-a11e-1ac73618ce46"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""CameraRotateRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""343dcf91-167f-46d6-bc2b-89ad1ffe7c2e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""CameraMoveInOut"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""f4076c14-9ad7-44e2-a050-41a3d4eb9ec8"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -211,6 +243,50 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Camera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f7b3fcc-96ed-417a-b641-ca62c57ff371"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraFreeLook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a19e6639-d57a-49f5-8f75-4e6f31a63829"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraRotateLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e152ea1d-69c1-4a94-bf1e-3ddeee55e912"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraRotateRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3a941c74-1dac-4ae9-a271-2af61f967d26"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMoveInOut"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -411,6 +487,10 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_PlayerMovement = asset.FindActionMap("Player Movement", throwIfNotFound: true);
         m_PlayerMovement_Movement = m_PlayerMovement.FindAction("Movement", throwIfNotFound: true);
         m_PlayerMovement_Camera = m_PlayerMovement.FindAction("Camera", throwIfNotFound: true);
+        m_PlayerMovement_CameraFreeLook = m_PlayerMovement.FindAction("CameraFreeLook", throwIfNotFound: true);
+        m_PlayerMovement_CameraRotateLeft = m_PlayerMovement.FindAction("CameraRotateLeft", throwIfNotFound: true);
+        m_PlayerMovement_CameraRotateRight = m_PlayerMovement.FindAction("CameraRotateRight", throwIfNotFound: true);
+        m_PlayerMovement_CameraMoveInOut = m_PlayerMovement.FindAction("CameraMoveInOut", throwIfNotFound: true);
         // Player Actions
         m_PlayerActions = asset.FindActionMap("Player Actions", throwIfNotFound: true);
         m_PlayerActions_Sprint = m_PlayerActions.FindAction("Sprint", throwIfNotFound: true);
@@ -474,12 +554,20 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private IPlayerMovementActions m_PlayerMovementActionsCallbackInterface;
     private readonly InputAction m_PlayerMovement_Movement;
     private readonly InputAction m_PlayerMovement_Camera;
+    private readonly InputAction m_PlayerMovement_CameraFreeLook;
+    private readonly InputAction m_PlayerMovement_CameraRotateLeft;
+    private readonly InputAction m_PlayerMovement_CameraRotateRight;
+    private readonly InputAction m_PlayerMovement_CameraMoveInOut;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerMovementActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_PlayerMovement_Movement;
         public InputAction @Camera => m_Wrapper.m_PlayerMovement_Camera;
+        public InputAction @CameraFreeLook => m_Wrapper.m_PlayerMovement_CameraFreeLook;
+        public InputAction @CameraRotateLeft => m_Wrapper.m_PlayerMovement_CameraRotateLeft;
+        public InputAction @CameraRotateRight => m_Wrapper.m_PlayerMovement_CameraRotateRight;
+        public InputAction @CameraMoveInOut => m_Wrapper.m_PlayerMovement_CameraMoveInOut;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -495,6 +583,18 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Camera.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCamera;
                 @Camera.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCamera;
                 @Camera.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCamera;
+                @CameraFreeLook.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCameraFreeLook;
+                @CameraFreeLook.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCameraFreeLook;
+                @CameraFreeLook.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCameraFreeLook;
+                @CameraRotateLeft.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCameraRotateLeft;
+                @CameraRotateLeft.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCameraRotateLeft;
+                @CameraRotateLeft.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCameraRotateLeft;
+                @CameraRotateRight.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCameraRotateRight;
+                @CameraRotateRight.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCameraRotateRight;
+                @CameraRotateRight.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCameraRotateRight;
+                @CameraMoveInOut.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCameraMoveInOut;
+                @CameraMoveInOut.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCameraMoveInOut;
+                @CameraMoveInOut.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCameraMoveInOut;
             }
             m_Wrapper.m_PlayerMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -505,6 +605,18 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Camera.started += instance.OnCamera;
                 @Camera.performed += instance.OnCamera;
                 @Camera.canceled += instance.OnCamera;
+                @CameraFreeLook.started += instance.OnCameraFreeLook;
+                @CameraFreeLook.performed += instance.OnCameraFreeLook;
+                @CameraFreeLook.canceled += instance.OnCameraFreeLook;
+                @CameraRotateLeft.started += instance.OnCameraRotateLeft;
+                @CameraRotateLeft.performed += instance.OnCameraRotateLeft;
+                @CameraRotateLeft.canceled += instance.OnCameraRotateLeft;
+                @CameraRotateRight.started += instance.OnCameraRotateRight;
+                @CameraRotateRight.performed += instance.OnCameraRotateRight;
+                @CameraRotateRight.canceled += instance.OnCameraRotateRight;
+                @CameraMoveInOut.started += instance.OnCameraMoveInOut;
+                @CameraMoveInOut.performed += instance.OnCameraMoveInOut;
+                @CameraMoveInOut.canceled += instance.OnCameraMoveInOut;
             }
         }
     }
@@ -627,6 +739,10 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
+        void OnCameraFreeLook(InputAction.CallbackContext context);
+        void OnCameraRotateLeft(InputAction.CallbackContext context);
+        void OnCameraRotateRight(InputAction.CallbackContext context);
+        void OnCameraMoveInOut(InputAction.CallbackContext context);
     }
     public interface IPlayerActionsActions
     {
