@@ -42,7 +42,7 @@ namespace Zeph.Unity {
         }
 
         bool justPunched = true;
-        public CharacterCombatAttackResult Attack(CharacterCombat characterToAttack, Zeph.Core.Classes.Attack attackBeingPerformed) {
+        public CharacterCombatAttackResult Attack(CharacterCombat characterToAttack, Zeph.Core.Classes.Attack attackToPerform) {
             //TODO: This here should rather start combat when combat is entered, i.e. the player attacks an enemy or the enemy attacks the player. This will help reduce processing power. But seeing as this is not a thing atm, let's just start combat here
             if (combatEntity == null) this.StartCombat();
             if (characterToAttack.combatEntity == null) characterToAttack.StartCombat();
@@ -53,14 +53,14 @@ namespace Zeph.Unity {
 
             var res = new CharacterCombatAttackResult();
 
-            if (Vector3.Distance(this.gameObject.transform.position, characterToAttack.gameObject.transform.position) > attackBeingPerformed.a_Distance) {
+            if (Vector3.Distance(this.gameObject.transform.position, characterToAttack.gameObject.transform.position) > attackToPerform.a_Distance) {
                 res.success = false;
                 res.reason = CharacterCombatAttackResultFailReason.TooFar;
             } else if (characterToAttack == this) {
                 res.success = false;
                 res.reason = CharacterCombatAttackResultFailReason.SameCharacter;
             } else {
-                var attackResult = combatEntity.PerformAttack(characterToAttack.combatEntity, attackBeingPerformed);
+                var attackResult = combatEntity.PerformAttack(characterToAttack.combatEntity, attackToPerform);
                 res.combatEntityResult = attackResult;
 
                 if (attackResult.success) {
@@ -79,7 +79,7 @@ namespace Zeph.Unity {
                             //play the animation, create the projectile if needed
                             animatorManager.PlayTargetAnimationClip("Finish Casting Spell", "Finish Casting Spell", "Finish Casting Spell", true);
 
-                            GameController.Instance.CreateProjectile(transform.position, characterToAttack.character);
+                            GameController.Instance.CreateProjectile(transform.position, this.character, characterToAttack.character, attackToPerform);
 
                             res.success = true;
                             break;
@@ -119,7 +119,7 @@ namespace Zeph.Unity {
                 if (e.Action == AttackResultSuccessAction.AttackFinished) {
                     animatorManager.PlayTargetAnimationClip("Finish Casting Spell", "Finish Casting Spell", "Finish Casting Spell", true);
                 } else if (e.Action == AttackResultSuccessAction.Projectile) {
-                    GameController.Instance.CreateProjectile(transform.position, castingCharacterTarget);
+                    GameController.Instance.CreateProjectile(transform.position, this.character, castingCharacterTarget, e.Attack);
                     animatorManager.PlayTargetAnimationClip("Finish Casting Spell", "Finish Casting Spell", "Finish Casting Spell", true);
                 } else {
                     Debug.Log("Not implemented");

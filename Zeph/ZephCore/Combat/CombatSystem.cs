@@ -30,18 +30,22 @@ namespace Zeph.Core.Combat {
 
         #region "Scripts"
 
-        string calculateDamageScript = @"
+        const string _CALCULATE_DAMAGE_SCRIPT = @"
 if (attack.a_AttackType == AttackType.Instant) {
     return from.currentStats.s_Strength * attack.a_Damage - to.currentStats.s_Hardness;
 } else if (attack.a_AttackType == AttackType.Projectile) {
-    return 0;
+    return from.currentStats.s_Strength * attack.a_Damage - to.currentStats.s_Hardness;
 } else {
     return 0;
 }
 ";
-        string calculateHealthScript = @"
+        const string _CALCULATE_HEALTH_SCRIPT = @"
 return stats.s_Constitution * 100;
 ";
+
+        public static string calculateDamageScript = _CALCULATE_DAMAGE_SCRIPT;
+        public static string calculateHealthScript = _CALCULATE_HEALTH_SCRIPT;
+
         #endregion
 
         #region Calculations
@@ -197,6 +201,7 @@ return stats.s_Constitution * 100;
         #region Attacking
 
         public AttackResult PerformAttack(CombatEntity entityToAttack, Classes.Attack attackToPerform) {
+
             var res = new AttackResult();
             res.attack = attackToPerform;
 
@@ -211,14 +216,18 @@ return stats.s_Constitution * 100;
                 if (attackToPerform.a_PreparationDuration == 0) {
                     if (attackToPerform.a_AttackType == Enums.AttackType.Instant) {
                         //perform the instant attack, dealing damage, putting that attack on cooldown if needed, igniting the global cooldown
-                        var combatSystem = SystemLocator.GetService<ICombatSystem>();
-                        var damage = combatSystem.CalculateDamage(this, entityToAttack, attackToPerform);
+                        var _res = entityToAttack.AttackHit(this, attackToPerform);
 
-                        var takeDamageResult = entityToAttack.TakeDamage(damage, this);
-                        
-                        res.success = true;
-                        res.action = AttackResultSuccessAction.AttackFinished;
-                        res.takeDamageResult = takeDamageResult;
+                        res.success = _res.success;
+                        res.action = _res.action;
+                        res.takeDamageResult = _res.takeDamageResult;
+
+                        if (attackToPerform.a_Cooldown > 0) {
+                            var ac = AttackCooldown.GetAttackCooldown(attackToPerform);
+                            if (ac != null) {
+                                cooldowns[attackToPerform.a_ID] = ac;
+                            }
+                        }
                     } else if (attackToPerform.a_AttackType == Enums.AttackType.Projectile) {
                         //tell the interface to spawn a projectile, pass back the projectile data to spawn.
                         /**
@@ -230,6 +239,13 @@ return stats.s_Constitution * 100;
                          */
                         res.success = true;
                         res.action = AttackResultSuccessAction.Projectile;
+
+                        if (attackToPerform.a_Cooldown > 0) {
+                            var ac = AttackCooldown.GetAttackCooldown(attackToPerform);
+                            if (ac != null) {
+                                cooldowns[attackToPerform.a_ID] = ac;
+                            }
+                        }
                     } else {
                         throw new NotImplementedException();
                     }
@@ -246,16 +262,25 @@ return stats.s_Constitution * 100;
             }
 
             if (res.success) {
-                if (attackToPerform.a_Cooldown > 0) {
-                    var ac = AttackCooldown.GetAttackCooldown(attackToPerform);
-                    if (ac != null) {
-                        cooldowns[attackToPerform.a_ID] = ac;
-                    }
-                }
-
                 inGlobalCooldown = true;
                 globalCooldownTimeLeft = GLOBAL_ATTACK_COOLDOWN;
             }
+
+            return res;
+        }
+
+        public AttackResult AttackHit(CombatEntity entityFrom, Classes.Attack attackHit) {
+            var res = new AttackResult();
+            res.attack = attackHit;
+
+            var combatSystem = SystemLocator.GetService<ICombatSystem>();
+            var damage = combatSystem.CalculateDamage(entityFrom, this, attackHit);
+
+            var takeDamageResult = this.TakeDamage(damage, entityFrom);
+
+            res.success = true;
+            res.action = AttackResultSuccessAction.AttackFinished;
+            res.takeDamageResult = takeDamageResult;
 
             return res;
         }
@@ -368,29 +393,14 @@ return stats.s_Constitution * 100;
                         EntityToAttack = currentCastingEntityToAttack,
                     };
 
-                    var attackToPerform = currentCastingAttack;
-                    var entityToAttack = currentCastingEntityToAttack;
-
-                    if (attackToPerform.a_AttackType == Enums.AttackType.Instant) {
+                    if (currentCastingAttack.a_AttackType == Enums.AttackType.Instant) {
                         //perform the instant attack, dealing damage, putting that attack on cooldown if needed, igniting the global cooldown
-                        var combatSystem = SystemLocator.GetService<ICombatSystem>();
-                        var damage = combatSystem.CalculateDamage(this, entityToAttack, attackToPerform);
+                        var _res = currentCastingEntityToAttack.AttackHit(this, currentCastingAttack);
 
-                        var takeDamageResult = entityToAttack.TakeDamage(damage, this);
-
-                        if (attackToPerform.a_Cooldown > 0) {
-                            var ac = AttackCooldown.GetAttackCooldown(attackToPerform);
-                            if (ac != null) {
-                                cooldowns[attackToPerform.a_ID] = ac;
-                            }
-                        }
-
-                        inGlobalCooldown = true;
-                        globalCooldownTimeLeft = GLOBAL_ATTACK_COOLDOWN;
-
-                        args.Action = AttackResultSuccessAction.AttackFinished;
-                        args.TakeDamageResult = takeDamageResult;
-                    } else if (attackToPerform.a_AttackType == Enums.AttackType.Projectile) {
+                        args.Success = _res.success;
+                        args.Action = _res.action;
+                        args.TakeDamageResult = _res.takeDamageResult;
+                    } else if (currentCastingAttack.a_AttackType == Enums.AttackType.Projectile) {
                         //tell the interface to spawn a projectile, pass back the projectile data to spawn.
                         /**
                          * 
@@ -399,12 +409,22 @@ return stats.s_Constitution * 100;
                          *  - renderer/mesh
                          * 
                          */
-                        inGlobalCooldown = true;
-                        globalCooldownTimeLeft = GLOBAL_ATTACK_COOLDOWN;
-
+                        args.Success = true;
                         args.Action = AttackResultSuccessAction.Projectile;
                     } else {
                         throw new NotImplementedException();
+                    }
+
+                    if (args.Success) {
+                        if (currentCastingAttack.a_Cooldown > 0) {
+                            var ac = AttackCooldown.GetAttackCooldown(currentCastingAttack);
+                            if (ac != null) {
+                                cooldowns[currentCastingAttack.a_ID] = ac;
+                            }
+                        }
+
+                        inGlobalCooldown = true;
+                        globalCooldownTimeLeft = GLOBAL_ATTACK_COOLDOWN;
                     }
 
                     ResetCasting();
@@ -539,6 +559,7 @@ return stats.s_Constitution * 100;
     public delegate void CastingEventHandler(object sender, CastingEventArgs e);
 
     public class CastingEventArgs : EventArgs {
+        public bool Success;
         public Attack @Attack;
         public CombatEntity EntityToAttack;
         public AttackResultSuccessAction Action;

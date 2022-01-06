@@ -23,7 +23,7 @@ namespace Zeph.Unity {
 
             if (Vector3.Distance(transform.position, targetCharacter.transform.position) < collisionDistance) {
                 //TODO: collide, raise an event so the combat system can deal damage and so that other systems can do what they need to also
-                targetCharacter.characterCombat.combatEntity.ProjectileCollision(sourceCharacter, targetCharacter, attack);
+                targetCharacter.characterCombat.combatEntity.AttackHit(sourceCharacter.characterCombat.combatEntity, attack);
                 Destroy(this.gameObject);
             }
         }

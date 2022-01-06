@@ -36,9 +36,11 @@ namespace Zeph.Unity {
             obj.SetText(text);
         }
 
-        public void CreateProjectile(Vector3 position, Character targetCharacter) {
+        public void CreateProjectile(Vector3 position, Character sourceCharater, Character targetCharacter, Zeph.Core.Classes.Attack attack) {
             var obj = Instantiate(projectileTemplate, position, Quaternion.identity).GetComponent<Projectile>();
+            obj.sourceCharacter = sourceCharater;
             obj.targetCharacter = targetCharacter;
+            obj.attack = attack;
         }
     }
 }
