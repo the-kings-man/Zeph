@@ -26,6 +26,7 @@ namespace Zeph.Unity {
     public class CharacterCombat : MonoBehaviour
     {
         public CombatEntity combatEntity { get; private set; }
+        public bool hasCombatEntity = false;
 
         protected Character character;
         protected AnimatorManager animatorManager;
@@ -127,10 +128,14 @@ namespace Zeph.Unity {
 
                 castingCharacterTarget = null;
             };
+
+            hasCombatEntity = true;
         }
 
         public void LeaveCombat() {
             combatEntity = null;
+
+            hasCombatEntity = false;
         }
     }
 

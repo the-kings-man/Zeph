@@ -31,7 +31,6 @@ namespace Zeph.Unity {
         }
         #endregion
 
-
         #region Player
 
         static Zeph.Core.Classes.Player _player;

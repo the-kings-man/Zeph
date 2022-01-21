@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +13,23 @@ namespace Zeph.Unity {
 
         virtual public void EntitySelected(Entity entity) {
             currentTarget = entity;
+
+            OnEntitySelected?.Invoke(this, new EntitySelectedEventArgs() {
+                EntitySource = this,
+                EntityTarget = entity
+            });
         }
+
+        #region "Events"
+        public event EntitySelectedEventHandler OnEntitySelected;
+        #endregion
+    }
+
+    public delegate void EntitySelectedEventHandler(object sender, EntitySelectedEventArgs e);
+
+    public class EntitySelectedEventArgs : EventArgs {
+        public Entity EntitySource { get; set; }
+        public Entity EntityTarget { get; set; }
     }
 
     public enum EntityType {

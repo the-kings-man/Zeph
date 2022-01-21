@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Zeph.Unity {
-    public class HUDPlayerInfoController : MonoBehaviour {
+    public class HUDTargetInfoController : MonoBehaviour {
         HUDStatBar healthController;
         HUDPlayerNameController nameController;
 
@@ -12,11 +12,11 @@ namespace Zeph.Unity {
             nameController = GetComponentInChildren<HUDPlayerNameController>();
         }
 
-        public void HandleRefresh(Player p) {
-            if (nameController != null) nameController.HandleRefresh(p.character.c_Name);
+        public void HandleRefresh(Character c) {
+            if (nameController != null) nameController.HandleRefresh(c.character.c_Name);
             if (healthController != null) {
-                if (p.characterCombat.combatEntity != null) {
-                    healthController.HandleRefresh(true, p.characterCombat.combatEntity.currentHealth, p.characterCombat.combatEntity.maxHealth);
+                if (c.characterCombat.combatEntity != null) {
+                    healthController.HandleRefresh(true, c.characterCombat.combatEntity.currentHealth, c.characterCombat.combatEntity.maxHealth);
                 } else {
                     healthController.HandleRefresh(false, 0, 0);
                 }

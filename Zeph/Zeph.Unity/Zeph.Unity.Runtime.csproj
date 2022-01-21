@@ -58,12 +58,14 @@
      <Compile Include="Assets\Runtime\Scripts\Animation\SetBool.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\Dialog\DialogCanvas.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\Dialog\DialogResponseText.cs" />
+     <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDPlayerNameController.cs" />
      <Compile Include="Assets\Runtime\Scripts\NPC\NPCLocomotion.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDPlayerQuestText.cs" />
      <Compile Include="Assets\Runtime\Scripts\DamageIndicator.cs" />
      <Compile Include="Assets\Runtime\Scripts\Camera\CameraManager.cs" />
      <Compile Include="Assets\Runtime\Scripts\Environment\DroppedItem.cs" />
      <Compile Include="Assets\Runtime\Scripts\Animation\AnimatorManager.cs" />
+     <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDStatBar.cs" />
      <Compile Include="Assets\Runtime\Scripts\Character.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\HUD\HotbarController.cs" />
      <Compile Include="Assets\Runtime\Scripts\Player\PlayerLocomotion.cs" />
@@ -73,7 +75,9 @@
      <Compile Include="Assets\Runtime\Scripts\Environment\Area.cs" />
      <Compile Include="Assets\Runtime\Scripts\Entity.cs" />
      <Compile Include="Assets\Runtime\Scripts\CharacterLocomotion.cs" />
+     <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDController.cs" />
      <Compile Include="Assets\Runtime\Scripts\GeneralOps.cs" />
+     <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDPlayerInfoController.cs" />
      <Compile Include="Assets\Runtime\Scripts\CharacterCombat.cs" />
      <Compile Include="Assets\Runtime\Scripts\Player\PlayerControls.cs" />
      <Compile Include="Assets\Runtime\Scripts\InteractOnButton.cs" />
@@ -91,10 +95,7 @@
      <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDPlayerQuestCanvas.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDCanvas.cs" />
      <Compile Include="Assets\Runtime\Scripts\NPC\NPCCombat.cs" />
-     <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDPlayerInfoController.cs" />
-     <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDPlayerHealthController.cs" />
-     <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDPlayerNameController.cs" />
-     <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDController.cs" />
+     <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDTargetInfoController.cs" />
      <None Include="Assets\Runtime\Scripts\Zeph.Unity.Runtime.asmdef" />
  <Reference Include="Unity.InputSystem">
  <HintPath>E:/Source/Zeph_source/Zeph/Zeph.Unity/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
