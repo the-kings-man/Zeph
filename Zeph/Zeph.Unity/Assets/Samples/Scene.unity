@@ -1778,6 +1778,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1476351881280760689, guid: de9b54585ee88a24f921abd267bb81c3, type: 3}
+      propertyPath: m_BlockingObjects
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1476351881280760691, guid: de9b54585ee88a24f921abd267bb81c3, type: 3}
       propertyPath: m_Name
       value: HUD
@@ -1786,6 +1790,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 36942715}
+    - target: {fileID: 4987057125313445140, guid: de9b54585ee88a24f921abd267bb81c3, type: 3}
+      propertyPath: buttonWidth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4987057125313445140, guid: de9b54585ee88a24f921abd267bb81c3, type: 3}
+      propertyPath: lstButtonKeys.Array.data[2]
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6054412753963497503, guid: de9b54585ee88a24f921abd267bb81c3, type: 3}
       propertyPath: m_IsActive
       value: 1

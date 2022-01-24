@@ -42,5 +42,7 @@ namespace Zeph.Unity {
             obj.targetCharacter = targetCharacter;
             obj.attack = attack;
         }
+
+
     }
 }

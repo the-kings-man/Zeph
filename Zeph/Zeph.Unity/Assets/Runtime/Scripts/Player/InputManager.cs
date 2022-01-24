@@ -24,7 +24,6 @@ namespace Zeph.Unity {
         PlayerLocomotion playerLocomotion;
         AnimatorManager animatorManager;
         Player player;
-        public HotbarController hotbarController;
 
         void Awake() {
             animatorManager = GetComponent<AnimatorManager>();
@@ -66,26 +65,32 @@ namespace Zeph.Unity {
                             if (entity != null) {
                                 player.EntitySelected(entity);
                             } else {
-                                player.EntitySelected(null);
+                                var isPointerOverGameObject = UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
+                                if (isPointerOverGameObject) {
+                                    //Do nothing, this was actually a click on a potentially clickable HUD object
+                                    Debug.Log("Pointer is over a game object.");
+                                } else {
+                                    player.EntitySelected(null);
+                                }
                             }
                         }
                     }
                 }; //mouse up?
 
                 playerControls.PlayerHotbars.Button1.canceled += (i) => {
-                    if (hotbarController != null) hotbarController.ButtonPressed(1);
+                    if (HotbarController.Instance != null) HotbarController.Instance.KeyPressed("1");
                 };
 
                 playerControls.PlayerHotbars.Button2.canceled += (i) => {
-                    if (hotbarController != null) hotbarController.ButtonPressed(2);
+                    if (HotbarController.Instance != null) HotbarController.Instance.KeyPressed("2");
                 };
 
                 playerControls.PlayerHotbars.Button3.canceled += (i) => {
-                    if (hotbarController != null) hotbarController.ButtonPressed(3);
+                    if (HotbarController.Instance != null) HotbarController.Instance.KeyPressed("3");
                 };
 
                 playerControls.PlayerHotbars.Button4.canceled += (i) => {
-                    if (hotbarController != null) hotbarController.ButtonPressed(4);
+                    if (HotbarController.Instance != null) HotbarController.Instance.KeyPressed("4");
                 };
             }
 

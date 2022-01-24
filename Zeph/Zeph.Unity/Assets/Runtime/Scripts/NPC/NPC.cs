@@ -5,7 +5,24 @@ using UnityEngine;
 namespace Zeph.Unity {
     public class NPC : Character {
         protected NPCLocomotion npcLocomotion;
-        protected NPCCombat npcCombat;
+
+        /// <summary>
+        /// The combat module for this NPC.
+        /// </summary>
+        /// <remarks>
+        /// Since I am using a different combat class to handle NPC combat than just standard character combat,
+        /// I have to override the Characters <see cref="Character.characterCombat"/> property and return the <see cref="npcCombat"/> 
+        /// casted as a <see cref="CharacterCombat"/> class. 
+        /// 
+        /// In the <see cref="Awake"/> method also, the <see cref="base.Awake"/> must be
+        /// called after npcCombat has been assigned, as the Character adds the Combat component in its Awake method
+        /// if there's not one currently attached to the character.
+        /// </remarks>
+        public NPCCombat npcCombat;
+        public override CharacterCombat characterCombat { get {
+                return (CharacterCombat)npcCombat;
+            }
+        }
 
         public bool isPerformingAction;
 
@@ -19,10 +36,10 @@ namespace Zeph.Unity {
 
         // Start is called before the first frame update
         protected override void Awake() {
-            base.Awake();
-
             npcLocomotion = GetComponent<NPCLocomotion>();
             npcCombat = GetComponent<NPCCombat>();
+
+            base.Awake();
         }
 
         protected void FixedUpdate() {

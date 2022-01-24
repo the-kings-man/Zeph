@@ -451,10 +451,12 @@ return stats.s_Constitution * 100;
         public Classes.Attack attack;
         public DateTime attackPerformed { get; private set; }
         public float timeLeft;
+        public float timeStart;
 
         AttackCooldown(Attack attack) {
             attackPerformed = GeneralOps.Now;
             timeLeft = attack.a_Cooldown;
+            timeStart = attack.a_Cooldown;
         }
 
         #region "Factory function"

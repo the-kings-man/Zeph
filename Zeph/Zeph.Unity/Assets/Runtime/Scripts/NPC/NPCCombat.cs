@@ -11,7 +11,7 @@ namespace Zeph.Unity {
             if (character.currentTarget) {
                 Zeph.Core.Classes.Attack currentAttack = Zeph.Core.Classes.Attack.Read(1);
                 if (distanceFromTarget < currentAttack.a_Distance) {
-                    Attack(character.currentTarget.GetComponent<CharacterCombat>(), currentAttack);
+                    base.Attack(character.currentTarget.GetComponent<CharacterCombat>(), currentAttack);
                 }
             }
         }

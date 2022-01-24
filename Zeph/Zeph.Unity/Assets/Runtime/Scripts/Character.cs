@@ -12,7 +12,7 @@ namespace Zeph.Unity {
         public Zeph.Core.Classes.Character character { get; private set; }
         public int characterID = -1;
 
-        public CharacterCombat characterCombat { get; private set; }
+        public virtual CharacterCombat characterCombat { get; private set; }
         public AnimatorManager animatorManager { get; private set; }
 
         // Start is called before the first frame update
@@ -23,7 +23,7 @@ namespace Zeph.Unity {
                 character = Zeph.Core.Classes.Character.Read(characterID);
             }
 
-            characterCombat = this.gameObject.AddComponent<CharacterCombat>();
+            if (characterCombat == null) characterCombat = this.gameObject.AddComponent<CharacterCombat>();
             animatorManager = GetComponent<AnimatorManager>();
         }
     }
