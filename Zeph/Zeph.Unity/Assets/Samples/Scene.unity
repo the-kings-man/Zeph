@@ -789,6 +789,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageIndicatorTemplate: {fileID: 7892545916200517812, guid: cc2f1cc2f85173949a6026100d02729b, type: 3}
   projectileTemplate: {fileID: 8290093822168038810, guid: 95316c3fba6d27f4da4183fb76a15ee1, type: 3}
+  indicatorStatBarTemplate: {fileID: 1018952168717498188, guid: 112c7ec0083e58d419d8a86e9a570b2c, type: 3}
 --- !u!4 &698963727
 Transform:
   m_ObjectHideFlags: 0

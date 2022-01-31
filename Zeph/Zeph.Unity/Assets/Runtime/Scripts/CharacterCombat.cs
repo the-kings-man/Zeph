@@ -31,7 +31,8 @@ namespace Zeph.Unity {
         protected Character character;
         protected AnimatorManager animatorManager;
 
-        private Character castingCharacterTarget;
+        Character castingCharacterTarget;
+        IndicatorStatBar statBar;
 
         virtual protected void Awake() {
             character = GetComponent<Character>();
@@ -40,6 +41,16 @@ namespace Zeph.Unity {
 
         virtual protected void Update() {
             combatEntity?.Update(Time.deltaTime * 1000f); //multiply by 1000 cos zeph framework is in milliseconds
+
+            if (combatEntity != null) {
+                if (statBar == null) {
+                    statBar = GameController.Instance.CreateIndicatorStatBar(transform.position);
+                }
+
+                var statBarPosition = transform.position;
+                statBarPosition.y += 2;
+                statBar.HandleRefresh(true, combatEntity.currentHealth, combatEntity.maxHealth, statBarPosition);
+            }
         }
 
         bool justPunched = true;
@@ -136,6 +147,10 @@ namespace Zeph.Unity {
             combatEntity = null;
 
             hasCombatEntity = false;
+
+            if (statBar != null) {
+                Destroy(statBar.gameObject);
+            }
         }
     }
 

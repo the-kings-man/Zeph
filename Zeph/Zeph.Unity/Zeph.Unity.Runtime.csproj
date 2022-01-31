@@ -66,6 +66,7 @@
      <Compile Include="Assets\Runtime\Scripts\Environment\DroppedItem.cs" />
      <Compile Include="Assets\Runtime\Scripts\Animation\AnimatorManager.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDStatBar.cs" />
+     <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDHotbar.cs" />
      <Compile Include="Assets\Runtime\Scripts\Character.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDTargetInfoController.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\HUD\HotbarController.cs" />
@@ -94,10 +95,10 @@
      <Compile Include="Assets\Runtime\Scripts\Projectile.cs" />
      <Compile Include="Assets\Runtime\Scripts\Environment\Trigger.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDPlayerQuestCanvas.cs" />
+     <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDHotbarButton.cs" />
      <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDCanvas.cs" />
      <Compile Include="Assets\Runtime\Scripts\NPC\NPCCombat.cs" />
-     <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDHotbar.cs" />
-     <Compile Include="Assets\Runtime\Scripts\UI\HUD\HUDHotbarButton.cs" />
+     <Compile Include="Assets\Runtime\Scripts\IndicatorStatBar.cs" />
      <None Include="Assets\Runtime\Scripts\Zeph.Unity.Runtime.asmdef" />
  <Reference Include="Unity.InputSystem">
  <HintPath>E:/Source/Zeph_source/Zeph/Zeph.Unity/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>

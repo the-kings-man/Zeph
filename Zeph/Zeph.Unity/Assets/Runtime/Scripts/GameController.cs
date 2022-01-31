@@ -9,6 +9,7 @@ namespace Zeph.Unity {
     public class GameController : MonoBehaviour {
         public GameObject damageIndicatorTemplate;
         public GameObject projectileTemplate;
+        public GameObject indicatorStatBarTemplate;
 
         private static GameController _instance;
         public static GameController Instance {
@@ -43,6 +44,11 @@ namespace Zeph.Unity {
             obj.attack = attack;
         }
 
+        public IndicatorStatBar CreateIndicatorStatBar(Vector3 position) {
+            var obj = Instantiate(indicatorStatBarTemplate, position, Quaternion.identity).GetComponent<IndicatorStatBar>();
+
+            return obj;
+        }
 
     }
 }
