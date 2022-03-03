@@ -8,11 +8,13 @@ namespace Zeph.Unity {
 
         HUDPlayerInfoController playerInfoController;
         HUDTargetInfoController targetInfoController;
+        HUDCastingBar castingBar;
 
         // Start is called before the first frame update
         void Awake() {
             playerInfoController = GetComponentInChildren<HUDPlayerInfoController>();
             targetInfoController = GetComponentInChildren<HUDTargetInfoController>();
+            castingBar = GetComponentInChildren<HUDCastingBar>();
 
             if (player == null) {
                 Debug.Log("Must apply a player to the HUDController");
@@ -25,6 +27,8 @@ namespace Zeph.Unity {
                     targetInfoController.gameObject.SetActive(false);
                 }
             }
+
+            castingBar.gameObject.SetActive(false);
         }
 
         private void Player_OnEntitySelected(object sender, EntitySelectedEventArgs e) {
@@ -40,6 +44,17 @@ namespace Zeph.Unity {
             if (playerInfoController && player) playerInfoController.HandleRefresh(player);
             if (targetInfoController && targetInfoController.gameObject.activeSelf) {
                 if (player.currentTarget.type == EntityType.Character) targetInfoController.HandleRefresh((Character)(player.currentTarget));
+            }
+            if (castingBar && player) {
+                var combatEntity = player.characterCombat.combatEntity;
+                if (combatEntity != null && combatEntity.isCasting && combatEntity.currentCastingAttack != null) {
+                    castingBar.gameObject.SetActive(true);
+                    var target = (long)combatEntity.currentCastingAttack.a_PreparationDuration;
+                    var progress = target - (long)combatEntity.castingTimeLeft;
+                    castingBar.HandleRefresh(progress, target);
+                } else {
+                    castingBar.gameObject.SetActive(false);
+                }
             }
         }
     }
