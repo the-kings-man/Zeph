@@ -9,12 +9,16 @@ namespace Zeph.Unity {
         HUDPlayerInfoController playerInfoController;
         HUDTargetInfoController targetInfoController;
         HUDCastingBar castingBar;
+        HUDPlayerQuestCanvas questList;
+
+        bool questListIsRefreshed = false;
 
         // Start is called before the first frame update
         void Awake() {
             playerInfoController = GetComponentInChildren<HUDPlayerInfoController>();
             targetInfoController = GetComponentInChildren<HUDTargetInfoController>();
             castingBar = GetComponentInChildren<HUDCastingBar>();
+            questList = GetComponentInChildren<HUDPlayerQuestCanvas>();
 
             if (player == null) {
                 Debug.Log("Must apply a player to the HUDController");
@@ -55,6 +59,12 @@ namespace Zeph.Unity {
                 } else {
                     castingBar.gameObject.SetActive(false);
                 }
+            }
+
+            if (!questListIsRefreshed) {
+                questList.RefreshQuestList();
+
+                questListIsRefreshed = true;
             }
         }
     }

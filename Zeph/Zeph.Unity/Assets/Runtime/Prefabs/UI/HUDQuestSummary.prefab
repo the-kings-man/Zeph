@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 2606568520425862936}
   - component: {fileID: 4040608205223841902}
   m_Layer: 5
-  m_Name: PlayerQuestHUDText
+  m_Name: HUDQuestSummary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
